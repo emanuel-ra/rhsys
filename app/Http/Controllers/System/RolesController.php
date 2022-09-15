@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
-   /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -19,6 +19,7 @@ class RolesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['role:admin','permission: roles.index|roles.create|roles.update|roles.delete']);
     }
 
     /**
@@ -67,16 +68,7 @@ class RolesController extends Controller
 
         $Role->syncPermissions($request->permission_id);
         
-        //return $Role;
-        /*
-        $company->name = $request->name;
-        $company->business_name = $request->business_name;
-        $company->address = $request->address;
-        $company->zip_code = $request->zip_code;
-
-        
-        */
-
+      
         $Role->save();
         return redirect()->route('system.roles');
 

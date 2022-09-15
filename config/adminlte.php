@@ -340,7 +340,7 @@ return [
         ],
         [
             'text' => 'users',
-            'url'  => 'admin/settings',
+            'route'  => 'system.users',
             'icon' => 'fas fa-fw fa-user',
             'can' =>  'users.index' ,
         ],

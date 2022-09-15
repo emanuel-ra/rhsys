@@ -43,6 +43,14 @@ Route::prefix('system')->group(function () {
         Route::post('/update/{id}', [App\Http\Controllers\System\BranchesController::class, 'update'])->name('system.branches.update');
     });
 
+    Route::prefix('users')->group(function () {    
+        Route::get('/', [App\Http\Controllers\System\UsersController::class, 'index'])->name('system.users');
+        Route::get('/register', [App\Http\Controllers\System\UsersController::class, 'register'])->name('system.users.register');
+        Route::post('/store', [App\Http\Controllers\System\UsersController::class, 'store'])->name('system.users.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\System\UsersController::class, 'edit'])->name('system.users.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\System\UsersController::class, 'update'])->name('system.users.update');
+    });
+
     Route::prefix('roles')->group(function () {    
         Route::get('/', [App\Http\Controllers\System\RolesController::class, 'index'])->name('system.roles');
         Route::get('/register', [App\Http\Controllers\System\RolesController::class, 'register'])->name('system.roles.register');

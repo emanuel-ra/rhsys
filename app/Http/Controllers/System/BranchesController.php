@@ -18,8 +18,9 @@ class BranchesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
+        $this->middleware(['role:admin','permission: branches.index|branches.create|branches.update|branches.delete']);
+    }   
+    
     /**
      * Show the application dashboard.
      *

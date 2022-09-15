@@ -6,19 +6,18 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Sistemas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+                <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
             </ol>
         </nav>
     @stop
 
     <div class="col-sm-12 p-2 d-flex justify-content-end">
-        @can('companies.create')
-            <a href="{{ route('system.companies.register') }}" class="btn btn-primary">
+        @can('users.create')
+            <a href="{{ route('system.users.register') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
                 Crear
             </a>
         @endcan        
-        
     </div>
 
     <div class="card">
@@ -36,21 +35,19 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre Comercial</th>
-                        <th>Razon Social</th>
-                        <th>Direccion</th>
-                        <th>Codigo postal</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>                  
+                        <th>Creado</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                   @foreach ($companies as $item)
+                   @foreach ($data as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->business_name }}</td>
-                            <td>{{ $item->address }}</td>
-                            <td>{{ $item->zip_code }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->created_at }}</td>
                             <td>
                                 <!-- Example split danger button -->
                                 <div class="btn-group">
@@ -60,9 +57,9 @@
                                         </span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        @can('companies.update')
-                                            <li><a class="dropdown-item" href="{{ route('system.companies.edit',['id' => $item->id]) }}">Editar</a></li>
-                                        @endcan
+                                        @can('users.update')
+                                            <li><a class="dropdown-item" href="{{ route('system.users.edit',['id' => $item->id]) }}">Editar</a></li>
+                                        @endcan   
                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                                         <li><hr class="dropdown-divider"></li>
@@ -76,10 +73,9 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Nombre Comercial</th>
-                        <th>Razon Social</th>
-                        <th>Direccion</th>
-                        <th>Codigo postal</th>
+                        <th>Nombre</th>   
+                        <th>Correo</th>                         
+                        <th>Creado</th>
                         <th></th>
                     </tr>
                 </tfoot>
@@ -89,4 +85,5 @@
     </div>
     <!-- /.card -->
       
+ 
 @stop
