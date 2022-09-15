@@ -43,6 +43,14 @@ Route::prefix('system')->group(function () {
         Route::post('/update/{id}', [App\Http\Controllers\System\BranchesController::class, 'update'])->name('system.branches.update');
     });
 
+    Route::prefix('roles')->group(function () {    
+        Route::get('/', [App\Http\Controllers\System\RolesController::class, 'index'])->name('system.roles');
+        Route::get('/register', [App\Http\Controllers\System\RolesController::class, 'register'])->name('system.roles.register');
+        Route::post('/store', [App\Http\Controllers\System\RolesController::class, 'store'])->name('system.roles.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\System\RolesController::class, 'edit'])->name('system.roles.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\System\RolesController::class, 'update'])->name('system.roles.update');
+    });
+    
 });
 
 Route::prefix('recruitment')->group(function () {

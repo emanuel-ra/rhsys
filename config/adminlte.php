@@ -328,13 +328,13 @@ return [
         ['header' => 'system'],
         [
             'text' => 'companies',
-            'url'  => 'system/companies',
+            'route'  => 'system.companies',
             'icon' => 'fas fa-fw fa-building',
             'can' =>  'companies.index' ,
         ],
         [
             'text' => 'branches',
-            'url'  => 'system/branches',
+            'route'  => 'system.branches',
             'icon' => 'fas fa-fw fa-building',
             'can' =>  'branches.index' ,
         ],
@@ -346,7 +346,7 @@ return [
         ],
         [
             'text' => 'roles',
-            'url'  => 'admin/settings',
+            'route'  => 'system.roles',
             'icon' => 'fas fa-fw fa-lock',
             'can' =>  'roles.index' ,
         ],

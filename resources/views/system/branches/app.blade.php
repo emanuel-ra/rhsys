@@ -12,10 +12,12 @@
     @stop
 
     <div class="col-sm-12 p-2 d-flex justify-content-end">
-        <a href="{{ route('system.branches.register') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>          
-            Crear
-        </a>
+        @can('branches.create')
+            <a href="{{ route('system.branches.register') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>          
+                Crear
+            </a>
+        @endcan
     </div>
 
     <div class="card">
@@ -29,7 +31,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <table id="table_recrods" class="table table-striped" style="width:100%">
+            <table id="table_records" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -59,7 +61,9 @@
                                         </span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('system.companies.edit',['id' => $item->id]) }}">Editar</a></li>
+                                        @can('branches.update')
+                                            <li><a class="dropdown-item" href="{{ route('system.companies.edit',['id' => $item->id]) }}">Editar</a></li>
+                                        @endcan
                                     {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                     <li><hr class="dropdown-divider"></li>
@@ -73,10 +77,11 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Nombre Comercial</th>
-                        <th>Razon Social</th>
+                        <th>Nombre</th>
+                        <th>Empresa</th>
                         <th>Direccion</th>
                         <th>Codigo postal</th>
+                        <th>Creado</th>
                         <th></th>
                     </tr>
                 </tfoot>
