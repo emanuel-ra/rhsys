@@ -48,5 +48,27 @@ class RoleSeeder extends Seeder
         $census_delete = Permission::create(['name' => 'census.unsubscribe'])->syncRoles([$role_admin]);
         $census_delete = Permission::create(['name' => 'census.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
 
+        // staff
+        $staff_index = Permission::create(['name' => 'staff.index'])->syncRoles([$role_admin,$role_manage_rh]);
+        $staff_create = Permission::create(['name' => 'staff.create'])->syncRoles([$role_admin,$role_manage_rh]);
+        $staff_update = Permission::create(['name' => 'staff.update'])->syncRoles([$role_admin,$role_manage_rh]);
+        $staff_delete = Permission::create(['name' => 'staff.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh]);
+        $staff_delete = Permission::create(['name' => 'staff.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+
+        // jop position
+        $jop_position_index = Permission::create(['name' => 'jop.position.index'])->syncRoles([$role_admin,$role_manage_rh]);
+        $jop_position_create = Permission::create(['name' => 'jop.position.create'])->syncRoles([$role_admin,$role_manage_rh]);
+        $jop_position_update = Permission::create(['name' => 'jop.position.update'])->syncRoles([$role_admin,$role_manage_rh]);
+        $jop_position_delete = Permission::create(['name' => 'jop.position.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh]);
+        $jop_position_delete = Permission::create(['name' => 'jop.position.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+
+        //interview appointment
+        $interview_appointment_index = Permission::create(['name' => 'interview.appointment.index'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+        $interview_appointment_create = Permission::create(['name' => 'interview.appointment.create'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+        $interview_appointment_update = Permission::create(['name' => 'interview.appointment.update'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+        $interview_appointment_delete = Permission::create(['name' => 'interview.appointment.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+        $interview_appointment_delete = Permission::create(['name' => 'interview.appointment.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_rh]);
+
+
     }
 }

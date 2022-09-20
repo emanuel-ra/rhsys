@@ -325,74 +325,96 @@ return [
             'can' =>  'dashboard' ,
         ],
 
-        ['header' => 'system'],
         [
-            'text' => 'companies',
-            'route'  => 'system.companies',
-            'icon' => 'fas fa-fw fa-building',
-            'can' =>  'companies.index' ,
-        ],
-        [
-            'text' => 'branches',
-            'route'  => 'system.branches',
-            'icon' => 'fas fa-fw fa-building',
-            'can' =>  'branches.index' ,
-        ],
-        [
-            'text' => 'users',
-            'route'  => 'system.users',
-            'icon' => 'fas fa-fw fa-user',
-            'can' =>  'users.index' ,
-        ],
-        [
-            'text' => 'roles',
-            'route'  => 'system.roles',
-            'icon' => 'fas fa-fw fa-lock',
-            'can' =>  'roles.index' ,
-        ],
+            'text'    => 'system',
+            'icon'    => 'fas fa-cogs',
+            'submenu' => [
+                ['header' => 'general_information'],
+                [
+                    'text' => 'companies',
+                    'route'  => 'system.companies',
+                    'icon' => 'fas fa-fw fa-industry',
+                    'can' =>  'companies.index' ,
+                ],               
+                [
+                    'text' => 'branches',
+                    'route'  => 'system.branches',
+                    'icon' => 'fas fa-fw fa-building',
+                    'can' =>  'branches.index' ,
+                ],
 
-        ['header' => 'account_settings'],
+                ['header' => 'users'],
 
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+                [
+                    'text' => 'users',
+                    'route'  => 'system.users',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' =>  'users.index' ,
+                ],
+                [
+                    'text' => 'roles',
+                    'route'  => 'system.roles',
+                    'icon' => 'fas fa-fw fa-lock',
+                    'can' =>  'roles.index' ,
+                ],
 
+                ['header' => 'profile'],
+
+                [
+                    'text' => 'profile',
+                    'url'  => 'admin/settings',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'change_password',
+                    'url'  => 'admin/settings',
+                    'icon' => 'fas fa-fw fa-lock',
+                ],
+            ],
+        ],        
         
-
-        ['header' => 'human_resources'],
-
-        [
-            'text' => 'jop_position',
-            'url'  => 'hr/jop-position',
-            'icon' => 'fas fa-fw fa-user',
-            'can' =>  'jop-position.index' ,
-        ],
-
-        [
-            'text' => 'staff',
-            'url'  => 'hr/staff',
-            'icon' => 'fas fa-fw fa-user',
-            'can' =>  'staff.index' ,
-        ],
-
-        [
-            'text' => 'census',
-            'url'  => 'recruitment/census',
-            'icon' => 'fas fa-fw fa-user',
-            'can' =>  'census.index' ,
-        ],
-
-        ['header' => 'recruitment'],
-
-
        
+        [
+            'text'    => 'human_resources',
+            'icon'    => 'fas fa-users',
+            'submenu' =>[
+
+                [
+                    'text' => 'jop_position',
+                    'route'  => 'hr.jop.position.index',
+                    'icon' => 'fas fa-user-tag',
+                    'can' =>  'jop.position.index' ,
+                ],
+        
+                [
+                    'text' => 'staff',
+                    'url'  => 'hr/staff',
+                    'icon' => 'fas fa-user-plus',
+                    'can' =>  'staff.index' ,
+                ],
+        
+                [
+                    'text' => 'census',
+                    'url'  => 'recruitment/census',
+                    'icon' => 'fas fa-th',
+                    'can' =>  'census.index' ,
+                ],
+
+            ]
+        ],
+
+        [
+            'text'    => 'recruitment',
+            'icon'    => 'fas fa-users',
+            'submenu' =>[
+                [
+                    'text' => 'interview_appointment',
+                    'url'  => 'recruitment/census',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' =>  'interview.appointment.index' ,
+                ],
+            ]
+        ],              
 
         // [
         //     'text'    => 'multilevel',

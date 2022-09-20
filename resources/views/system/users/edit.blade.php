@@ -46,7 +46,7 @@
                 
                 <div class="col-sm-12">
                     <x-dg-select id="role_id" name="role_id" label="Rol" required>
-                        <x-dg-option   value=""></x-dg-option>
+                        <x-dg-option value=""></x-dg-option>
                         @foreach ($Role as $item)                            
                             <x-dg-option selected="{{ ($user->roles[0]->id==$item->id) ? true:false }}"  value="{{ $item->id }}">{{ $item->name }}</x-dg-option>
                         @endforeach

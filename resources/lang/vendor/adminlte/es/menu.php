@@ -19,6 +19,9 @@ return [
 
     
     'recruitment'                   => 'RECLUTAMIENTO',
+    'general_information'                   => 'Información General',
+    'jop_position' => 'Puesto' ,
+    'interview_appointment'  => 'Citas a Entrevista' ,
     'human_resources'                   => 'RECURSOS HUMANOS',
     'staff'                   => 'Personal',
     'companies'                   => 'Empresas',

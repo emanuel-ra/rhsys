@@ -57,9 +57,21 @@ Route::prefix('system')->group(function () {
         Route::post('/store', [App\Http\Controllers\System\RolesController::class, 'store'])->name('system.roles.store');
         Route::get('/edit/{id}', [App\Http\Controllers\System\RolesController::class, 'edit'])->name('system.roles.edit');
         Route::post('/update/{id}', [App\Http\Controllers\System\RolesController::class, 'update'])->name('system.roles.update');
-    });
-    
+    });    
 });
+
+
+Route::prefix('hr')->group(function () {    
+
+    Route::prefix('jop-position')->group(function () {
+        Route::get('/', [App\Http\Controllers\HumanResources\JopPositionController::class, 'index'])->name('hr.jop.position.index');
+        Route::get('/register', [App\Http\Controllers\HumanResources\JopPositionController::class, 'register'])->name('hr.jop.position.register');
+        Route::post('/store', [App\Http\Controllers\HumanResources\JopPositionController::class, 'store'])->name('hr.jop.position.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\HumanResources\JopPositionController::class, 'edit'])->name('hr.jop.position.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\HumanResources\JopPositionController::class, 'update'])->name('hr.jop.position.update');
+    });
+});
+
 
 Route::prefix('recruitment')->group(function () {
     Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])->name('home');
