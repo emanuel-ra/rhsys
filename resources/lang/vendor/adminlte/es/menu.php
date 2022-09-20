@@ -22,6 +22,7 @@ return [
     'general_information'                   => 'Información General',
     'jop_position' => 'Puesto' ,
     'interview_appointment'  => 'Citas a Entrevista' ,
+    'departments'  => 'Departamentos' ,    
     'human_resources'                   => 'RECURSOS HUMANOS',
     'staff'                   => 'Personal',
     'companies'                   => 'Empresas',

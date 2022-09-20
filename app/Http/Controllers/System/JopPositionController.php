@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\HumanResources;
+namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,11 +27,11 @@ class JopPositionController extends Controller
      */
     public function index()
     {
-        $data= JopPosition::where('enable',1)->get();    
-        return view('human-resources.jop-position.app',['data'=>$data]);
+        $data= JopPosition::where('enable',1)->get();      
+        return view('system.jop-position.app',['data'=>$data]);
     }   
     public function register(){        
-        return view('human-resources.jop-position.register');
+        return view('system.jop-position.register');
     }   
     public function store(Request $request)
     {
@@ -45,11 +45,11 @@ class JopPositionController extends Controller
 
         $JopPosition->save();
        
-        return redirect()->route('hr.jop.position.index');
+        return redirect()->route('system.jop.position.index');
     }
     public function edit($id){                   
         $data = JopPosition::find($id);
-        return view('human-resources.jop-position.edit',['data'=>$data,'id'=>$id]);
+        return view('system.jop-position.edit',['data'=>$data,'id'=>$id]);
     }
     public function update($id,Request $request)
     {
@@ -61,7 +61,7 @@ class JopPositionController extends Controller
         $data->name = $request->name;
         $data->save();
 
-        return redirect()->route('hr.jop.position.index');
+        return redirect()->route('system.jop.position.index');
 
     }
 }

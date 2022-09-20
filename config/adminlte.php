@@ -343,6 +343,20 @@ return [
                     'can' =>  'branches.index' ,
                 ],
 
+                [
+                    'text' => 'jop_position',
+                    'route'  => 'system.jop.position.index',
+                    'icon' => 'fas fa-user-tag',
+                    'can' =>  'jop.position.index' ,
+                ],
+
+                [
+                    'text' => 'departments',
+                    'route'  => 'system.departments',
+                    'icon' => 'fas fa-briefcase',
+                    'can' =>  'departments.index' ,
+                ],
+
                 ['header' => 'users'],
 
                 [
@@ -378,14 +392,7 @@ return [
             'text'    => 'human_resources',
             'icon'    => 'fas fa-users',
             'submenu' =>[
-
-                [
-                    'text' => 'jop_position',
-                    'route'  => 'hr.jop.position.index',
-                    'icon' => 'fas fa-user-tag',
-                    'can' =>  'jop.position.index' ,
-                ],
-        
+                      
                 [
                     'text' => 'staff',
                     'url'  => 'hr/staff',

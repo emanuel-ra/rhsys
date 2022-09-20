@@ -43,6 +43,22 @@ Route::prefix('system')->group(function () {
         Route::post('/update/{id}', [App\Http\Controllers\System\BranchesController::class, 'update'])->name('system.branches.update');
     });
 
+    Route::prefix('jop-position')->group(function () {
+        Route::get('/', [App\Http\Controllers\System\JopPositionController::class, 'index'])->name('system.jop.position.index');
+        Route::get('/register', [App\Http\Controllers\System\JopPositionController::class, 'register'])->name('system.jop.position.register');
+        Route::post('/store', [App\Http\Controllers\System\JopPositionController::class, 'store'])->name('system.jop.position.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\System\JopPositionController::class, 'edit'])->name('system.jop.position.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\System\JopPositionController::class, 'update'])->name('system.jop.position.update');
+    });
+
+    Route::prefix('departments')->group(function () {
+        Route::get('/', [App\Http\Controllers\System\DepartmentsController::class, 'index'])->name('system.departments');
+        Route::get('/register', [App\Http\Controllers\System\DepartmentsController::class, 'register'])->name('system.departments.register');
+        Route::post('/store', [App\Http\Controllers\System\DepartmentsController::class, 'store'])->name('system.departments.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\System\DepartmentsController::class, 'edit'])->name('system.departments.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\System\DepartmentsController::class, 'update'])->name('system.departments.update');
+    });
+
     Route::prefix('users')->group(function () {    
         Route::get('/', [App\Http\Controllers\System\UsersController::class, 'index'])->name('system.users');
         Route::get('/register', [App\Http\Controllers\System\UsersController::class, 'register'])->name('system.users.register');
@@ -63,16 +79,9 @@ Route::prefix('system')->group(function () {
 
 Route::prefix('hr')->group(function () {    
 
-    Route::prefix('jop-position')->group(function () {
-        Route::get('/', [App\Http\Controllers\HumanResources\JopPositionController::class, 'index'])->name('hr.jop.position.index');
-        Route::get('/register', [App\Http\Controllers\HumanResources\JopPositionController::class, 'register'])->name('hr.jop.position.register');
-        Route::post('/store', [App\Http\Controllers\HumanResources\JopPositionController::class, 'store'])->name('hr.jop.position.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\HumanResources\JopPositionController::class, 'edit'])->name('hr.jop.position.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\HumanResources\JopPositionController::class, 'update'])->name('hr.jop.position.update');
-    });
 });
 
 
 Route::prefix('recruitment')->group(function () {
-    Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])->name('home');
+    Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])->name('census');
 });

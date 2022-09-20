@@ -19,6 +19,7 @@ return [
 
     'human_resources'                   => 'HUMAN RESOURCES',
     'jop_position' => 'Jop Position' ,
+    'departments'  => 'Departments' ,
     'interview_appointment'  => 'Interview Appointment' ,
     'staff'                   => 'Staff',
     'companies'                   => 'Company',

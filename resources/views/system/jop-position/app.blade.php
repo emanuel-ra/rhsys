@@ -6,14 +6,14 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Sistema</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Roles</li>
+                <li class="breadcrumb-item active" aria-current="page">Puestos</li>
             </ol>
         </nav>
     @stop
 
     <div class="col-sm-12 p-2 d-flex justify-content-end">
-        @can('roles.create')
-            <a href="{{ route('system.roles.register') }}" class="btn btn-primary">
+        @can('users.create')
+            <a href="{{ route('system.jop.position.register') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
                 Crear
             </a>
@@ -35,7 +35,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>                       
+                        <th>Nombre</th>
                         <th>Creado</th>
                         <th></th>
                     </tr>
@@ -45,7 +45,6 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
-                            
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <!-- Example split danger button -->
@@ -56,8 +55,8 @@
                                         </span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        @can('roles.update')
-                                            <li><a class="dropdown-item" href="{{ route('system.roles.edit',['id' => $item->id]) }}">Editar</a></li>
+                                        @can('users.update')
+                                            <li><a class="dropdown-item" href="{{ route('system.jop.position.edit',['id' => $item->id]) }}">Editar</a></li>
                                         @endcan   
                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -72,7 +71,7 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>                       
+                        <th>Nombre</th>   
                         <th>Creado</th>
                         <th></th>
                     </tr>

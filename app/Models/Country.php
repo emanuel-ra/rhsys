@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Staff extends Model
+class Country extends Model
 {
     use HasFactory;
+
+    public function States(){ 
+        return $this->hasMany(StateOfACountry::class, 'country_id');
+    }
 }

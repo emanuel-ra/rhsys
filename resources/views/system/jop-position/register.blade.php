@@ -5,9 +5,9 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">            
-                <li class="breadcrumb-item active" aria-current="page">Recursos Humanos</li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('hr.jop.position.index') }}">Puestos</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('hr.jop.position.register') }}">Registrar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sistema</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('system.jop.position.index') }}">Puestos</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('system.jop.position.register') }}">Registrar</a></li>
             </ol>
         </nav>
     @stop
@@ -23,7 +23,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form action="{{ route('hr.jop.position.store') }}" method="POST">
+            <form action="{{ route('system.jop.position.store') }}" method="POST">
                 @csrf
 
                 <div class="col-sm-12">
@@ -46,7 +46,7 @@
     
                 <div class="col-sm-12 p-2 d-flex justify-content-between">
                     
-                    <a href="{{ route('hr.jop.position.index') }}" class="btn btn-default">
+                    <a href="{{ route('system.jop.position.index') }}" class="btn btn-default">
                         Cancelar
                     </a>
 

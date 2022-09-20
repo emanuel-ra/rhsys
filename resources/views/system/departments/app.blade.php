@@ -5,15 +5,15 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Puestos</li>
+                <li class="breadcrumb-item"><a href="#">Sistema</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Departamentos</li>
             </ol>
         </nav>
     @stop
 
     <div class="col-sm-12 p-2 d-flex justify-content-end">
         @can('users.create')
-            <a href="{{ route('hr.jop.position.register') }}" class="btn btn-primary">
+            <a href="{{ route('system.departments.register') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
                 Crear
             </a>
@@ -56,7 +56,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         @can('users.update')
-                                            <li><a class="dropdown-item" href="{{ route('hr.jop.position.edit',['id' => $item->id]) }}">Editar</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('system.departments.edit',['id' => $item->id]) }}">Editar</a></li>
                                         @endcan   
                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>

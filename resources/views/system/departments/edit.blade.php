@@ -6,8 +6,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">            
                 <li class="breadcrumb-item active" aria-current="page">Sistema</li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('system.roles') }}">Roles</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('system.companies.edit',['id'=>$id]) }}">Actualizar</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('system.departments.index') }}">Departamentos</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('system.departments.edit',['id'=>$id]) }}">Actualizar</a></li>
             </ol>
         </nav>
     @stop
@@ -23,21 +23,11 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form action="{{ route('system.roles.update',['id'=>$id]) }}" method="POST">
+            <form action="{{ route('system.departments.update',['id'=>$id]) }}" method="POST">
                 @csrf
-                
-                <div class="col-sm-12">
-                    <x-dg-input type="text" label="Nombre del Rol" name="name" maxlength="255" value="{{ $role[0]->name }}" placeholder="Capture el nombre del rol" required />
-                </div>
-                
 
-                <div class="row">
-                    @foreach ($permissions as $item)
-                        <div class="com-sm-12 col-lg-3 form-check ">
-                            <input class="form-check-input" type="checkbox" value="{{ $item->id }}" name="permission_id[]" id="permission_{{ $item->id }}">
-                            <label class="form-check-label" for="permission_{{ $item->id }}">{{ $item->name }}</label>
-                        </div>                       
-                    @endforeach
+                <div class="col-sm-12">
+                    <x-dg-input type="text" label="Nombre del puesto" name="name" maxlength="255" value="{{ $data->name }}" placeholder="Capture el nombre del puesto" required />
                 </div>
 
                 <div class="row">
@@ -51,10 +41,11 @@
                         </div>
                     @endif
                 </div>
+                
     
                 <div class="col-sm-12 p-2 d-flex justify-content-between">
                     
-                    <a href="{{ route('system.roles') }}" class="btn btn-default">
+                    <a href="{{ route('system.departments.index') }}" class="btn btn-default">
                         Cancelar
                     </a>
 
@@ -68,15 +59,5 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-    
-    @section('js')
-        <script>           
-            let element;
-            @foreach ($role[0]->permissions as $permission)
-                element = document.getElementById('permission_'+{{ $permission->id }});
-                element.setAttribute("checked", "checked");
-            @endforeach
-        </script>
-    @stop
 
 @stop

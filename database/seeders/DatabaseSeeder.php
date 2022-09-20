@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CompanySeeder::class ,
             JopPositionSeeder::class ,
+            DepartmentSeeder::class ,
+            ScholarshipSeeder::class ,
+            CountrySeeder::class ,
+            StateOfACountrySeeder::class ,
         ]);
     }
 }
