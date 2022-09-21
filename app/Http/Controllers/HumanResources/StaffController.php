@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\HumanResources;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Staff;
+use App\Models\Department;
+use App\Models\JopPosition;
 use App\Models\Branch;
 use App\Models\Company;
+use App\Models\Scholarship;
 
-
-class BranchesController extends Controller
+class StaffController extends Controller
 {
-    /**
+   /**
      * Create a new controller instance.
      *
      * @return void
@@ -18,7 +21,7 @@ class BranchesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:admin','permission: branches.index|branches.create|branches.update|branches.delete']);
+        $this->middleware(['role:admin','permission: staff.index|staff.create|staff.update|staff.unsubscribe|staff.subscribe']);
     }   
     
     /**
@@ -28,15 +31,21 @@ class BranchesController extends Controller
      */
     public function index()
     {
-        $data = Branch::where('enable','1')->with('company')->get();        
-        return view('system.branches.app',['data'=>$data]);
+        $data = Staff::get();        
+        return view('human-resources.staff.app',['data'=>$data]);
     }   
     public function register(){
 
-        $companies = Company::where('enable','1')->get();
-       
-        return view('system.branches.register',[
-            'companies' => $companies
+        $Company = Company::where('enable',1)->get();      
+        $Department = Department::where('enable',1)->get();
+        $JopPosition = JopPosition::where('enable',1)->get();
+        $Scholarship = Scholarship::where('enable',1)->get();
+
+        return view('human-resources.staff.register',[
+            'Company' => $Company ,
+            'Department' => $Department ,
+            'JopPosition' => $JopPosition ,
+            'Scholarship' => $Scholarship ,
         ]);
     }   
     public function store(Request $request)
@@ -81,12 +90,5 @@ class BranchesController extends Controller
 
         return redirect()->route('system.branches');
 
-    }
-
-    // AJAX
-    public function getJson(Request $request){
-        $data = Branch::where('company_id',$request->company_id)->get(); 
-
-        return Response()->json($data,200);
     }
 }

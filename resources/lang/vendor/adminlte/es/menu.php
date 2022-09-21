@@ -17,7 +17,6 @@ return [
     'warning'                       => 'Advertencia',
     'information'                   => 'Información',
 
-    
     'recruitment'                   => 'RECLUTAMIENTO',
     'general_information'                   => 'Información General',
     'jop_position' => 'Puesto' ,

@@ -13,17 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', 'dashboard');
 
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes([
     'register' => false
 ]);
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::prefix('system')->group(function () {    
 
@@ -76,12 +71,27 @@ Route::prefix('system')->group(function () {
     });    
 });
 
-
 Route::prefix('hr')->group(function () {    
+    Route::prefix('staff')->group(function (){
+        Route::get('/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])->name('hr.staff');
+        Route::get('/register', [App\Http\Controllers\HumanResources\StaffController::class, 'register'])->name('hr.staff.register');
+        Route::post('/store', [App\Http\Controllers\HumanResources\StaffController::class, 'store'])->name('hr.staff.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'edit'])->name('hr.staff.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'update'])->name('hr.staff.update');
 
+
+        Route::prefix('ajax')->group(function () {    
+            Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
+        });
+
+        
+    });    
 });
 
 
-Route::prefix('recruitment')->group(function () {
+Route::prefix('recruitment')->group(function () {    
     Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])->name('census');
 });
+
+
+

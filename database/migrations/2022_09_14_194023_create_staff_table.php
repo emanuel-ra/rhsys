@@ -22,14 +22,17 @@ class CreateStaffTable extends Migration
             $table->string('rfc');
             $table->string('nss');
             $table->string('email');
-
             $table->string('nationality');
-
             $table->string('marital_status');
-
             $table->string('phone');
             $table->string('mobile_phone');
-            $table->string('socioeconomic');            
+            $table->string('socioeconomic'); 
+            $table->string('address');
+            $table->string('street');
+            $table->string('suburb');
+            $table->string('zip_code');
+            $table->string('town');
+            $table->string('bank_account');
             
             //$table->tinyInteger('enable')->default(1);
 
@@ -38,6 +41,10 @@ class CreateStaffTable extends Migration
             $table->unsignedSmallInteger('jop_position_id')->default(0);
             $table->unsignedSmallInteger('department_id')->default(0);
             $table->unsignedSmallInteger('scholarship_id')->default(0);
+
+            $table->unsignedSmallInteger('country_id')->default(0);
+            $table->unsignedSmallInteger('state_of_a_country_id')->default(0);
+            $table->unsignedSmallInteger('status_id')->default(0);
 
             $table->datetime('hired_date')->nullable();
             $table->datetime('born_date')->nullable();
