@@ -33,7 +33,18 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $data = Staff::get();        
+        $data = Staff::where('status_id','!=',2)
+        ->with('Position')
+        ->with('Department')
+        ->with('Company')
+        ->with('Branch')
+        ->with('MaritalStatus')
+        ->with('Scholarship')
+        ->with('Country')
+        ->with('StateOfACountry')
+        ->get();        
+
+        //return $data;
         return view('human-resources.staff.app',['data'=>$data]);
     }   
     public function register(){

@@ -35,8 +35,14 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>                  
+                        <th>Clave</th>
+                        <th>Nombre</th>                        
+                        <th>Correo</th>
+                        <th>Teléfono</th>                        
+                        <th>Empresa</th>                        
+                        <th>Puesto</th>
+                        <th>Departamento</th>
+                        <th>Escolaridad</th>
                         <th>Creado</th>
                         <th></th>
                     </tr>
@@ -45,8 +51,14 @@
                    @foreach ($data as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
+                            <td>{{ $item->code }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
+                            <td>{{ $item->mobile_phone }}</td>
+                            <td>{{ $item->company->name }} <br> {{ $item->branch->name }}</td>
+                            <td>{{ $item->position->name }}</td>
+                            <td>{{ $item->department->name }}</td>
+                            <td>{{ $item->scholarship->name }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <!-- Example split danger button -->
@@ -73,10 +85,17 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>   
-                        <th>Correo</th>                         
+                        <th>Clave</th>
+                        <th>Nombre</th>                        
+                        <th>Correo</th>
+                        <th>Teléfono</th>                        
+                        <th>Empresa</th>                        
+                        <th>Puesto</th>
+                        <th>Departamento</th>
+                        <th>Escolaridad</th>
                         <th>Creado</th>
                         <th></th>
+                    </tr>
                     </tr>
                 </tfoot>
             </table>
