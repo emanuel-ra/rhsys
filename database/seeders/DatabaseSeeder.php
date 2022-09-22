@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class ,
             StateOfACountrySeeder::class ,
             StatusSeeder::class ,
+            MariatialStatusSeeder::class ,
         ]);
     }
 }

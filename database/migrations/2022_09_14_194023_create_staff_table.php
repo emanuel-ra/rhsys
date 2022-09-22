@@ -17,22 +17,18 @@ class CreateStaffTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
-            $table->string('genre');
-            $table->string('curp');
-            $table->string('rfc');
-            $table->string('nss');
-            $table->string('email');
-            $table->string('nationality');
-            $table->string('marital_status');
-            $table->string('phone');
-            $table->string('mobile_phone');
-            $table->string('socioeconomic'); 
-            $table->string('address');
-            $table->string('street');
-            $table->string('suburb');
-            $table->string('zip_code');
-            $table->string('town');
-            $table->string('bank_account');
+            $table->string('genre')->nullable();
+            $table->string('curp')->nullable();
+            $table->string('rfc')->nullable();
+            $table->string('nss')->nullable();
+            $table->string('email')->nullable();                                    
+            $table->string('mobile_phone')->nullable();            
+            $table->string('address')->nullable();      
+            $table->string('suburb')->nullable();      
+            $table->string('zip_code')->nullable();      
+            $table->string('town')->nullable();      
+            $table->string('city')->nullable();      
+            $table->string('bank_account')->nullable();
             
             //$table->tinyInteger('enable')->default(1);
 
@@ -41,15 +37,18 @@ class CreateStaffTable extends Migration
             $table->unsignedSmallInteger('jop_position_id')->default(0);
             $table->unsignedSmallInteger('department_id')->default(0);
             $table->unsignedSmallInteger('scholarship_id')->default(0);
-
+            $table->unsignedSmallInteger('maritial_status_id')->default(0);
+            
             $table->unsignedSmallInteger('country_id')->default(0);
-            $table->unsignedSmallInteger('state_of_a_country_id')->default(0);
-            $table->unsignedSmallInteger('status_id')->default(0);
+            $table->unsignedSmallInteger('state_of_a_country_id')->nullable();
+            $table->unsignedSmallInteger('status_id')->default(1);
 
-            $table->datetime('hired_date')->nullable();
-            $table->datetime('born_date')->nullable();
-            $table->datetime('discharge_date')->nullable();
-            $table->datetime('expiration_date')->nullable();
+            $table->unsignedSmallInteger('socioeconomic')->default(0);
+
+            $table->date('hired_date')->nullable();
+            $table->date('born_date')->nullable();
+            $table->date('resignation_date')->nullable();
+            $table->date('expiration_date')->nullable();
 
             $table->timestamps();
         });

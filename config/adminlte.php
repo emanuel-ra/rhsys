@@ -194,7 +194,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-dark navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -291,16 +291,19 @@ return [
     
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type'         => 'navbar-search',
+        //     'text'         => 'search',
+        //     'topnav_right' => true,
+        // ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
+        [
+            'type'         => 'darkmode-widget',
+            'topnav_right' => true, // Or "topnav => true" to place on the left.
+        ],
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
@@ -609,6 +612,28 @@ return [
                     'asset' => true,
                     'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
                 ],
+            ],
+        ],
+
+        'owner' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/main.js',
+                ]
+            ],
+        ],
+
+        'imask' => [
+            'active' => false ,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'https://unpkg.com/imask',
+                ]
             ],
         ],
     ],

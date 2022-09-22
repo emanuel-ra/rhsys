@@ -82,8 +82,8 @@ Route::prefix('hr')->group(function () {
 
         Route::prefix('ajax')->group(function () {    
             Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
+            Route::post('/states', [App\Http\Controllers\System\StatesOfCountryController::class, 'getJson']);
         });
-
         
     });    
 });

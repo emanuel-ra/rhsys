@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Company;
+use App\Models\Branch;
 
 class CompanySeeder extends Seeder
 {
@@ -14,12 +15,21 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        Company::create([
-            'name' => "LINKBITS COMERCIO ELECTRÓNICO ",
+        $company = Company::create([
+            'name' => "LINKBITS COMERCIO ELECTRÓNICO",
             'business_name' => "LINKBITS COMERCIO ELECTRÓNICO SA DE CV",
             'address' =>'Ramon Corona #148',
             'zip_code' => '44100',
             'enable' => 1 ,
         ]);
+
+        Branch::create([
+            'name' => "Massive Home",
+            'address' => "",
+            'zip_code' =>'44100',
+            'company_id' =>  $company->id ,
+            'enable' => 1 ,
+        ]);
+
     }
 }

@@ -17,4 +17,5 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.scripts([
 'resources/js/branches.js' ,
+'resources/js/states.js' ,
 ], 'public/js/main.js');

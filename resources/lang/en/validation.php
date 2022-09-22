@@ -158,6 +158,35 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'id' => 'id' ,
+        'name' => 'name' ,
+        'code' => 'code' ,
+        'genre' => 'genre' ,
+        'curp' => 'curp' ,
+        'rfc' => 'rfc' ,
+        'nss' => 'nss' ,
+        'email' => 'email' ,
+        'mobile_phone' => 'mobile_phone' ,
+        'address' => 'address' ,
+        'suburb' => 'suburb' ,
+        'zip_code' => 'zip code' ,
+        'town' => 'town' ,
+        'city' => 'city' ,
+        'bank_account' => 'bank account' ,
+        'company_id' => 'company' ,
+        'branch_id' => 'branch' ,
+        'jop_position_id' => 'jop position' ,
+        'department_id' => 'department' ,
+        'scholarship_id' => 'scholarship' ,
+        'maritial_status_id' => 'maritial status' ,
+        'country_id' => 'country_id' ,
+        'state_of_a_country_id' => 'state of a country' ,
+        'status_id' => 'status' ,
+        'socioeconomic' => 'socioeconomic' ,
+        'hired_date' => 'hired date' ,
+        'born_date' => 'born date' ,
+        'expiration_date' => 'expiration date' ,
+    ],
 
 ];

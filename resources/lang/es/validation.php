@@ -105,6 +105,35 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'id' => 'id' ,
+        'name' => 'nombre' ,
+        'code' => 'código' ,
+        'genre' => 'genero' ,
+        'curp' => 'curp' ,
+        'rfc' => 'rfc' ,
+        'nss' => 'número de seguro social' ,
+        'email' => 'email' ,
+        'mobile_phone' => 'número de teléfono' ,
+        'address' => 'dirección' ,
+        'suburb' => 'colonia' ,
+        'zip_code' => 'código postal' ,
+        'town' => 'pueblo' ,
+        'city' => 'ciudad' ,
+        'bank_account' => 'cuenta bancaria' ,
+        'company_id' => 'empresa' ,
+        'branch_id' => 'sucursal' ,
+        'jop_position_id' => 'puesto' ,
+        'department_id' => 'departamento' ,
+        'scholarship_id' => 'escolaridad' ,
+        'maritial_status_id' => 'estado civil' ,
+        'country_id' => 'ciudad' ,
+        'state_of_a_country_id' => 'estado' ,
+        'status_id' => 'estatus' ,
+        'socioeconomic' => 'socioeconómico' ,
+        'hired_date' => 'fecha ingreso' ,
+        'born_date' => 'fecha de nacimiento' ,
+        'expiration_date' => 'fecha de vencimiento' ,        
+    ],
 
 ];
