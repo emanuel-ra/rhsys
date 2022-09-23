@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJopPositionsTable extends Migration
+class CreateAuthorizedPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateJopPositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jop_positions', function (Blueprint $table) {
-            $table->id();            
-            $table->string('name');
-            $table->tinyInteger('enable')->default(1);
+        Schema::create('authorized_posts', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedSmallInteger('jop_position_id')->default(0);
             $table->unsignedSmallInteger('department_id')->default(0);
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateJopPositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jop_positions');
+        Schema::dropIfExists('authorized_posts');
     }
 }

@@ -31,6 +31,10 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <div class="col-12">
+                {{ $data->links('pagination::bootstrap-4') }}
+            </div>
+
             <table id="table_records" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
@@ -101,6 +105,11 @@
             </table>
         </div>
         <!-- /.card-body -->
+        <div class="card-footer">
+            <div class="col-12">
+                {{ $data->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
     </div>
     <!-- /.card -->
       

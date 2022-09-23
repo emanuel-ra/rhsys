@@ -26,10 +26,20 @@
             <form action="{{ route('system.jop.position.store') }}" method="POST">
                 @csrf
 
+
+                <div class="col-sm-12 ">
+                    <x-dg-select id="department_id" name="department_id" label="Departamentos" inputclass="form-select" >        
+                        <x-dg-option value=""></x-dg-option>
+                        @foreach ($Department as $item)
+                        <option {{ (old('department_id')==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </x-dg-select>
+                </div>
+
                 <div class="col-sm-12">
                     <x-dg-input type="text" label="Nombre del puesto" name="name" maxlength="255" value="{{old('name')}}" placeholder="Capture el nombre del puesto" required />
                 </div>
-
+                
 
                 <div class="row">
                     @if ($errors->any())

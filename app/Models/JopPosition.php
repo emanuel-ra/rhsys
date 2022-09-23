@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class JopPosition extends Model
 {
     use HasFactory;
+
+    public function Department(){ 
+        return $this->hasOne(Department::class,'id', 'department_id');
+    }
 }

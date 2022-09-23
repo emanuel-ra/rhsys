@@ -34,6 +34,7 @@ class StaffController extends Controller
     public function index()
     {
         $data = Staff::where('status_id','!=',2)
+        ->with('User')
         ->with('Position')
         ->with('Department')
         ->with('Company')
@@ -42,9 +43,8 @@ class StaffController extends Controller
         ->with('Scholarship')
         ->with('Country')
         ->with('StateOfACountry')
-        ->get();        
+        ->paginate(50);        
 
-        //return $data;
         return view('human-resources.staff.app',['data'=>$data]);
     }   
     public function register(){
@@ -67,7 +67,7 @@ class StaffController extends Controller
         ]);
     }   
     public function store(Request $request)
-    {
+    {        
         $this->validate($request, [               
             'code' => 'required|max:255|unique:staff',         
             'name' => 'required|max:255',     
@@ -119,7 +119,8 @@ class StaffController extends Controller
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;
-        $Staff->status_id = 1;
+        $Staff->status_id = 4;
+        $Staff->user_id = $request->user()->id;
         if($request->hired_date!='')
             $Staff->born_date = $request->hired_date;      
         if($request->born_date!='')
@@ -204,7 +205,7 @@ class StaffController extends Controller
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;
-        $Staff->status_id = 1;
+        $Staff->status_id = 4;
         $Staff->born_date = $request->hired_date;      
         $Staff->born_date = $request->born_date;        
         $Staff->expiration_date = $request->expiration_date;

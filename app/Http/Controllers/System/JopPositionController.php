@@ -5,7 +5,9 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Department;
 use App\Models\JopPosition;
+use App\Models\AuthorizedPost;
 
 class JopPositionController extends Controller
 {
@@ -27,38 +29,50 @@ class JopPositionController extends Controller
      */
     public function index()
     {
-        $data= JopPosition::where('enable',1)->get();      
+        $data= JopPosition::where('enable',1)->with('Department')->get();      
         return view('system.jop-position.app',['data'=>$data]);
     }   
-    public function register(){        
-        return view('system.jop-position.register');
+    public function register(){   
+        $Department = Department::where('enable','1')->get();
+        return view('system.jop-position.register',['Department'=>$Department]);
     }   
     public function store(Request $request)
     {
         $this->validate($request, [               
             'name' => 'required|max:255|unique:jop_positions',                   
+            'department_id' => 'required'
         ]); 
       
         $JopPosition = new JopPosition;
 
         $JopPosition->name = $request->name;
+        $JopPosition->department_id = $request->department_id;
 
-        $JopPosition->save();
-       
+        $record = $JopPosition->save();
+     
+        $AuthorizedPost = new AuthorizedPost;
+
+        $AuthorizedPost->department_id = $request->department_id;;
+        $AuthorizedPost->jop_position_id = $record;
+        $AuthorizedPost->quantity=0;
+        $AuthorizedPost->save();
         return redirect()->route('system.jop.position.index');
     }
     public function edit($id){                   
         $data = JopPosition::find($id);
-        return view('system.jop-position.edit',['data'=>$data,'id'=>$id]);
+        $Department = Department::where('enable','1')->get();
+        return view('system.jop-position.edit',['data'=>$data,'Department'=>$Department,'id'=>$id]);
     }
     public function update($id,Request $request)
     {
         $this->validate($request, [               
             'name' => 'required|max:255|unique:jop_positions,id,'.$id ,
+            'department_id' => 'required'
         ]); 
         
         $data = JopPosition::find($id);
         $data->name = $request->name;
+        $data->department_id = $request->department_id;
         $data->save();
 
         return redirect()->route('system.jop.position.index');

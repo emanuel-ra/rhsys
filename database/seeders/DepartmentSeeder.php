@@ -24,5 +24,10 @@ class DepartmentSeeder extends Seeder
         Department::create(['name'=>'SOPORTE TÉCNICO']);
         Department::create(['name'=>'LIMPIEZA']);
         Department::create(['name'=>'MANTENIMIENTO']);
+        Department::create(['name'=>'CONTABILIDAD']);
+        Department::create(['name'=>'ALMACÉN']);
+        Department::create(['name'=>'DISPLAY']);
+        Department::create(['name'=>'TESORERÍA']);
+        Department::create(['name'=>'CAJAS']);        
     }
 }

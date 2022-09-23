@@ -9,6 +9,9 @@ class Staff extends Model
 {
     use HasFactory;
 
+    public function User(){ 
+        return $this->hasOne(User::class, 'id','user_id');
+    }
     public function Position(){ 
         return $this->hasOne(JopPosition::class, 'id','jop_position_id');
     }

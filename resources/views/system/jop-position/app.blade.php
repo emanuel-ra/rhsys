@@ -35,6 +35,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Departamento</th>
                         <th>Nombre</th>
                         <th>Creado</th>
                         <th></th>
@@ -44,6 +45,7 @@
                    @foreach ($data as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
+                            <td>{{ $item->department->name }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class AuthorizedPost extends Model
 {
-    use HasFactory;    
+    use HasFactory;
 }
