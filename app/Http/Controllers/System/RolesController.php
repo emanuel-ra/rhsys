@@ -19,7 +19,7 @@ class RolesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:admin','permission: roles.index|roles.create|roles.update|roles.delete']);
+        $this->middleware(['permission: roles.index|roles.create|roles.update|roles.delete']);
     }
 
     /**

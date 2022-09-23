@@ -23,61 +23,161 @@ Auth::routes([
 Route::prefix('system')->group(function () {    
 
     Route::prefix('companies')->group(function () {    
-        Route::get('/', [App\Http\Controllers\System\CompaniesController::class, 'index'])->name('system.companies');
-        Route::get('/register', [App\Http\Controllers\System\CompaniesController::class, 'register'])->name('system.companies.register');
-        Route::post('/store', [App\Http\Controllers\System\CompaniesController::class, 'store'])->name('system.companies.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\System\CompaniesController::class, 'edit'])->name('system.companies.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\System\CompaniesController::class, 'update'])->name('system.companies.update');
+        Route::get('/', [App\Http\Controllers\System\CompaniesController::class, 'index'])
+        ->middleware(['permission:companies.index'])
+        ->name('system.companies');
+
+        Route::get('/register', [App\Http\Controllers\System\CompaniesController::class, 'register'])
+        ->middleware(['permission:companies.create'])
+        ->name('system.companies.register');
+        Route::post('/store', [App\Http\Controllers\System\CompaniesController::class, 'store'])
+        ->middleware(['permission:companies.create'])
+        ->name('system.companies.store');
+
+        Route::get('/edit/{id}', [App\Http\Controllers\System\CompaniesController::class, 'edit'])
+        ->middleware(['permission:companies.update'])
+        ->name('system.companies.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\System\CompaniesController::class, 'update'])
+        ->middleware(['permission:companies.update'])
+        ->name('system.companies.update');
     });
 
     Route::prefix('branches')->group(function () {    
-        Route::get('/', [App\Http\Controllers\System\BranchesController::class, 'index'])->name('system.branches');
-        Route::get('/register', [App\Http\Controllers\System\BranchesController::class, 'register'])->name('system.branches.register');
-        Route::post('/store', [App\Http\Controllers\System\BranchesController::class, 'store'])->name('system.branches.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\System\BranchesController::class, 'edit'])->name('system.branches.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\System\BranchesController::class, 'update'])->name('system.branches.update');
+        Route::get('/', [App\Http\Controllers\System\BranchesController::class, 'index'])
+        ->middleware(['permission:branches.index'])
+        ->name('system.branches');
+
+        Route::get('/register', [App\Http\Controllers\System\BranchesController::class, 'register'])
+        ->middleware(['permission:branches.create'])
+        ->name('system.branches.register');
+
+        Route::post('/store', [App\Http\Controllers\System\BranchesController::class, 'store'])
+        ->middleware(['permission:branches.create'])
+        ->name('system.branches.store');
+
+        Route::get('/edit/{id}', [App\Http\Controllers\System\BranchesController::class, 'edit'])
+        ->middleware(['permission:branches.update'])
+        ->name('system.branches.edit');
+
+        Route::post('/update/{id}', [App\Http\Controllers\System\BranchesController::class, 'update'])
+        ->middleware(['permission:branches.update'])
+        ->name('system.branches.update');
     });
 
     Route::prefix('jop-position')->group(function () {
-        Route::get('/', [App\Http\Controllers\System\JopPositionController::class, 'index'])->name('system.jop.position.index');
-        Route::get('/register', [App\Http\Controllers\System\JopPositionController::class, 'register'])->name('system.jop.position.register');
-        Route::post('/store', [App\Http\Controllers\System\JopPositionController::class, 'store'])->name('system.jop.position.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\System\JopPositionController::class, 'edit'])->name('system.jop.position.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\System\JopPositionController::class, 'update'])->name('system.jop.position.update');
+        Route::get('/', [App\Http\Controllers\System\JopPositionController::class, 'index'])
+        ->middleware(['permission:jop.position.index'])
+        ->name('system.jop.position.index');
+        
+        Route::get('/register', [App\Http\Controllers\System\JopPositionController::class, 'register'])
+        ->middleware(['permission:jop.position.create'])
+        ->name('system.jop.position.register');
+
+        Route::post('/store', [App\Http\Controllers\System\JopPositionController::class, 'store'])
+        ->middleware(['permission:jop.position.create'])
+        ->name('system.jop.position.store');
+
+        Route::get('/edit/{id}', [App\Http\Controllers\System\JopPositionController::class, 'edit'])
+        ->middleware(['permission:jop.position.update'])
+        ->name('system.jop.position.edit');
+        
+        Route::post('/update/{id}', [App\Http\Controllers\System\JopPositionController::class, 'update'])
+        ->middleware(['permission:jop.position.update'])
+        ->name('system.jop.position.update');
     });
 
     Route::prefix('departments')->group(function () {
-        Route::get('/', [App\Http\Controllers\System\DepartmentsController::class, 'index'])->name('system.departments');
-        Route::get('/register', [App\Http\Controllers\System\DepartmentsController::class, 'register'])->name('system.departments.register');
-        Route::post('/store', [App\Http\Controllers\System\DepartmentsController::class, 'store'])->name('system.departments.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\System\DepartmentsController::class, 'edit'])->name('system.departments.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\System\DepartmentsController::class, 'update'])->name('system.departments.update');
+        Route::get('/', [App\Http\Controllers\System\DepartmentsController::class, 'index'])
+        ->middleware(['permission:departments.index'])
+        ->name('system.departments');
+        
+        Route::get('/register', [App\Http\Controllers\System\DepartmentsController::class, 'register'])
+        ->middleware(['permission:departments.create'])
+        ->name('system.departments.register');
+        
+        Route::post('/store', [App\Http\Controllers\System\DepartmentsController::class, 'store'])
+        ->middleware(['permission:departments.create'])
+        ->name('system.departments.store');
+        
+        Route::get('/edit/{id}', [App\Http\Controllers\System\DepartmentsController::class, 'edit'])
+        ->middleware(['permission:departments.update'])
+        ->name('system.departments.edit');
+        
+        Route::post('/update/{id}', [App\Http\Controllers\System\DepartmentsController::class, 'update'])
+        ->middleware(['permission:departments.update'])
+        ->name('system.departments.update');
+        
     });
 
     Route::prefix('users')->group(function () {    
-        Route::get('/', [App\Http\Controllers\System\UsersController::class, 'index'])->name('system.users');
-        Route::get('/register', [App\Http\Controllers\System\UsersController::class, 'register'])->name('system.users.register');
-        Route::post('/store', [App\Http\Controllers\System\UsersController::class, 'store'])->name('system.users.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\System\UsersController::class, 'edit'])->name('system.users.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\System\UsersController::class, 'update'])->name('system.users.update');
+        Route::get('/', [App\Http\Controllers\System\UsersController::class, 'index'])
+        ->middleware(['permission:users.index'])
+        ->name('system.users');
+
+        Route::get('/register', [App\Http\Controllers\System\UsersController::class, 'register'])
+        ->middleware(['permission:users.create'])
+        ->name('system.users.register');
+
+        Route::post('/store', [App\Http\Controllers\System\UsersController::class, 'store'])
+        ->middleware(['permission:users.create'])
+        ->name('system.users.store');
+
+        Route::get('/edit/{id}', [App\Http\Controllers\System\UsersController::class, 'edit'])
+        ->middleware(['permission:users.update'])
+        ->name('system.users.edit');
+
+        Route::post('/update/{id}', [App\Http\Controllers\System\UsersController::class, 'update'])
+        ->middleware(['permission:users.update'])
+        ->name('system.users.update');
+
     });
 
     Route::prefix('roles')->group(function () {    
-        Route::get('/', [App\Http\Controllers\System\RolesController::class, 'index'])->name('system.roles');
-        Route::get('/register', [App\Http\Controllers\System\RolesController::class, 'register'])->name('system.roles.register');
-        Route::post('/store', [App\Http\Controllers\System\RolesController::class, 'store'])->name('system.roles.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\System\RolesController::class, 'edit'])->name('system.roles.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\System\RolesController::class, 'update'])->name('system.roles.update');
+        Route::get('/', [App\Http\Controllers\System\RolesController::class, 'index'])
+        ->middleware(['permission:roles.index'])
+        ->name('system.roles');
+
+        Route::get('/register', [App\Http\Controllers\System\RolesController::class, 'register'])
+        ->middleware(['permission:roles.create'])
+        ->name('system.roles.register');
+
+        Route::post('/store', [App\Http\Controllers\System\RolesController::class, 'store'])
+        ->middleware(['permission:roles.create'])
+        ->name('system.roles.store');
+
+        Route::get('/edit/{id}', [App\Http\Controllers\System\RolesController::class, 'edit'])
+        ->middleware(['permission:roles.update'])
+        ->name('system.roles.edit');
+
+        Route::post('/update/{id}', [App\Http\Controllers\System\RolesController::class, 'update'])
+        ->middleware(['permission:roles.update'])
+        ->name('system.roles.update');
+
     });    
 });
 
 Route::prefix('hr')->group(function () {    
     Route::prefix('staff')->group(function (){
-        Route::get('/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])->name('hr.staff');
-        Route::get('/register', [App\Http\Controllers\HumanResources\StaffController::class, 'register'])->name('hr.staff.register');
-        Route::post('/store', [App\Http\Controllers\HumanResources\StaffController::class, 'store'])->name('hr.staff.store');
-        Route::get('/edit/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'edit'])->name('hr.staff.edit');
-        Route::post('/update/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'update'])->name('hr.staff.update');
+        Route::get('/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])
+        ->middleware(['permission:staff.index'])
+        ->name('hr.staff');
+
+        Route::get('/register', [App\Http\Controllers\HumanResources\StaffController::class, 'register'])
+        ->middleware(['permission:staff.create'])
+        ->name('hr.staff.register');
+
+        Route::post('/store', [App\Http\Controllers\HumanResources\StaffController::class, 'store'])
+        ->middleware(['permission:staff.create'])
+        ->name('hr.staff.store');
+
+        Route::get('/edit/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'edit'])
+        ->middleware(['permission:staff.update'])
+        ->name('hr.staff.edit');
+
+        Route::post('/update/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'update'])
+        ->middleware(['permission:staff.update'])
+        ->name('hr.staff.update');
+
 
 
         Route::prefix('ajax')->group(function () {    
@@ -90,7 +190,9 @@ Route::prefix('hr')->group(function () {
 
 
 Route::prefix('recruitment')->group(function () {    
-    Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])->name('census');
+    Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])
+    ->middleware(['permission:census.index'])
+    ->name('census');
 });
 
 

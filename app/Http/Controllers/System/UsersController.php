@@ -22,7 +22,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:admin','permission: users.index|users.create|users.update|users.delete']);
+        $this->middleware(['permission: users.index|users.create|users.update|users.delete']);
     }
 
     /**

@@ -61,8 +61,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'census.index'])->syncRoles([$role_admin]);
         Permission::create(['name' => 'census.create'])->syncRoles([$role_admin]);
         Permission::create(['name' => 'census.update'])->syncRoles([$role_admin]);
-        Permission::create(['name' => 'census.unsubscribe'])->syncRoles([$role_admin]);
-        Permission::create(['name' => 'census.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        //Permission::create(['name' => 'census.unsubscribe'])->syncRoles([$role_admin]);
+        //Permission::create(['name' => 'census.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
 
         // staff
         Permission::create(['name' => 'staff.index'])->syncRoles([$role_admin,$role_manage_rh]);
@@ -75,7 +75,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'interview.appointment.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         Permission::create(['name' => 'interview.appointment.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         Permission::create(['name' => 'interview.appointment.update'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'interview.appointment.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'interview.appointment.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        //Permission::create(['name' => 'interview.appointment.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        //Permission::create(['name' => 'interview.appointment.subscribe'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
     }
 }

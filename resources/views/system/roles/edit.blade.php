@@ -29,13 +29,14 @@
                 <div class="col-sm-12">
                     <x-dg-input type="text" label="Nombre del Rol" name="name" maxlength="255" value="{{ $role[0]->name }}" placeholder="Capture el nombre del rol" required />
                 </div>
-                
+
 
                 <div class="row">
+                    
                     @foreach ($permissions as $item)
                         <div class="com-sm-12 col-lg-3 form-check ">
                             <input class="form-check-input" type="checkbox" value="{{ $item->id }}" name="permission_id[]" id="permission_{{ $item->id }}">
-                            <label class="form-check-label" for="permission_{{ $item->id }}">{{ $item->name }}</label>
+                            <label class="form-check-label" for="permission_{{ $item->id }}">{{ __('permissions.'.$item->name) }}</label>
                         </div>                       
                     @endforeach
                 </div>

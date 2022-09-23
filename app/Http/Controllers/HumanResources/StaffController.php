@@ -23,7 +23,7 @@ class StaffController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:admin','permission: staff.index|staff.create|staff.update|staff.unsubscribe|staff.subscribe']);
+        $this->middleware(['permission: staff.index|staff.create|staff.update|staff.unsubscribe|staff.subscribe']);
     }   
     
     /**

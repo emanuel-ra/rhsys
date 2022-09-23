@@ -16,7 +16,7 @@ class CompaniesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:admin','permission: companies.index|companies.create|companies.update|companies.delete']);
+        $this->middleware(['permission: companies.index|companies.create|companies.update|companies.delete']);
     }
 
     /**
@@ -29,7 +29,7 @@ class CompaniesController extends Controller
         $companies = Company::where('enable','1')->get();
         return view('system.companies.app',['companies'=>$companies]);
     }   
-    public function register(){
+    public function register(){       
         return view('system.companies.register');
     }   
     public function store(Request $request)

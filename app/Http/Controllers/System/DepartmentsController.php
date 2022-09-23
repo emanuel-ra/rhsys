@@ -16,7 +16,7 @@ class DepartmentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:admin','permission: jop.position.index|jop.position.create|jop.position.update|jop.position.delete']);
+        $this->middleware(['permission: jop.position.index|jop.position.create|jop.position.update|jop.position.delete']);
     }
 
     /**
