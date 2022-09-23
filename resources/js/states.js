@@ -1,13 +1,14 @@
-const GetStates = (country_id=151,token,selector_results) =>{
+const GetStates = (country_id=151,token,selector_results,base_url,selected_id=0) =>{
     $("#"+selector_results).html('');
     $.ajax({
         type:"POST"  ,
         data:`country_id=${country_id}&_token=${token}` ,
         dataType:"json" ,
-        url:"./ajax/states",
+        url:`${base_url}/ajax/states`,
         success:function(result){            
             result.forEach(element => {
-                $("#"+selector_results).append(`<option value="${element.id}">${element.name}</option>`);
+                selected = (selected_id == element.id) ? 'selected':'';
+                $("#"+selector_results).append(`<option ${selected} value="${element.id}">${element.name}</option>`);
             });            
         }
     });

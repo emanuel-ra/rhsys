@@ -59,6 +59,7 @@
                                         @can('roles.update')
                                             <li><a class="dropdown-item" href="{{ route('system.roles.edit',['id' => $item->id]) }}">Editar</a></li>
                                         @endcan   
+
                                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                                         <li><hr class="dropdown-divider"></li>

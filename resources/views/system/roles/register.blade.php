@@ -34,7 +34,7 @@
                     @foreach ($permissions as $item)
                         <div class="com-sm-12 col-lg-3 form-check ">
                             <input class="form-check-input" type="checkbox" value="{{ $item->id }}" name="permission_id[]" id="permission_{{ $item->id }}">
-                            <label class="form-check-label" for="permission_{{ $item->id }}">{{ $item->name }}</label>
+                            <label class="form-check-label" for="permission_{{ $item->id }}">{{ __('permissions.'.$item->name) }}</label>
                         </div>
                     @endforeach
                 </div>

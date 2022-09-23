@@ -176,16 +176,12 @@ Route::prefix('hr')->group(function () {
 
         Route::post('/update/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'update'])
         ->middleware(['permission:staff.update'])
-        ->name('hr.staff.update');
-
-
-
-        Route::prefix('ajax')->group(function () {    
-            Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
-            Route::post('/states', [App\Http\Controllers\System\StatesOfCountryController::class, 'getJson']);
-        });
+        ->name('hr.staff.update');        
         
     });    
+
+   
+    
 });
 
 
@@ -195,5 +191,9 @@ Route::prefix('recruitment')->group(function () {
     ->name('census');
 });
 
+Route::prefix('ajax')->group(function () {    
+    Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
+    Route::post('/states', [App\Http\Controllers\System\StatesOfCountryController::class, 'getJson']);
+});
 
 

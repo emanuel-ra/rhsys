@@ -9,7 +9,7 @@
             <ol class="breadcrumb">            
                 <li class="breadcrumb-item active" aria-current="page">Sistemas</li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('system.users') }}">Personal</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('system.users.register') }}">Registrar</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('hr.staff.register') }}">Registrar</a></li>
             </ol>
         </nav>
     @stop
@@ -22,6 +22,7 @@
                 <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
             </div>            
         </div>
+
         <div class="card-body  p-0">
 
             <div class="col-12 p-0">
@@ -78,6 +79,7 @@
 
             
         </div>
+    
     </div>
 
 @stop

@@ -134,8 +134,7 @@
         var element = document.getElementById('mobile_phone');
         var maskOptions = { mask: '(00) 0000-0000' };
         var mask = IMask(element, maskOptions);
-
-
+        
         //GetBranches(document.getElementById('company_id').value,'{{ csrf_token() }}','branch_id')
     </script>
 @endsection

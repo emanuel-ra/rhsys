@@ -1,13 +1,15 @@
-const GetBranches = (company_id,token,selector_results) =>{
+const GetBranches = (company_id,token,selector_results,base_url,selected_id=0) =>{
     $("#"+selector_results).html('');
+    console.log(base_url);
     $.ajax({
         type:"POST"  ,
         data:`company_id=${company_id}&_token=${token}` ,
         dataType:"json" ,
-        url:"./ajax/branches",
+        url:`${base_url}/ajax/branches`,
         success:function(result){            
             result.forEach(element => {
-                $("#"+selector_results).append(`<option value="${element.id}">${element.name}</option>`);
+                selected = (selected_id == element.id) ? 'selected':'';
+                $("#"+selector_results).append(`<option ${selected} value="${element.id}">${element.name}</option>`);
             });            
         }
     });
