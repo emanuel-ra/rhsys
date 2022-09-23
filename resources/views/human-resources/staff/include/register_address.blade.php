@@ -22,7 +22,7 @@
 
 <div class="col-sm-12 col-lg-6 form-group">
     <label for="">Pais</label>
-    <select id="country_id" name="country_id" class="form-control" required onchange="GetStates(this.value,'{{ csrf_token() }}','state_id')">        
+    <select id="country_id" name="country_id" class="form-control" required onchange="GetStates(this.value,'{{ csrf_token() }}','state_id','{{ url('') }}')">        
         <option value=""></option>
         @foreach ($Country as $item)
             <option {{ ($item->id==151) ? 'selected':'' }} value="{{ $item->id }}">{{ $item->name }}</option>

@@ -34,7 +34,7 @@
 
 <div class="col-sm-12 col-lg-6 col-xl-4 form-group">
     <label for="">Empresa</label>
-    <select id="company_id" name="company_id" class="form-control"  onchange="GetBranches(this.value,'{{ csrf_token() }}','branch_id')">        
+    <select id="company_id" name="company_id" class="form-control"  onchange="GetBranches(this.value,'{{ csrf_token() }}','branch_id','{{ url('') }}')">        
         <option value=""></option>
         @foreach ($Company as $item)
             <option {{ (old('company_id')==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
