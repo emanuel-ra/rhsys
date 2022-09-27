@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\JopPosition;
 use App\Models\AuthorizedPost;
+use App\Models\branch;
 
 class JopPositionController extends Controller
 {
@@ -49,13 +50,19 @@ class JopPositionController extends Controller
         $JopPosition->department_id = $request->department_id;
 
         $record = $JopPosition->save();
-     
-        $AuthorizedPost = new AuthorizedPost;
+            
+        $branch = branch::get();
+        foreach($branch as $item)
+        {
+            $AuthorizedPost = new AuthorizedPost;
+            $AuthorizedPost->company_id=$item->company_id;
+            $AuthorizedPost->branch_id=$item->branch_id;
 
-        $AuthorizedPost->department_id = $request->department_id;;
-        $AuthorizedPost->jop_position_id = $record;
-        $AuthorizedPost->quantity=0;
-        $AuthorizedPost->save();
+            $AuthorizedPost->department_id = $request->department_id;;
+            $AuthorizedPost->jop_position_id = $record;
+            $AuthorizedPost->quantity=0;
+            $AuthorizedPost->save();
+        }        
         return redirect()->route('system.jop.position.index');
     }
     public function edit($id){                   

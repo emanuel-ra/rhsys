@@ -41,7 +41,7 @@ class CreateStaffTable extends Migration
             $table->unsignedSmallInteger('user_id')->default(0);
             
             $table->unsignedSmallInteger('country_id')->default(0);
-            $table->unsignedSmallInteger('state_of_a_country_id')->nullable();
+            $table->unsignedSmallInteger('state_id')->nullable();
             $table->unsignedSmallInteger('status_id')->default(1);
 
             $table->unsignedSmallInteger('socioeconomic')->default(0);

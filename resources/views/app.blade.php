@@ -19,9 +19,4 @@
     <script src="{{ asset('js/main.js') }}"></script> 
     --}}
 
-    <script>
-        $(document).ready(function () {
-          
-        });
-    </script>
 @stop

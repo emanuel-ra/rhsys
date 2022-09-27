@@ -10,7 +10,7 @@ use App\Models\Company;
 use App\Models\Scholarship;
 use App\Models\Country;
 use App\Models\MaritalStatus;
-use App\Models\StateOfACountry;
+use App\Models\State;
 use App\Models\Status;
 
 class StaffFactory extends Factory
@@ -22,10 +22,18 @@ class StaffFactory extends Factory
      */
     public function definition()
     {
-        $status_id = array(4,5);
+        $status_arr = array(4,5);
+        $status_id = $status_arr[array_rand($status_arr, 1)];
+
+        $dt = $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now');
+        $hired_date = $dt->format("Y-m-d"); 
+        
+        $dt = $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now');
+        $resignation_date = $dt->format("Y-m-d"); 
+
         return [
             'name' => $this->faker->name() , 
-            'code' => $this->faker->name() ,
+            'code' => $this->faker->unique()->numberBetween(100, 500) ,
             'genre' => $this->faker->name() ,
             //'curp' => $this->faker->name() ,
             //'rfc' => $this->faker->name() ,
@@ -46,13 +54,12 @@ class StaffFactory extends Factory
             'maritial_status_id' => MaritalStatus::all()->random()->id ,
             'user_id' => 1 ,
             'country_id' => 151 ,
-            'state_of_a_country_id' => StateOfACountry::all()->random()->id ,
-            'status_id' => $status_id[array_rand($status_id, 1)] ,
+            'state_id' => State::all()->random()->id ,
+            'status_id' => $status_id ,
             'socioeconomic' => rand(0,1) ,
-            'hired_date' => $this->faker->date() ,
-            'born_date' => $this->faker->date()
-            ,
-            //'resignation_date' => $this->faker->name() ,
+            'hired_date' => $hired_date ,
+            'born_date' => $this->faker->date() ,
+            'resignation_date' => ($status_id==5) ? $resignation_date : null ,
             //'expiration_date' => $this->faker->name() ,
         ];
     }

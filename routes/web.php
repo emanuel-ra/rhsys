@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'dashboard');
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes([
     'register' => false
 ]);
@@ -157,8 +158,14 @@ Route::prefix('system')->group(function () {
 });
 
 Route::prefix('hr')->group(function () {    
+    
     Route::prefix('staff')->group(function (){
-        Route::get('/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])
+                
+        // Route::get('/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])
+        // ->middleware(['permission:staff.index'])
+        // ->name('hr.staff');
+
+        Route::match(['get', 'post'],'/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])
         ->middleware(['permission:staff.index'])
         ->name('hr.staff');
 
@@ -180,8 +187,6 @@ Route::prefix('hr')->group(function () {
         
     });    
 
-   
-    
 });
 
 
@@ -193,7 +198,7 @@ Route::prefix('recruitment')->group(function () {
 
 Route::prefix('ajax')->group(function () {    
     Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
-    Route::post('/states', [App\Http\Controllers\System\StatesOfCountryController::class, 'getJson']);
+    Route::post('/states', [App\Http\Controllers\System\StatesController::class, 'getJson']);
 });
 
 

@@ -24,10 +24,11 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class ,
             ScholarshipSeeder::class ,
             CountrySeeder::class ,
-            StateOfACountrySeeder::class ,
+            StateSeeder::class ,
             StatusSeeder::class ,
             MariatialStatusSeeder::class ,
             StaffSeeder::class ,
+            AuthorizedPostSeeder::class ,
         ]);
     }
 }

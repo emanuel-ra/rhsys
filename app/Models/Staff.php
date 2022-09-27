@@ -33,8 +33,8 @@ class Staff extends Model
     public function Country(){ 
         return $this->hasOne(Country::class, 'id', 'country_id');
     }
-    public function StateOfACountry(){ 
-        return $this->hasOne(StateOfACountry::class, 'id', 'state_of_a_country_id');
+    public function State(){ 
+        return $this->hasOne(State::class, 'id', 'state_id');
     }
 
 }

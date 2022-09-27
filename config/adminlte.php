@@ -291,11 +291,13 @@ return [
     
     'menu' => [
         // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
+        [
+            'type'         => 'navbar-search',
+            'text'         => 'search',
+            'topnav_right' => true,
+            'method'       => 'post',         
+            'input_name' => 'searchKeyword'
+        ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,

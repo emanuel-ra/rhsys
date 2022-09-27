@@ -5,7 +5,7 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('hr.staff') }}">Recursos Humanos</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Personal</li>
             </ol>
         </nav>
@@ -19,7 +19,7 @@
             </a>
         @endcan        
     </div>
-
+    
     <div class="card">
         <div class="card-header">
           <h3 class="card-title">Listado</h3>
@@ -65,22 +65,24 @@
                             <td>{{ $item->scholarship->name }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
-                                <!-- Example split danger button -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">
-                                            <i class="fa fa-cogs"></i>
-                                        </span>
-                                    </button>
-                                    <ul class="dropdown-menu">
+                                <div class="dropdown dropleft show">
+                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-cogs"></i>
+                                    </a>
+                                
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         @can('users.update')
-                                            <li><a class="dropdown-item" href="{{ route('hr.staff.edit',['id' => $item->id]) }}">Editar</a></li>
+                                            <li>                                                
+                                                <a class="dropdown-item" href="{{ route('hr.staff.edit',['id' => $item->id]) }}">
+                                                    <i class="fas fa-user-edit"></i> Editar
+                                                </a>
+                                            </li>
                                         @endcan   
-                                        {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li> --}}
-                                    </ul>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-user-slash"></i> Dar de Baja</a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-id-card"></i> Ver Datos
+                                        </a>
+                                    </div>
                                 </div>
                             </td>                        
                         </tr>
@@ -113,5 +115,13 @@
     </div>
     <!-- /.card -->
       
+    @section('js')
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+          
+        </script>
+    @endsection
  
 @stop

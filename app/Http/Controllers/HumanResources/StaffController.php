@@ -31,21 +31,40 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Staff::where('status_id','!=',2)
-        ->with('User')
-        ->with('Position')
-        ->with('Department')
-        ->with('Company')
-        ->with('Branch')
-        ->with('MaritalStatus')
-        ->with('Scholarship')
-        ->with('Country')
-        ->with('StateOfACountry')
-        ->paginate(50);        
+     
+        $query = Staff::query();
 
-        return view('human-resources.staff.app',['data'=>$data]);
+        $query = $query->where('status_id','!=',2);
+        
+        
+        if(isset($request->searchKeyword)){
+            $query = $query->Where('name', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('email', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('mobile_phone', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('curp', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('rfc', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('city', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('zip_code', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('suburb', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('genre', 'LIKE', "%".$request->searchKeyword."%")
+                    ->orWhere('code', 'LIKE', "%".$request->searchKeyword."%");
+        }
+
+        $query->with('User');
+        $query->with('Position');
+        $query->with('Department');
+        $query->with('Company');
+        $query->with('Branch');
+        $query->with('MaritalStatus');
+        $query->with('Scholarship');
+        $query->with('Country');
+        $query->with('State');
+
+        $data = $query->paginate(50); 
+
+        return view('human-resources.staff.app',['data'=>$data,'keyword' => $request->searchKeyword]);
     }   
     public function register(){
 
@@ -63,7 +82,7 @@ class StaffController extends Controller
             'JopPosition' => $JopPosition ,
             'Scholarship' => $Scholarship ,
             'Country' => $Country ,     
-            'MaritalStatus' => $MaritalStatus ,            
+            'MaritalStatus' => $MaritalStatus ,             
         ]);
     }   
     public function store(Request $request)
@@ -115,7 +134,7 @@ class StaffController extends Controller
         $Staff->scholarship_id = $request->scholarship_id;
         $Staff->maritial_status_id = $request->maritial_status_id;
         $Staff->country_id = $request->country_id;
-        $Staff->state_of_a_country_id = $request->state_of_a_country_id;
+        $Staff->state_id = $request->state_of_a_country_id;
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;
@@ -201,7 +220,7 @@ class StaffController extends Controller
         $Staff->scholarship_id = $request->scholarship_id;
         $Staff->maritial_status_id = $request->maritial_status_id;
         $Staff->country_id = $request->country_id;
-        $Staff->state_of_a_country_id = $request->state_of_a_country_id;
+        $Staff->state_id = $request->state_of_a_country_id;
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;

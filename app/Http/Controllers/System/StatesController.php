@@ -4,9 +4,9 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\StateOfACountry;
+use App\Models\State;
 
-class StatesOfCountryController extends Controller
+class StatesController extends Controller
 {
     public function __construct()
     {
@@ -15,7 +15,7 @@ class StatesOfCountryController extends Controller
     }
     // AJAX
     public function getJson(Request $request){
-        $data = StateOfACountry::where('country_id',$request->country_id)->get(); 
+        $data = State::where('country_id',$request->country_id)->get(); 
 
         return Response()->json($data,200);
     }

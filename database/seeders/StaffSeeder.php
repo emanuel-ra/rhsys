@@ -15,7 +15,7 @@ class StaffSeeder extends Seeder
     {
         //\App\Models\Staff::StaffFactory(50)->create();
         //factory(\App\Models\Staff::class)->count(12)->create();
-        Staff::factory(300)->create();
+        Staff::factory(350)->create();
 
     }
 }

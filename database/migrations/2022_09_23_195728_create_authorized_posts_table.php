@@ -15,8 +15,10 @@ class CreateAuthorizedPostsTable extends Migration
     {
         Schema::create('authorized_posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedSmallInteger('company_id')->default(0);
+            $table->unsignedSmallInteger('branch_id')->default(0);
             $table->unsignedSmallInteger('jop_position_id')->default(0);
-            $table->unsignedSmallInteger('department_id')->default(0);
+            $table->unsignedSmallInteger('department_id')->default(0);            
             $table->integer('quantity');
             $table->timestamps();
         });
