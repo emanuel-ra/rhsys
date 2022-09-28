@@ -140,10 +140,12 @@
                         @endcan
 
                         @can('staff.unsubscribe')
-                        <a href="{{ route('hr.staff.unsubscribe',['id'=>$data->id]) }}" rel="noopener" class="btn btn-danger">
-                            <i class="fas fa-user-slash"></i> 
-                            Dar de Baja
-                        </a>     
+                            @if ($data->status_id == 4)
+                                <a href="{{ route('hr.staff.unsubscribe',['id'=>$data->id]) }}" rel="noopener" class="btn btn-danger">
+                                    <i class="fas fa-user-slash"></i> 
+                                    Dar de Baja
+                                </a>     
+                            @else                            
                         @endcan
                                                     
                         {{-- <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">

@@ -254,8 +254,7 @@ class StaffController extends Controller
         $Staff->state_id = $request->state_id;
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
-        $Staff->hired_date = $request->hired_date;
-        $Staff->status_id = 4;
+        $Staff->hired_date = $request->hired_date;        
         $Staff->born_date = $request->hired_date;      
         $Staff->born_date = $request->born_date;        
         $Staff->expiration_date = $request->expiration_date;
