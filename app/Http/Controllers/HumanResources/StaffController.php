@@ -67,7 +67,7 @@ class StaffController extends Controller
         $query->with('Status');
         
         $query->orderByDesc('id');
-
+        
         $data = $query->paginate(50); 
 
         return view('human-resources.staff.app',['data'=>$data,'keyword' => $request->searchKeyword]);
@@ -205,7 +205,7 @@ class StaffController extends Controller
     {
 
         $this->validate($request, [               
-            'code' => 'required|max:255|unique:staff,id,'.$id,
+            'code' => 'required|max:255|unique:staff,code,'.$id.',id' ,  
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',                 
             'mobile_phone' => 'required|max:15',            
@@ -252,13 +252,13 @@ class StaffController extends Controller
         $Staff->maritial_status_id = $request->maritial_status_id;
         $Staff->country_id = $request->country_id;
         $Staff->state_id = $request->state_id;
-        $Staff->status_id = $request->status_id;
+        
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;        
         $Staff->born_date = $request->hired_date;      
         $Staff->born_date = $request->born_date;        
         $Staff->expiration_date = $request->expiration_date;
-
+   
         $Staff->save();
 
 
