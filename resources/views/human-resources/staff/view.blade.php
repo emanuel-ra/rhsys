@@ -145,7 +145,7 @@
                                     <i class="fas fa-user-slash"></i> 
                                     Dar de Baja
                                 </a>     
-                            @else                            
+                            @endif                            
                         @endcan
                                                     
                         {{-- <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
