@@ -183,7 +183,21 @@ Route::prefix('hr')->group(function () {
 
         Route::post('/update/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'update'])
         ->middleware(['permission:staff.update'])
-        ->name('hr.staff.update');        
+        ->name('hr.staff.update');  
+        
+        Route::get('/view/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'view'])
+        ->middleware(['permission:staff.view'])
+        ->name('hr.staff.view');
+
+
+        Route::get('/unsubscribe/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'unsubscribe_from'])
+        ->middleware(['permission:staff.unsubscribe'])
+        ->name('hr.staff.unsubscribe');  
+
+
+        Route::post('/unsubscribe', [App\Http\Controllers\HumanResources\StaffController::class, 'unsubscribe'])
+        ->middleware(['permission:staff.unsubscribe'])
+        ->name('hr.staff.post.unsubscribe');  
         
     });    
 

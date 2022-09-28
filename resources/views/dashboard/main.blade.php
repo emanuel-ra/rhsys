@@ -20,9 +20,10 @@
             'disabled_staff' => $disabled_staff ,
         ])
 
-        @include('dashboard.charts.staff.pie')
-
-        @include('dashboard.charts.staff.bar')
+        <div class="row">
+            @include('dashboard.charts.staff.pie')
+            @include('dashboard.charts.staff.bar')
+        </div>
         
         
         @section('js')
@@ -34,12 +35,14 @@
                 
                 var ctx_staff_by_postion = document.getElementById("staff_by_postion"); 
                 var ctx_staff_by_department = document.getElementById("staff_by_department"); 
+                var ctx_staff_reasons_to_leave_the_work = document.getElementById("char_staff_reasons_to_leave_the_work"); 
                 
-
+                
                 let char_bar_enable =  {!! json_encode($char_bar_enable) !!}
                 let char_bar_disabled =  {!! json_encode($char_bar_disabled) !!}
                 let char_staff_by_position_enable =  {!! json_encode($char_staff_by_position_enable) !!}
                 let char_staff_by_department_enable =  {!! json_encode($char_staff_by_department_enable) !!}
+                let char_staff_reasons_to_leave_the_work =  {!! json_encode($char_staff_reasons_to_leave_the_work) !!}
 
                 let months = [];
                 let data_enable = [];   
@@ -119,7 +122,7 @@
                 var ChartStaffByPosition = new Chart(ctx_staff_by_postion, {
                     type: 'doughnut',
                     data: {
-                        labels: char_staff_by_position_enable.map((i)=>{ return i.puesto }),
+                        labels: char_staff_by_position_enable.map((i)=>{ return `${i.puesto} : ${i.data}` }),
                         datasets: [{
                         label: 'Personal Activo por area',
                         data: char_staff_by_position_enable.map((i)=>{ return i.data }) ,
@@ -131,14 +134,16 @@
                     options: {
                         //cutoutPercentage: 40,
                         responsive: true,
-
+                        legend: {
+                            position: 'right'
+                        }
                     }
                 });
 
                 var ChartStaffByDepartment = new Chart(staff_by_department, {
                     type: 'doughnut',
                     data: {
-                        labels: char_staff_by_department_enable.map((i)=>{ return i.department }),
+                        labels: char_staff_by_department_enable.map((i)=>{ return `${i.department} : ${i.data}` }),
                         datasets: [{
                         label: 'Personal Activo por area',
                         data: char_staff_by_department_enable.map((i)=>{ return i.data }) ,
@@ -150,6 +155,32 @@
                     options: {
                         //cutoutPercentage: 40,
                         responsive: true,
+                        legend: {
+                            position: 'right'
+                        }
+
+                    }
+                });
+
+
+                var ChartStaffByDepartment = new Chart(ctx_staff_reasons_to_leave_the_work, {
+                    type: 'doughnut',
+                    data: {
+                        labels: char_staff_reasons_to_leave_the_work.map((i)=>{ return `${i.reason} : ${i.data}` }),
+                        datasets: [{
+                        label: 'Personal Activo por area',
+                        data: char_staff_reasons_to_leave_the_work.map((i)=>{ return i.data }) ,
+                        backgroundColor: char_staff_reasons_to_leave_the_work.map((val,index)=>{ return (index%2==0) ? 'rgba(67, 160, 71, 0.2)':'rgba(21, 101, 192, 0.2)'}),
+                        borderColor: char_staff_reasons_to_leave_the_work.map((val,index)=>{ return (index%2==0) ? 'rgba(67, 160, 71, 1)':'rgba(21, 101, 192, 1)'}),
+                        borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        //cutoutPercentage: 40,
+                        responsive: true,
+                        legend: {
+                            position: 'right'
+                        }
 
                     }
                 });

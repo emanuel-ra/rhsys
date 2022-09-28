@@ -29,9 +29,8 @@ class CreateStaffTable extends Migration
             $table->string('town')->nullable();      
             $table->string('city')->nullable();      
             $table->string('bank_account')->nullable();
-            
-            //$table->tinyInteger('enable')->default(1);
-
+            $table->string('reason_unsubscribe_text')->nullable();
+                       
             $table->unsignedSmallInteger('company_id')->default(0);
             $table->unsignedSmallInteger('branch_id')->default(0);            
             $table->unsignedSmallInteger('jop_position_id')->default(0);
@@ -39,6 +38,7 @@ class CreateStaffTable extends Migration
             $table->unsignedSmallInteger('scholarship_id')->default(0);
             $table->unsignedSmallInteger('maritial_status_id')->default(0);
             $table->unsignedSmallInteger('user_id')->default(0);
+            $table->unsignedSmallInteger('reason_unsubscribe_id')->default(0);            
             
             $table->unsignedSmallInteger('country_id')->default(0);
             $table->unsignedSmallInteger('state_id')->nullable();
@@ -48,7 +48,7 @@ class CreateStaffTable extends Migration
 
             $table->date('hired_date')->nullable();
             $table->date('born_date')->nullable();
-            $table->date('resignation_date')->nullable();
+            $table->date('unsubscribe_date')->nullable();
             $table->date('expiration_date')->nullable();
 
             $table->timestamps();

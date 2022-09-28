@@ -7,7 +7,7 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">            
-                <li class="breadcrumb-item active" aria-current="page">Sistemas</li>
+                <li class="breadcrumb-item active" aria-current="page">Recursos Humanos</li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('system.users') }}">Personal</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('hr.staff.edit',['id'=>$id]) }}">Actualizar</a></li>
             </ol>
@@ -68,10 +68,10 @@
                     
                 <div class="col-sm-12 p-2 d-flex justify-content-between">
                     
-                    <a href="{{ route('hr.staff') }}" class="btn btn-default">
+                    <a href="{{ url()->previous(); }}" class="btn btn-default">
                         Cancelar
                     </a>
-
+                    
                     <button class="btn btn-primary">
                         Guardar
                     </button>

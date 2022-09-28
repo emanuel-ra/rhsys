@@ -37,4 +37,16 @@ class Staff extends Model
         return $this->hasOne(State::class, 'id', 'state_id');
     }
 
+    public function Status(){ 
+        return $this->hasOne(Status::class, 'id', 'status_id');
+    }
+
+    public function unsubscribe(){ 
+        return $this->hasOne(ReasonsToLeaveWork::class, 'id', 'reason_unsubscribe_id');
+    }
+    public function stafflogs(){ 
+        return $this->hasMany(StaffLogs::class, 'staff_id', 'id')->with('User')->orderBy('created_at','desc');
+    }
+    
+
 }

@@ -27,7 +27,7 @@ class HomeController extends Controller
     {        
         $enable_staff = Staff::where('status_id',4)->count();
         $disabled_staff = Staff::where('status_id',5)->count();
-
+      
         $char_bar_enable = Staff::selectRaw('year(hired_date) year, monthname(hired_date) month, count(*) data')
                 ->whereYear('hired_date',date('Y'))
                 ->where('status_id',4)
@@ -35,6 +35,7 @@ class HomeController extends Controller
                 ->orderBy('year', 'desc')
                 ->orderBy('month', 'asc')
                 ->get();
+        
 
         $char_bar_disabled = Staff::selectRaw('year(hired_date) year, monthname(hired_date) month, count(*) data')
                 ->whereYear('hired_date',date('Y'))
@@ -57,8 +58,13 @@ class HomeController extends Controller
                 ->groupBy('staff.jop_position_id')
                 ->get();
         
+        $char_staff_reasons_to_leave_the_work = Staff::selectRaw('reasons_to_leave_works.name reason, count(staff.id) data')
+                ->join('reasons_to_leave_works', 'staff.reason_unsubscribe_id' ,'reasons_to_leave_works.id')               
+                ->groupBy('staff.reason_unsubscribe_id')
+                ->get();
         
-        //return $char_staff_by_position_enable;
+        
+      
 
         return view('dashboard.main',
             [
@@ -71,7 +77,7 @@ class HomeController extends Controller
 
                 'char_staff_by_position_enable' => $char_staff_by_position_enable , // STAFF ENABLED BY POSITION
                 'char_staff_by_department_enable' => $char_staff_by_department_enable , // STAFF ENABLED BY POSITION
-
+                'char_staff_reasons_to_leave_the_work' => $char_staff_reasons_to_leave_the_work , // STAFF ENABLED BY POSITION
             ]
         );
     }

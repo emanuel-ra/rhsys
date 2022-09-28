@@ -12,6 +12,9 @@ use App\Models\Company;
 use App\Models\Scholarship;
 use App\Models\Country;
 use App\Models\MaritalStatus;
+use App\Models\ReasonsToLeaveWork;
+use App\Models\StaffLogs;
+use Carbon\Carbon;
 
 class StaffController extends Controller
 {
@@ -61,11 +64,32 @@ class StaffController extends Controller
         $query->with('Scholarship');
         $query->with('Country');
         $query->with('State');
+        $query->with('Status');
+        
+        $query->orderByDesc('id');
 
         $data = $query->paginate(50); 
 
         return view('human-resources.staff.app',['data'=>$data,'keyword' => $request->searchKeyword]);
-    }   
+    }  
+    public function view($id){
+       
+        $data = Staff::with('User')
+        ->with('Position')
+        ->with('Department')
+        ->with('Company')
+        ->with('Branch')
+        ->with('MaritalStatus')
+        ->with('Scholarship')
+        ->with('Country')
+        ->with('State')
+        ->with('Status')
+        ->with('unsubscribe')  
+        ->with('stafflogs')         
+        ->find($id);        
+        //return $data;
+        return view('human-resources.staff.view',['data'=>$data]);
+    }
     public function register(){
 
         
@@ -99,7 +123,7 @@ class StaffController extends Controller
             'scholarship_id' => 'required',
             'maritial_status_id' => 'required',
             'country_id' => 'nullable',
-            'state_of_a_country_id' => 'nullable',
+            'state_id' => 'nullable',
             'socioeconomic' => 'required',
             'hired_date' => 'required|max:10',
             'born_date' => 'required|max:10',
@@ -134,7 +158,7 @@ class StaffController extends Controller
         $Staff->scholarship_id = $request->scholarship_id;
         $Staff->maritial_status_id = $request->maritial_status_id;
         $Staff->country_id = $request->country_id;
-        $Staff->state_id = $request->state_of_a_country_id;
+        $Staff->state_id = $request->state_id;
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;
@@ -148,6 +172,13 @@ class StaffController extends Controller
             $Staff->expiration_date = $request->expiration_date;
 
         $Staff->save();
+
+        $StaffLogs = new StaffLogs;
+        $StaffLogs->staff_id =  $Staff->id;
+        $StaffLogs->user_id =  $request->user()->id;
+        $StaffLogs->description =  'Alta';
+        $StaffLogs->save();
+
         return redirect()->route('hr.staff');
     }
     public function edit($id){
@@ -185,7 +216,7 @@ class StaffController extends Controller
             'scholarship_id' => 'required',
             'maritial_status_id' => 'required',
             'country_id' => 'nullable',
-            'state_of_a_country_id' => 'nullable',
+            'state_id' => 'nullable',
             'socioeconomic' => 'required',
             'hired_date' => 'required|max:10',
             'born_date' => 'required|max:10',
@@ -220,7 +251,7 @@ class StaffController extends Controller
         $Staff->scholarship_id = $request->scholarship_id;
         $Staff->maritial_status_id = $request->maritial_status_id;
         $Staff->country_id = $request->country_id;
-        $Staff->state_id = $request->state_of_a_country_id;
+        $Staff->state_id = $request->state_id;
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;
@@ -231,7 +262,50 @@ class StaffController extends Controller
 
         $Staff->save();
 
+
+        $StaffLogs = new StaffLogs;
+        $StaffLogs->staff_id =  $id;
+        $StaffLogs->user_id =  $request->user()->id;
+        $StaffLogs->description =  'Actualizado';
+        $StaffLogs->save();
+
         return redirect()->route('hr.staff');
 
+    }
+    public function unsubscribe_from($id){
+        $data = Staff::find($id);
+
+        if(!$data){ abort(404); }
+
+        $ReasonsToLeaveWork = ReasonsToLeaveWork::where('enable',1)->get();
+
+
+        return view('human-resources.staff.unsubscribe',[
+            'data'=>$data ,
+            'ReasonsToLeaveWork'=>$ReasonsToLeaveWork ,
+        ]);       
+    }
+    public function unsubscribe(Request $request){
+        $this->validate($request, [               
+            'id' => 'required|integer',         
+            'reason_unsubscribe_id' => 'required|integer',  
+            'reason_unsubscribe_text' => 'required_if:reason_unsubscribe_id,==,0|nullable',  
+        ]);
+
+        $Staff = Staff::find($request->id);
+        
+        $Staff->reason_unsubscribe_id = $request->reason_unsubscribe_id;
+        $Staff->reason_unsubscribe_text =  $request->reason_unsubscribe_text;
+        $Staff->unsubscribe_date =  Carbon::now();
+        $Staff->status_id =  5;
+        $Staff->save();
+
+        $StaffLogs = new StaffLogs;
+        $StaffLogs->staff_id = $request->id;
+        $StaffLogs->user_id =  $request->user()->id;
+        $StaffLogs->description =  'Baja';
+        $StaffLogs->save();
+
+        return redirect()->route('hr.staff.view',['id'=>$request->id]);
     }
 }

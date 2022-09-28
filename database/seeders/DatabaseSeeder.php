@@ -26,9 +26,10 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class ,
             StateSeeder::class ,
             StatusSeeder::class ,
-            MariatialStatusSeeder::class ,
-            StaffSeeder::class ,
+            MariatialStatusSeeder::class ,           
             AuthorizedPostSeeder::class ,
+            ReasonsToLeaveWorkSeeder::class ,
+            StaffSeeder::class ,
         ]);
     }
 }

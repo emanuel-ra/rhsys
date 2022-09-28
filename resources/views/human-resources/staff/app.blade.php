@@ -15,7 +15,7 @@
         @can('users.create')
             <a href="{{ route('hr.staff.register') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
-                Crear
+                Dar de alta
             </a>
         @endcan        
     </div>
@@ -48,6 +48,7 @@
                         <th>Departamento</th>
                         <th>Escolaridad</th>
                         <th>Creado</th>
+                        <th>Estatus</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -64,6 +65,7 @@
                             <td>{{ $item->department->name }}</td>
                             <td>{{ $item->scholarship->name }}</td>
                             <td>{{ $item->created_at }}</td>
+                            <td class="{{ ($item->status_id == 4) ? 'text-success':'text-danger' }}">{{ $item->status->name }}</td>
                             <td>
                                 <div class="dropdown dropleft show">
                                     <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,10 +80,22 @@
                                                 </a>
                                             </li>
                                         @endcan   
-                                        <a class="dropdown-item" href="#"><i class="fas fa-user-slash"></i> Dar de Baja</a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-id-card"></i> Ver Datos
-                                        </a>
+                                        
+                                        @can('users.update')
+                                            <a class="dropdown-item" href="{{route('hr.staff.view',['id'=> $item->id])}}">
+                                                <i class="fas fa-id-card"></i> Ver kardex
+                                            </a>
+                                        @endcan
+
+                                                                                
+                                        @can('staff.unsubscribe')     
+                                            <div class="dropdown-divider"></div>                                   
+                                            @if ($item->status_id == 4)
+                                                <a class="dropdown-item" href="{{ route('hr.staff.unsubscribe',['id' => $item->id]) }}"><i class="fas fa-user-slash text-danger"></i> Dar de Baja</a>    
+                                            @endif
+                                            
+                                        @endcan
+                                        
                                     </div>
                                 </div>
                             </td>                        

@@ -133,7 +133,9 @@ return [
         'socioeconomic' => 'socioeconómico' ,
         'hired_date' => 'fecha ingreso' ,
         'born_date' => 'fecha de nacimiento' ,
-        'expiration_date' => 'fecha de vencimiento' ,        
+        'expiration_date' => 'fecha de vencimiento' ,  
+        'reason_unsubscribe_text' => 'otro motivo de baja' ,        
+        'reason_unsubscribe_id' => 'motivo de baja' ,        
     ],
 
 ];

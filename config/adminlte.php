@@ -393,12 +393,12 @@ return [
                     'can' =>  'staff.index' ,
                 ],
         
-                [
-                    'text' => 'census',
-                    'url'  => 'recruitment/census',
-                    'icon' => 'fas fa-th',
-                    'can' =>  'census.index' ,
-                ],
+                // [
+                //     'text' => 'census',
+                //     'url'  => 'recruitment/census',
+                //     'icon' => 'fas fa-th',
+                //     'can' =>  'census.index' ,
+                // ],
 
             ]
         ],
