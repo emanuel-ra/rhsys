@@ -194,11 +194,10 @@ Route::prefix('hr')->group(function () {
         ->middleware(['permission:staff.unsubscribe'])
         ->name('hr.staff.unsubscribe');  
 
-
         Route::post('/unsubscribe', [App\Http\Controllers\HumanResources\StaffController::class, 'unsubscribe'])
         ->middleware(['permission:staff.unsubscribe'])
         ->name('hr.staff.post.unsubscribe');  
-        
+             
     });    
 
 });

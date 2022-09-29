@@ -38,15 +38,12 @@
             <table id="table_records" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Clave</th>
                         <th>Nombre</th>                        
-                        <th>Correo</th>
-                        <th>Teléfono</th>                        
+                        <th>Contacto</th>                        
                         <th>Empresa</th>                        
-                        <th>Puesto</th>
                         <th>Departamento</th>
-                        <th>Escolaridad</th>
+                        <th>Ingreso</th>
                         <th>Creado</th>
                         <th>Estatus</th>
                         <th></th>
@@ -55,16 +52,26 @@
                 <tbody>
                    @foreach ($data as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
                             <td>{{ $item->code }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->mobile_phone }}</td>
-                            <td>{{ $item->company->name }} <br> {{ $item->branch->name }}</td>
-                            <td>{{ $item->position->name }}</td>
-                            <td>{{ $item->department->name }}</td>
-                            <td>{{ $item->scholarship->name }}</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>
+                                Email:<a href="mailto:{{ $item->email }} ">{{ $item->email }} </a><br>
+                                Tel:<a href="tel:+52{{ $item->mobile_phone }}">{{ $item->mobile_phone }}</a>
+                            </td>
+                            <td>{{ $item->company->name }} <br> {{ $item->branch->name }}</td>                            
+                            <td>
+                                {{ $item->department->name }} <br>
+                                <b>Puesto: </b>{{ $item->position->name }} <br>
+                                <b>Supervisor: </b>{{ ($item->supervisor) ? 'si':'no' }}                                
+                            </td>
+                            <td>
+                                {{ $item->hired_date }} <br>
+                                <b>Antiguedad: </b> 
+                                <span class="badge badge-info">
+                                    {{  \Carbon\Carbon::parse($item->hired_date)->age }} Años
+                                </span>
+                            </td>
+                            <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                             <td class="{{ ($item->status_id == 4) ? 'text-success':'text-danger' }}">{{ $item->status->name }}</td>
                             <td>
                                 <div class="dropdown dropleft show">
@@ -82,6 +89,7 @@
                                         @endcan   
                                         
                                         @can('users.update')
+                                            <div class="dropdown-divider"></div>       
                                             <a class="dropdown-item" href="{{route('hr.staff.view',['id'=> $item->id])}}">
                                                 <i class="fas fa-id-card"></i> Ver kardex
                                             </a>
@@ -104,15 +112,12 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>#</th>
                         <th>Clave</th>
                         <th>Nombre</th>                        
-                        <th>Correo</th>
-                        <th>Teléfono</th>                        
+                        <th>Correo</th>                        
                         <th>Empresa</th>                        
-                        <th>Puesto</th>
                         <th>Departamento</th>
-                        <th>Escolaridad</th>
+                        <th>Ingreso</th>
                         <th>Creado</th>
                         <th></th>
                     </tr>

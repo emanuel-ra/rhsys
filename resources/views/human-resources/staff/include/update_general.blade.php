@@ -75,11 +75,20 @@
     </x-dg-select>
 </div>
 
-<div class="col-sm-12 col-lg-6 col-xl-4">
+<div class="col-sm-12 col-lg-6 col-xl-3">
     <x-dg-select id="maritial_status_id" name="maritial_status_id" label="Estado Civil" inputclass="form-select" >        
         <x-dg-option value=""></x-dg-option>
         @foreach ($MaritalStatus as $item)
         <option {{ ($Staff->maritial_status_id==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
+        @endforeach
+    </x-dg-select>
+</div>
+
+<div class="col-sm-12 col-lg-6 col-xl-3">
+    <x-dg-select id="supervisor_id" name="supervisor_id" label="Supervisor" inputclass="form-select" >        
+        <x-dg-option value="0"></x-dg-option>
+        @foreach ($Supervisor as $item)
+            <option {{ ($Staff->supervisor_id==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
         @endforeach
     </x-dg-select>
 </div>
@@ -96,6 +105,21 @@
     <x-dg-input-date id="expiration_date" name="expiration_date" label="Fecha Vencimiento" value="{{$Staff->expiration_date}}" />
 </div>
 
+<div class="col-sm-12 col-md-4">
+    <label for="">Es supervisor?</label>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="supervisor" id="supervisor_si" value="1" {{ ($Staff->supervisor) ? 'checked':''; }}>
+        <label class="form-check-label" for="supervisor_si">
+            Si
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" checked type="radio" name="supervisor" id="supervisor_no" value="0" {{ (!$Staff->supervisor) ? 'checked':''; }}>
+        <label class="form-check-label" for="supervisor_no">
+            No
+        </label>
+    </div>
+</div>
 
 <div class="col-sm-12 col-md-4">
     <label for="">Socioeconómico</label>

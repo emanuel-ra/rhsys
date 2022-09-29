@@ -52,6 +52,9 @@
                             @endif
                             
                         </h3>
+                        <div class="timeline-body">                            
+                        </div>
+                        
                     </div>
 
                 </div>

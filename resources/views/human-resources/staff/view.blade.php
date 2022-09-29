@@ -80,7 +80,11 @@
                             <strong>Puesto: </strong>{{ $data->position->name }}<br>                           
                             <strong>Escolaridad: </strong>{{ $data->scholarship->name }}<br>      
                             <strong>Estado civil: </strong>{{ $data->maritalstatus->name }}<br>    
-                            <strong>Socioeconomico: </strong>{{ ($data->socioeconomic) ? 'Si':'No' }}<br>                           
+                            <strong>Socioeconomico: </strong>{{ ($data->socioeconomic) ? 'Si':'No' }}<br>                       
+                            <strong>Supervisor: </strong>{{ ($data->supervisor) ? 'Si':'No' }}<br>   
+                            @if ($data->boss != null)
+                            <strong>Jefe Directo: </strong><a title="Ver Kardex" href="{{ route('hr.staff.view',['id'=>$data->boss->id]) }}">{{ $data->boss->name }}</a><br>                                                       
+                            @endif                                                
                         </section>
                     </div>
 
@@ -162,4 +166,23 @@
     
     </div>
 
+    <div class="modal" tabindex="-1" id="modalStaffLogs">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-database"></i> Log</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="body_modalStaffLogs">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
 @stop

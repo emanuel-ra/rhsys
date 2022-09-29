@@ -14,6 +14,7 @@ use App\Models\Country;
 use App\Models\MaritalStatus;
 use App\Models\ReasonsToLeaveWork;
 use App\Models\StaffLogs;
+use App\Models\StaffRotation;
 use Carbon\Carbon;
 
 class StaffController extends Controller
@@ -85,22 +86,24 @@ class StaffController extends Controller
         ->with('State')
         ->with('Status')
         ->with('unsubscribe')  
-        ->with('stafflogs')         
-        ->find($id);        
-        //return $data;
+        ->with('stafflogs')     
+        ->with('Boss')             
+        ->find($id);   
+
         return view('human-resources.staff.view',['data'=>$data]);
     }
     public function register(){
 
-        
-        $Company = Company::where('enable',1)->get();      
-        $Department = Department::where('enable',1)->get();
-        $JopPosition = JopPosition::where('enable',1)->get();
-        $Scholarship = Scholarship::where('enable',1)->get();
-        $Country = Country::where('enable',1)->get();
-        $MaritalStatus = MaritalStatus::where('enable',1)->get();
-
-        return view('human-resources.staff.register',[           
+        $Supervisor = Staff::select('id','name')->where('status_id',4)->where('supervisor',1)->get();
+        $Company = Company::select('id','name')->where('enable',1)->get();
+        $Department = Department::select('id','name')->where('enable',1)->get();
+        $JopPosition = JopPosition::select('id','name')->where('enable',1)->get();
+        $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
+        $Country = Country::select('id','name')->where('enable',1)->get();
+        $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
+    
+        return view('human-resources.staff.register',[        
+            'Supervisor' => $Supervisor ,   
             'Company' => $Company ,
             'Department' => $Department ,
             'JopPosition' => $JopPosition ,
@@ -127,7 +130,6 @@ class StaffController extends Controller
             'socioeconomic' => 'required',
             'hired_date' => 'required|max:10',
             'born_date' => 'required|max:10',
-
 
             'rfc' => [ 'nullable', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
@@ -161,6 +163,8 @@ class StaffController extends Controller
         $Staff->state_id = $request->state_id;
         $Staff->status_id = $request->status_id;
         $Staff->socioeconomic = $request->socioeconomic;
+        $Staff->supervisor = $request->supervisor;        
+        $Staff->supervisor_id = $request->supervisor_id;        
         $Staff->hired_date = $request->hired_date;
         $Staff->status_id = 4;
         $Staff->user_id = $request->user()->id;
@@ -170,28 +174,32 @@ class StaffController extends Controller
             $Staff->born_date = $request->born_date;        
         if($request->expiration_date!='')
             $Staff->expiration_date = $request->expiration_date;
-
+                    
         $Staff->save();
 
         $StaffLogs = new StaffLogs;
         $StaffLogs->staff_id =  $Staff->id;
         $StaffLogs->user_id =  $request->user()->id;
         $StaffLogs->description =  'Alta';
+        $StaffLogs->data = json_encode($Staff);
         $StaffLogs->save();
 
         return redirect()->route('hr.staff');
     }
     public function edit($id){
+
         $Staff = Staff::find($id);       
-        $Company = Company::where('enable',1)->get();      
-        $Department = Department::where('enable',1)->get();
-        $JopPosition = JopPosition::where('enable',1)->get();
-        $Scholarship = Scholarship::where('enable',1)->get();
-        $Country = Country::where('enable',1)->get();
-        $MaritalStatus = MaritalStatus::where('enable',1)->get();
-        //return $Staff;
+        $Supervisor = Staff::select('id','name')->where('status_id',4)->where('id','!=',$id)->where('supervisor',1)->get();
+        $Company = Company::select('id','name')->where('enable',1)->get();      
+        $Department = Department::select('id','name')->where('enable',1)->get();
+        $JopPosition = JopPosition::select('id','name')->where('enable',1)->get();
+        $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
+        $Country = Country::select('id','name')->where('enable',1)->get();
+        $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
+       
         return view('human-resources.staff.edit',[
             'Staff' => $Staff ,
+            'Supervisor' => $Supervisor ,
             'Company' => $Company ,
             'Department' => $Department ,
             'JopPosition' => $JopPosition ,
@@ -252,7 +260,8 @@ class StaffController extends Controller
         $Staff->maritial_status_id = $request->maritial_status_id;
         $Staff->country_id = $request->country_id;
         $Staff->state_id = $request->state_id;
-        
+        $Staff->supervisor = $request->supervisor;        
+        $Staff->supervisor_id = $request->supervisor_id;            
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;        
         $Staff->born_date = $request->hired_date;      
@@ -266,9 +275,10 @@ class StaffController extends Controller
         $StaffLogs->staff_id =  $id;
         $StaffLogs->user_id =  $request->user()->id;
         $StaffLogs->description =  'Actualizado';
+        $StaffLogs->data = json_encode($Staff);
         $StaffLogs->save();
 
-        return redirect()->route('hr.staff');
+        return redirect()->route('hr.staff.view',['id'=>$id]);
 
     }
     public function unsubscribe_from($id){
@@ -277,7 +287,6 @@ class StaffController extends Controller
         if(!$data){ abort(404); }
 
         $ReasonsToLeaveWork = ReasonsToLeaveWork::where('enable',1)->get();
-
 
         return view('human-resources.staff.unsubscribe',[
             'data'=>$data ,
@@ -303,7 +312,18 @@ class StaffController extends Controller
         $StaffLogs->staff_id = $request->id;
         $StaffLogs->user_id =  $request->user()->id;
         $StaffLogs->description =  'Baja';
+        $StaffLogs->data = json_encode($Staff);
         $StaffLogs->save();
+
+        $StaffRotation = new StaffRotation;     
+        $StaffRotation->staff_id = $Staff->id;
+        $StaffRotation->supervisor_id = $Staff->supervisor_id;
+        $StaffRotation->company_id = $Staff->company_id;
+        $StaffRotation->branch_id = $Staff->branch_id;
+        $StaffRotation->department_id = $Staff->department_id;
+        $StaffRotation->jop_position_id = $Staff->jop_position_id;
+        $StaffRotation->scholarship_id = $Staff->scholarship_id;
+        $StaffRotation->save();
 
         return redirect()->route('hr.staff.view',['id'=>$request->id]);
     }
