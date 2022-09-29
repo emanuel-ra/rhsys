@@ -9,10 +9,9 @@
     </div>
 
     <div class="col-12 col-md-2">
-        <x-dg-info-box bg="success" title="Empresas" text="{{ $companies_count }}" icon="fad fa-building" :full="true" :grad="true"/>
+        <x-dg-info-box bg="primary" title="Empresas" text="{{ $companies_count }}" icon="fas fa-building" :full="true" :grad="true"/>
     </div>
     <div class="col-12 col-md-2">
-        <x-dg-info-box bg="success" title="Sucursales" text="{{ $branches_count }}" icon="fas fa-user-check" :full="true" :grad="true"/>
+        <x-dg-info-box bg="info" title="Sucursales" text="{{ $branches_count }}" icon="fas fa-store" :full="true" :grad="true"/>
     </div>
-
-</div>
+  
