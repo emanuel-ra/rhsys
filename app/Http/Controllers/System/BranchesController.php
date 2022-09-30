@@ -60,24 +60,25 @@ class BranchesController extends Controller
     }
     public function edit($id){
         
-        $company = Company::find($id);
+        $data = Branch::find($id);
+        $companies = Company::where('enable',1)->get();
         
-        return view('system.branches.edit',['company'=>$company,'id'=>$id]);
+        return view('system.branches.edit',['companies'=>$companies,'data'=>$data,'id'=>$id]);
     }
     public function update($id,Request $request)
     {
         $this->validate($request, [               
-            'name' => 'required|max:255|unique:companies,id,'.$id,         
+            'name' => 'required|max:255|unique:branches,id,'.$id,         
         ]);
 
-        $company = Company::find($id);
+        $data = Branch::find($id);
 
-        $company->name = $request->name;
-        $company->business_name = $request->business_name;
-        $company->address = $request->address;
-        $company->zip_code = $request->zip_code;
+        $data->name = $request->name;
+        $data->company_id = $request->company_id;
+        $data->address = $request->address;
+        $data->zip_code = $request->zip_code;
 
-        $company->save();
+        $data->save();
 
         return redirect()->route('system.branches');
 

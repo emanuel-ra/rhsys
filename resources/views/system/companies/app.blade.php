@@ -52,22 +52,20 @@
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->zip_code }}</td>
                             <td>
-                                <!-- Example split danger button -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">
-                                            <i class="fa fa-cogs"></i>
-                                        </span>
-                                    </button>
-                                    <ul class="dropdown-menu">
+                                <div class="dropdown dropleft show">
+                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuCompanies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-cogs"></i>
+                                    </a>
+                                
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuCompanies">
                                         @can('companies.update')
-                                            <li><a class="dropdown-item" href="{{ route('system.companies.edit',['id' => $item->id]) }}">Editar</a></li>
-                                        @endcan
-                                        {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li> --}}
-                                    </ul>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('system.companies.edit',['id' => $item->id]) }}">
+                                                    <i class="fa fa-pencil-alt"></i> Editar
+                                                </a>
+                                            </li>
+                                        @endcan                                        
+                                    </div>
                                 </div>
                             </td>                        
                         </tr>
@@ -86,7 +84,20 @@
             </table>
         </div>
         <!-- /.card-body -->
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <div class="col-12">
+                {{ $companies->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
     </div>
     <!-- /.card -->
       
+    @section('js')
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }          
+        </script>
+    @endsection
 @stop

@@ -21,6 +21,7 @@
           </div>
           <!-- /.card-tools -->
         </div>
+        
         <!-- /.card-header -->
         <div class="card-body">
             <form action="{{ route('system.branches.store') }}" method="POST">

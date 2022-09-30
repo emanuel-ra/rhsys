@@ -24,7 +24,8 @@ Auth::routes([
 Route::prefix('system')->group(function () {    
 
     Route::prefix('companies')->group(function () {    
-        Route::get('/', [App\Http\Controllers\System\CompaniesController::class, 'index'])
+
+        Route::match(['get', 'post'],'/',  [App\Http\Controllers\System\CompaniesController::class, 'index'])
         ->middleware(['permission:companies.index'])
         ->name('system.companies');
 
@@ -44,7 +45,8 @@ Route::prefix('system')->group(function () {
     });
 
     Route::prefix('branches')->group(function () {    
-        Route::get('/', [App\Http\Controllers\System\BranchesController::class, 'index'])
+        
+        Route::match(['get', 'post'],'/', [App\Http\Controllers\System\BranchesController::class, 'index'])
         ->middleware(['permission:branches.index'])
         ->name('system.branches');
 

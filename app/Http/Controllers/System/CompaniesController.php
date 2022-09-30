@@ -24,10 +24,23 @@ class CompaniesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $companies = Company::where('enable','1')->get();
-        return view('system.companies.app',['companies'=>$companies]);
+        $query = Company::query();
+
+        $query = $query->where('enable',1);
+
+        if(isset($request->searchKeyword)){
+            $query = $query->Where('name', 'LIKE', "%".$request->searchKeyword."%")
+            ->orWhere('business_name', 'LIKE', "%".$request->searchKeyword."%");
+        }
+
+        $query->orderByDesc('id');
+        
+        $data = $query->paginate(15); 
+
+        //$companies = Company::where('enable','1')->get();
+        return view('system.companies.app',['companies'=>$data]);
     }   
     public function register(){       
         return view('system.companies.register');

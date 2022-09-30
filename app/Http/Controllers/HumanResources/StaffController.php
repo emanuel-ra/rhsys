@@ -40,20 +40,19 @@ class StaffController extends Controller
      
         $query = Staff::query();
 
-        $query = $query->where('status_id','!=',2);
-        
+        $query = $query->where('status_id','!=',2);        
         
         if(isset($request->searchKeyword)){
             $query = $query->Where('name', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('email', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('mobile_phone', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('curp', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('rfc', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('city', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('zip_code', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('suburb', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('genre', 'LIKE', "%".$request->searchKeyword."%")
-                    ->orWhere('code', 'LIKE', "%".$request->searchKeyword."%");
+                ->orWhere('email', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('mobile_phone', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('curp', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('rfc', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('city', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('zip_code', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('suburb', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('genre', 'LIKE', "%".$request->searchKeyword."%")
+                ->orWhere('code', 'LIKE', "%".$request->searchKeyword."%");
         }
 
         $query->with('User');
