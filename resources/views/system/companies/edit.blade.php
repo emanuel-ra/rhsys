@@ -41,6 +41,10 @@
                     <label for="public_deed">Escritura pública</label>
                     <textarea name="public_deed" id="public_deed" maxlength="255" class="form-control" placeholder="Capture la escritura pública">{{ $company->public_deed }}</textarea>
                 </div>
+
+                <div class="col-sm-12">
+                    <x-dg-input type="text" label="RFC" name="rfc" maxlength="255" placeholder="Capture el rfc de la empresa" value="{{ $company->rfc }}" />
+                </div>
     
                 <div class="col-sm-12">
                     <x-dg-input type="text" label="Direccion" name="address" maxlength="255" value="{{ $company->address }}" placeholder="Capture la dirección"  />

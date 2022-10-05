@@ -16,6 +16,7 @@ use App\Models\ReasonsToLeaveWork;
 use App\Models\StaffLogs;
 use App\Models\StaffRotation;
 use Carbon\Carbon;
+use PDF;
 
 class StaffController extends Controller
 {
@@ -28,6 +29,10 @@ class StaffController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(['permission: staff.index|staff.create|staff.update|staff.unsubscribe|staff.subscribe']);
+         // Configuración para fechas en español
+         \Carbon\Carbon::setUTF8(true);
+         \Carbon\Carbon::setLocale(config('app.locale'));
+         setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
     }   
     
     /**
@@ -314,7 +319,7 @@ class StaffController extends Controller
                 'end' => (count($request->sunday)>2) ? $request->sunday[2] : '' ,
             ]
         ];
-
+        
         $Staff = Staff::find($id);
 
         $Staff->name = $request->name;
@@ -347,7 +352,8 @@ class StaffController extends Controller
         $Staff->born_date = $request->born_date;      
         $Staff->working_hours = json_encode($working_hours);  
         $Staff->expiration_date = $request->expiration_date;
-   
+        $Staff->daily_salary = $request->daily_salary;
+
         $Staff->save();
 
 
@@ -406,5 +412,14 @@ class StaffController extends Controller
         $StaffRotation->save();
 
         return redirect()->route('hr.staff.view',['id'=>$request->id]);
+    }
+    public function pdf_contract($id){
+        
+        $data = Staff::with('Country')->with('MaritalStatus')->with('Position')->find($id);
+        $Company = Company::find($data->company_id);
+        
+        
+        $pdf = Pdf::loadView('pdf.human-resources.staff.contract', ['data'=>$data,'Company'=>$Company]);
+        return $pdf->stream();
     }
 }

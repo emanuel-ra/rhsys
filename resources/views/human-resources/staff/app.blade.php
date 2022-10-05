@@ -80,7 +80,15 @@
                                     </a>
                                 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                                        <li>                                                
+                                            <a class="dropdown-item" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
+                                                <i class="fas fa-file-pdf"></i> Contrato
+                                            </a>
+                                        </li>
+                                        
                                         @can('users.update')
+                                            <div class="dropdown-divider"></div>   
                                             <li>                                                
                                                 <a class="dropdown-item" href="{{ route('hr.staff.edit',['id' => $item->id]) }}">
                                                     <i class="fas fa-user-edit"></i> Editar
@@ -94,8 +102,7 @@
                                                 <i class="fas fa-id-card"></i> Ver kardex
                                             </a>
                                         @endcan
-
-                                                                                
+                                             
                                         @can('staff.unsubscribe')     
                                             <div class="dropdown-divider"></div>                                   
                                             @if ($item->status_id == 4)

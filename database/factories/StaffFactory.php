@@ -68,15 +68,17 @@ class StaffFactory extends Factory
             'scholarship_id' =>  Scholarship::all()->random()->id ,
             'maritial_status_id' => MaritalStatus::all()->random()->id ,
             'user_id' => User::all()->random()->id ,
-            'country_id' => 151 ,
+            'country_id' => Country::all()->random()->id ,
             'state_id' => State::all()->random()->id ,
             'status_id' => $status_id ,
             'socioeconomic' => rand(0,1) ,
             'hired_date' => $hired_date ,
-            'born_date' => $this->faker->date() ,
+            'born_date' => $this->faker->dateTimeInInterval($startDate = '-30 years', $interval = '+ 5 days', $timezone = null) , // DateTime('2003-03-15 02:00:49', 'Antartica/Vostok')
+            //$this->faker->date() ,
             'unsubscribe_date' => ($status_id==5) ? $resignation_date : null ,
             'reason_unsubscribe_id' => ($status_id==5) ? ReasonsToLeaveWork::all()->random()->id  : 0  ,
             'supervisor' => $supervisor ,
+            'activities' => $this->faker->text(350) ,
             //'expiration_date' => $this->faker->name() ,
         ];
     }    

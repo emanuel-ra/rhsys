@@ -30,7 +30,7 @@ class CreateStaffTable extends Migration
             $table->string('city')->nullable();      
             $table->string('bank_account')->nullable();
             $table->string('reason_unsubscribe_text')->nullable();
-            $table->string('activities')->nullable();
+            $table->string('activities',550)->nullable();
                        
             $table->unsignedSmallInteger('company_id')->default(0);
             $table->unsignedSmallInteger('branch_id')->default(0);            

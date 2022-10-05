@@ -195,6 +195,12 @@ Route::prefix('hr')->group(function () {
         Route::post('/unsubscribe', [App\Http\Controllers\HumanResources\StaffController::class, 'unsubscribe'])
         ->middleware(['permission:staff.unsubscribe'])
         ->name('hr.staff.post.unsubscribe');  
+
+        Route::prefix('PDF')->group(function (){
+            Route::get('/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_contract'])
+            //->middleware(['permission:staff.unsubscribe'])
+            ->name('hr.staff.pdf.contract');  
+        });
              
     });  
     

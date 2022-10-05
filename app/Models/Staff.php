@@ -35,7 +35,7 @@ class Staff extends Model
         return $this->hasOne(Scholarship::class, 'id', 'scholarship_id')->select('id','name');
     }
     public function Country(){ 
-        return $this->hasOne(Country::class, 'id', 'country_id')->select('id','name');
+        return $this->hasOne(Country::class, 'id', 'country_id')->select('id','name','nationality');
     }
     public function State(){ 
         return $this->hasOne(State::class, 'id', 'state_id')->select('id','name');
