@@ -105,7 +105,11 @@
     <x-dg-input-date id="expiration_date" name="expiration_date" label="Fecha Vencimiento" value="{{$Staff->expiration_date}}" />
 </div>
 
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
+    <x-dg-input id="daily_salary" name="daily_salary" label="Salario Diario" value="{{$Staff->daily_salary}}" />
+</div>
+
+<div class="col-sm-12 col-md-3">
     <label for="">Es supervisor?</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="supervisor" id="supervisor_si" value="1" {{ ($Staff->supervisor) ? 'checked':''; }}>
@@ -121,7 +125,7 @@
     </div>
 </div>
 
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
     <label for="">Socioeconómico</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="socioeconomic" id="socioeconomic_si" value="1" {{ ($Staff->socioeconomic) ? 'checked':''; }}>
@@ -137,7 +141,7 @@
     </div>
 </div>
 
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
     <label for="">Sexo</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="genre" id="male" value="Masculino" {{ ($Staff->genre=='Masculino') ? 'checked':''; }}>
@@ -161,5 +165,19 @@
 
         GetBranches(document.getElementById('company_id').value,'{{ csrf_token() }}','branch_id','{{ url('') }}',{{$Staff->branch_id}})
         GetStates({{$Staff->country_id}},'{{ csrf_token() }}','state_id','{{ url('') }}',{{ $Staff->state_id }})
+                       
     </script>
+    @if ($Staff->working_hours!=null)
+        <script>
+            let working_hours = JSON.parse('{!! $Staff->working_hours !!}');
+            for (let d in working_hours){                   
+                //console.log(d)
+                document.getElementById(d).checked = working_hours[d].enable;
+                if(working_hours[d].enable===true){
+                    document.getElementById(`${d}_start`).value = working_hours[d].start;
+                    document.getElementById(`${d}_end`).value = working_hours[d].end;
+                }
+            }
+        </script>
+    @endif
 @endsection

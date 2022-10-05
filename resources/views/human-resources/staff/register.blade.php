@@ -32,6 +32,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="staff-address-data-tab" data-toggle="pill" href="#staff-address-data" role="tab" aria-controls="staff-address-data" aria-selected="false">Direccion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="staff-working-hours-data-tab" data-toggle="pill" href="#staff-working-hours-data" role="tab" aria-controls="staff-working-hours-data" aria-selected="false">Horario</a>
                     </li>                   
                 </ul>
             </div>
@@ -48,6 +51,11 @@
                     <div class="tab-pane fade" id="staff-address-data" role="tabpanel" aria-labelledby="staff-address-data-tab">
                         <div class="row">
                             @include('human-resources.staff.include.register_address')      
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="staff-working-hours-data" role="tabpanel" aria-labelledby="staff-working-hours-data-tab">
+                        <div class="row">
+                            @include('human-resources.staff.include.register_working_hours')      
                         </div>
                     </div>
                 </div>
@@ -81,5 +89,7 @@
         </div>
     
     </div>
+
+    
 
 @stop

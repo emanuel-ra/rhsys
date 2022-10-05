@@ -94,18 +94,22 @@
 </div>
 
 <div class="col-sm-12 col-md-2">
-    <x-dg-input-date id="born_date" name="born_date" label="Fecha Nacimiento" value="old('born_date')"  />
+    <x-dg-input-date id="born_date" name="born_date" label="Fecha Nacimiento" value="{{old('born_date')}}"  />
 </div>
 
 <div class="col-sm-12 col-md-2">
-    <x-dg-input-date id="hired_date" name="hired_date" label="Fecha ingreso" value="old('hired_date')"  />
+    <x-dg-input-date id="hired_date" name="hired_date" label="Fecha ingreso" value="{{old('hired_date')}}"  />
 </div>
 
 <div class="col-sm-12 col-md-2">
-    <x-dg-input-date id="expiration_date" name="expiration_date" label="Fecha Vencimiento" value="old('expiration_date')" />
+    <x-dg-input-date id="expiration_date" name="expiration_date" label="Fecha Vencimiento" value="{{old('expiration_date')}}" />
 </div>
 
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
+    <x-dg-input id="daily_salary" name="daily_salary" label="Salario Diario" value="{{old('daily_salary')}}" />
+</div>
+
+<div class="col-sm-12 col-md-3">
     <label for="">Es supervisor?</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="supervisor" id="supervisor_si" value="1">
@@ -121,7 +125,7 @@
     </div>
 </div>
 
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
     <label for="">Socioeconómico</label>
     <div class="form-check">
         <input class="form-check-input" checked type="radio" name="socioeconomic" id="socioeconomic_si" value="1">
@@ -137,7 +141,7 @@
     </div>
 </div>
 
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
     <label for="">Sexo</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="genre" id="male" value="Masculino">
@@ -159,6 +163,5 @@
         var maskOptions = { mask: '(00) 0000-0000' };
         var mask = IMask(element, maskOptions);
         
-        //GetBranches(document.getElementById('company_id').value,'{{ csrf_token() }}','branch_id')
     </script>
 @endsection

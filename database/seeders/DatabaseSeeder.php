@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class ,
             StatusSeeder::class ,
             MariatialStatusSeeder::class ,           
-            AuthorizedPostSeeder::class ,
             ReasonsToLeaveWorkSeeder::class ,
             StaffSeeder::class ,
             StaffRotationSeeder::class ,

@@ -112,7 +112,8 @@ class StaffController extends Controller
         ]);
     }   
     public function store(Request $request)
-    {        
+    {       
+                
         $this->validate($request, [               
             'code' => 'required|max:255|unique:staff',         
             'name' => 'required|max:255',     
@@ -134,8 +135,48 @@ class StaffController extends Controller
             'curp' => [ 'nullable', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
             'nss' => [ 'nullable', 'unique:staff', 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
         
-        ]);       
-       
+        ]);     
+        
+        
+        $working_hours = [
+            'monday' => [
+                'enable' => (count($request->monday)>2) ? true :false ,
+                'start' => (count($request->monday)>2) ? $request->monday[1] :'' ,
+                'end' => (count($request->monday)>2) ? $request->monday[2] :'' ,
+            ],
+            'tuesday' => [
+                'enable' => (count($request->tuesday)>2) ? true :false ,
+                'start' => (count($request->tuesday)>2) ? $request->tuesday[1] :'' ,
+                'end' => (count($request->tuesday)>2) ? $request->tuesday[2] : '' ,
+            ],
+            'wednesday' => [
+                'enable' => (count($request->wednesday)>2) ? true :false ,
+                'start' => (count($request->wednesday)>2) ? $request->wednesday[1] : '' ,
+                'end' => (count($request->wednesday)>2) ? $request->wednesday[2] : '' ,
+            ],
+            'thursday' => [
+                'enable' => (count($request->thursday)>2) ? true :false ,
+                'start' => (count($request->thursday)>2) ? $request->thursday[1] : '' ,
+                'end' => (count($request->thursday)>2) ? $request->thursday[2] : '' ,
+            ],
+            'friday' => [
+                'enable' => (count($request->friday)>2) ? true :false ,
+                'start' => (count($request->friday)>2) ? $request->friday[1] :'' ,
+                'end' =>  (count($request->friday)>2) ? $request->friday[2] : '' ,
+            ],
+            'saturday' => [
+                'enable' => (count($request->saturday)>2) ? true :false ,
+                'start' => (count($request->saturday)>2) ? $request->saturday[1]: '' ,
+                'end' => (count($request->saturday)>2) ? $request->saturday[2] : '' ,
+            ],
+            'sunday' => [
+                'enable' => (count($request->sunday)>2) ? true :false ,
+                'start' => (count($request->sunday)>2) ? $request->sunday[1] : '' ,
+                'end' => (count($request->sunday)>2) ? $request->sunday[2] : '' ,
+            ]
+        ];
+
+               
         $Staff = new Staff;       
 
         $Staff->name = $request->name;
@@ -166,6 +207,8 @@ class StaffController extends Controller
         $Staff->supervisor_id = $request->supervisor_id;        
         $Staff->hired_date = $request->hired_date;
         $Staff->status_id = 4;
+        $Staff->working_hours = json_encode($working_hours);
+        $Staff->daily_salary = $request->daily_salary;
         $Staff->user_id = $request->user()->id;
         if($request->hired_date!='')
             $Staff->born_date = $request->hired_date;      
@@ -195,7 +238,7 @@ class StaffController extends Controller
         $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
         $Country = Country::select('id','name')->where('enable',1)->get();
         $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
-       
+        //return $Staff;
         return view('human-resources.staff.edit',[
             'Staff' => $Staff ,
             'Supervisor' => $Supervisor ,
@@ -209,8 +252,7 @@ class StaffController extends Controller
         ]);
     }
     public function update($id,Request $request)
-    {
-
+    {                
         $this->validate($request, [               
             'code' => 'required|max:255|unique:staff,code,'.$id.',id' ,  
             'name' => 'required|max:255',
@@ -234,7 +276,45 @@ class StaffController extends Controller
             'nss' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
         
         ]);   
-       
+        
+        $working_hours = [
+            'monday' => [
+                'enable' => (count($request->monday)>2) ? true :false ,
+                'start' => (count($request->monday)>2) ? $request->monday[1] :'' ,
+                'end' => (count($request->monday)>2) ? $request->monday[2] :'' ,
+            ],
+            'tuesday' => [
+                'enable' => (count($request->tuesday)>2) ? true :false ,
+                'start' => (count($request->tuesday)>2) ? $request->tuesday[1] :'' ,
+                'end' => (count($request->tuesday)>2) ? $request->tuesday[2] : '' ,
+            ],
+            'wednesday' => [
+                'enable' => (count($request->wednesday)>2) ? true :false ,
+                'start' => (count($request->wednesday)>2) ? $request->wednesday[1] : '' ,
+                'end' => (count($request->wednesday)>2) ? $request->wednesday[2] : '' ,
+            ],
+            'thursday' => [
+                'enable' => (count($request->thursday)>2) ? true :false ,
+                'start' => (count($request->thursday)>2) ? $request->thursday[1] : '' ,
+                'end' => (count($request->thursday)>2) ? $request->thursday[2] : '' ,
+            ],
+            'friday' => [
+                'enable' => (count($request->friday)>2) ? true :false ,
+                'start' => (count($request->friday)>2) ? $request->friday[1] :'' ,
+                'end' =>  (count($request->friday)>2) ? $request->friday[2] : '' ,
+            ],
+            'saturday' => [
+                'enable' => (count($request->saturday)>2) ? true :false ,
+                'start' => (count($request->saturday)>2) ? $request->saturday[1]: '' ,
+                'end' => (count($request->saturday)>2) ? $request->saturday[2] : '' ,
+            ],
+            'sunday' => [
+                'enable' => (count($request->sunday)>2) ? true :false ,
+                'start' => (count($request->sunday)>2) ? $request->sunday[1] : '' ,
+                'end' => (count($request->sunday)>2) ? $request->sunday[2] : '' ,
+            ]
+        ];
+
         $Staff = Staff::find($id);
 
         $Staff->name = $request->name;
@@ -264,7 +344,8 @@ class StaffController extends Controller
         $Staff->socioeconomic = $request->socioeconomic;
         $Staff->hired_date = $request->hired_date;        
         $Staff->born_date = $request->hired_date;      
-        $Staff->born_date = $request->born_date;        
+        $Staff->born_date = $request->born_date;      
+        $Staff->working_hours = json_encode($working_hours);  
         $Staff->expiration_date = $request->expiration_date;
    
         $Staff->save();

@@ -323,60 +323,61 @@ return [
             'icon'    => 'fas fa-cogs',
             'submenu' => [
                 ['header' => 'general_information'],
-                [
-                    'text' => 'companies',
-                    'route'  => 'system.companies',
-                    'icon' => 'fas fa-fw fa-industry',
-                    'can' =>  'companies.index' ,
-                ],               
-                [
-                    'text' => 'branches',
-                    'route'  => 'system.branches',
-                    'icon' => 'fas fa-fw fa-building',
-                    'can' =>  'branches.index' ,
-                ],
 
-                [
-                    'text' => 'jop_position',
-                    'route'  => 'system.jop.position.index',
-                    'icon' => 'fas fa-user-tag',
-                    'can' =>  'jop.position.index' ,
-                ],
+                    [
+                        'text' => 'companies',
+                        'route'  => 'system.companies',
+                        'icon' => 'fas fa-fw fa-industry',
+                        'can' =>  'companies.index' ,
+                    ],               
+                    [
+                        'text' => 'branches',
+                        'route'  => 'system.branches',
+                        'icon' => 'fas fa-fw fa-building',
+                        'can' =>  'branches.index' ,
+                    ],
 
-                [
-                    'text' => 'departments',
-                    'route'  => 'system.departments',
-                    'icon' => 'fas fa-briefcase',
-                    'can' =>  'departments.index' ,
-                ],
+                    [
+                        'text' => 'jop_position',
+                        'route'  => 'system.jop.position.index',
+                        'icon' => 'fas fa-user-tag',
+                        'can' =>  'jop.position.index' ,
+                    ],
+
+                    [
+                        'text' => 'departments',
+                        'route'  => 'system.departments',
+                        'icon' => 'fas fa-briefcase',
+                        'can' =>  'departments.index' ,
+                    ],
 
                 ['header' => 'users'],
 
-                [
-                    'text' => 'users',
-                    'route'  => 'system.users',
-                    'icon' => 'fas fa-fw fa-user',
-                    'can' =>  'users.index' ,
-                ],
-                [
-                    'text' => 'roles',
-                    'route'  => 'system.roles',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'can' =>  'roles.index' ,
-                ],
+                    [
+                        'text' => 'users',
+                        'route'  => 'system.users',
+                        'icon' => 'fas fa-fw fa-user',
+                        'can' =>  'users.index' ,
+                    ],
+                    [
+                        'text' => 'roles',
+                        'route'  => 'system.roles',
+                        'icon' => 'fas fa-fw fa-lock',
+                        'can' =>  'roles.index' ,
+                    ],
 
                 ['header' => 'profile'],
 
-                [
-                    'text' => 'profile',
-                    'url'  => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
-                [
-                    'text' => 'change_password',
-                    'url'  => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-lock',
-                ],
+                    [
+                        'text' => 'profile',
+                        'url'  => 'admin/settings',
+                        'icon' => 'fas fa-fw fa-user',
+                    ],
+                    [
+                        'text' => 'change_password',
+                        'url'  => 'admin/settings',
+                        'icon' => 'fas fa-fw fa-lock',
+                    ],
             ],
         ],        
         
@@ -391,6 +392,13 @@ return [
                     'url'  => 'hr/staff',
                     'icon' => 'fas fa-user-plus',
                     'can' =>  'staff.index' ,
+                ],
+
+                [
+                    'text' => 'authorized job vacancy',
+                    'route'  => 'authorized.job.vacancies',
+                    'icon' => 'fas fa-user-plus',
+                    'can' =>  'authorized.job.vacancies.index' ,
                 ],
         
                 // [
@@ -637,7 +645,7 @@ return [
                     'location' => 'https://unpkg.com/imask',
                 ]
             ],
-        ],
+        ]
     ],
 
     /*

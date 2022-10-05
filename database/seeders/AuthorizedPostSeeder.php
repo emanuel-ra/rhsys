@@ -16,22 +16,6 @@ class AuthorizedPostSeeder extends Seeder
      */
     public function run()
     {
-        $branches = branch::get();
-        $JopPositions = JopPosition::get();
-        foreach($branches as $branch)
-        {
-            foreach($JopPositions as $JopPosition)
-            {               
-                
-                    AuthorizedPost::create([
-                        'company_id' =>$branch->company_id ,
-                        'branch_id' =>$branch->id ,
-                        'department_id' =>$JopPosition->department_id ,
-                        'jop_position_id' =>$JopPosition->id ,
-                        'quantity' => rand(1,10) ,
-                    ]);
               
-            }            
-        }        
     }
 }

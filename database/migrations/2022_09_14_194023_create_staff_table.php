@@ -30,6 +30,7 @@ class CreateStaffTable extends Migration
             $table->string('city')->nullable();      
             $table->string('bank_account')->nullable();
             $table->string('reason_unsubscribe_text')->nullable();
+            $table->string('activities')->nullable();
                        
             $table->unsignedSmallInteger('company_id')->default(0);
             $table->unsignedSmallInteger('branch_id')->default(0);            
@@ -53,6 +54,8 @@ class CreateStaffTable extends Migration
             $table->date('unsubscribe_date')->nullable();
             $table->date('expiration_date')->nullable();
 
+            $table->json('working_hours')->nullable();
+            $table->decimal('daily_salary', 15 , 2)->default(0);
             $table->timestamps();
         });
     }

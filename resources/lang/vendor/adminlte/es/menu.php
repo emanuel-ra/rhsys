@@ -17,18 +17,47 @@ return [
     'warning'                       => 'Advertencia',
     'information'                   => 'Información',
 
-    'recruitment'                   => 'RECLUTAMIENTO',
-    'general_information'                   => 'Información General',
-    'jop_position' => 'Puesto' ,
-    'interview_appointment'  => 'Citas a Entrevista' ,
-    'departments'  => 'Departamentos' ,    
-    'human_resources'                   => 'RECURSOS HUMANOS',
-    'staff'                   => 'Personal',
-    'companies'                   => 'Empresas',
-    'branches'                   => 'Sucursales',    
-    'system'    => 'SISTEMA',
-    'users'     => 'Usuarios',
-    'roles'     => 'Roles',
-    'census'    => 'Censo',
-    'dashboard' => 'Dashboard',
+    // [    A   ]
+    // [    B   ]
+        'branches'      => 'Sucursal',
+    // [    C   ]
+        'companies'     => 'Empresa',
+        'census'        => 'Censo',    
+    // [    D   ]
+        'departments'   => 'Departamentos' ,
+        'dashboard'     => 'Dashboard',
+    // [    E   ]
+    // [    F   ]
+    // [    G   ]
+        'general_information'  => 'Información General',
+    // [    H   ]
+        'human_resources'      => 'Recursos Humanos',
+    // [    I   ]
+        'interview_appointment'=> 'Entrevistas' ,
+    // [    J   ]
+        'jop_position'  => 'Puestos' ,
+        'authorized job vacancy'   => 'Vacantes autorizadas',    
+    // [    K   ]
+    // [    L   ]
+    // [    M   ]
+    // [    N   ]
+    // [    O   ]
+    // [    P   ]
+    // [    Q   ]
+    // [    R   ]
+        'recruitment'   => 'Reclutamiento',
+        'roles'         => 'Roles',
+    // [    S   ]
+        'staff'         => 'Personal',
+        'system'        => 'Sistema',
+    // [    T   ]
+    // [    U   ]
+        'users'         => 'Usuarios',
+    // [    V   ]
+    // [    W   ]
+    // [    X   ]
+    // [    Z   ]      
+    
+    
+    
 ];

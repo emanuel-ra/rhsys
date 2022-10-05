@@ -162,11 +162,7 @@ Route::prefix('system')->group(function () {
 Route::prefix('hr')->group(function () {    
     
     Route::prefix('staff')->group(function (){
-                
-        // Route::get('/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])
-        // ->middleware(['permission:staff.index'])
-        // ->name('hr.staff');
-
+       
         Route::match(['get', 'post'],'/', [App\Http\Controllers\HumanResources\StaffController::class, 'index'])
         ->middleware(['permission:staff.index'])
         ->name('hr.staff');
@@ -200,7 +196,27 @@ Route::prefix('hr')->group(function () {
         ->middleware(['permission:staff.unsubscribe'])
         ->name('hr.staff.post.unsubscribe');  
              
-    });    
+    });  
+    
+    Route::prefix('authorized-jop-vacancy')->group(function (){
+        
+        Route::match(['get', 'post'],'/', [App\Http\Controllers\HumanResources\AuthotizedJopVacancyController::class, 'index'])
+        ->middleware(['permission:authorized.job.vacancies.index'])
+        ->name('authorized.job.vacancies');
+
+        Route::get('/config/{company_id}/{branch_id}', [App\Http\Controllers\HumanResources\AuthotizedJopVacancyController::class, 'config'])
+        ->middleware(['permission:authorized.job.vacancies.config'])
+        ->name('authorized.job.vacancies.config');
+
+        Route::post('/config', [App\Http\Controllers\HumanResources\AuthotizedJopVacancyController::class, 'store'])
+        ->middleware(['permission:authorized.job.vacancies.config'])
+        ->name('authorized.job.vacancies.config.post');
+        
+        // Route::get('/view/{id}', [App\Http\Controllers\HumanResources\AuthotizedJopVacancyController::class, 'view'])
+        // ->middleware(['permission:authorized.job.vacancies.view'])
+        // ->name('authorized.job.vacancies.view');
+
+    }); 
 
 });
 

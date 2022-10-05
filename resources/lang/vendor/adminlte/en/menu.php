@@ -17,20 +17,44 @@ return [
     'warning'                       => 'Warning',
     'information'                   => 'Information',
 
-    'human_resources'                   => 'HUMAN RESOURCES',
-    'jop_position' => 'Jop Position' ,
-    'departments'  => 'Departments' ,
-    'interview_appointment'  => 'Interview Appointment' ,
-    'staff'                   => 'Staff',
-    'companies'                   => 'Company',
-    'general_information'                   => 'General Information',
-    'branches'                   => 'Branches',
-    
-    'recruitment'                   => 'Recruitment',
-    'system'                   => 'SYSTEMS',
-    'users'                   => 'Users',
-    'roles'                   => 'Roles',
-    'census'                   => 'Census',    
-
-    'dashboard' => 'Dashboard',
+    // [    A   ]
+    // [    B   ]
+        'branches'      => 'Branches',
+    // [    C   ]
+        'companies'     => 'Company',
+        'census'        => 'Census',    
+    // [    D   ]
+        'departments'   => 'Departments' ,
+        'dashboard'     => 'Dashboard',
+    // [    E   ]
+    // [    F   ]
+    // [    G   ]
+        'general_information'  => 'General Information',
+    // [    H   ]
+        'human_resources'      => 'HUMAN RESOURCES',
+    // [    I   ]
+        'interview_appointment'=> 'Interview Appointment' ,
+    // [    J   ]
+        'jop_position'  => 'Jop Position' ,
+        'authorized job vacancy'   => 'job vacancy',    
+    // [    K   ]
+    // [    L   ]
+    // [    M   ]
+    // [    N   ]
+    // [    O   ]
+    // [    P   ]
+    // [    Q   ]
+    // [    R   ]
+        'recruitment'   => 'Recruitment',
+        'roles'         => 'Roles',
+    // [    S   ]
+        'staff'         => 'Staff',
+        'system'        => 'SYSTEMS',
+    // [    T   ]
+    // [    U   ]
+        'users'         => 'Users',
+    // [    V   ]
+    // [    W   ]
+    // [    X   ]
+    // [    Z   ]        
 ];

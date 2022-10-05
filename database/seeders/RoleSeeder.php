@@ -71,7 +71,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'staff.view'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'staff.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh]);
 
-                
+        //staff job vacancy
+       
+        Permission::create(['name' => 'authorized.job.vacancies.index'])->syncRoles([$role_admin,$role_manage_rh]);
+        Permission::create(['name' => 'authorized.job.vacancies.config'])->syncRoles([$role_admin,$role_manage_rh]);        
+        Permission::create(['name' => 'authorized.job.vacancies.view'])->syncRoles([$role_admin,$role_manage_rh]);        
+
         //interview appointment
         Permission::create(['name' => 'interview.appointment.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         Permission::create(['name' => 'interview.appointment.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);

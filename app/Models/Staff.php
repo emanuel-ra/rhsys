@@ -9,6 +9,10 @@ class Staff extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        //'working_hours' => 'array'
+    ];
+
     public function User(){ 
         return $this->hasOne(User::class, 'id','user_id');
     }

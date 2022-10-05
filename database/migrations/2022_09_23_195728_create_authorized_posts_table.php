@@ -14,16 +14,17 @@ class CreateAuthorizedPostsTable extends Migration
     public function up()
     {
         Schema::create('authorized_posts', function (Blueprint $table) {
-            $table->id();
+            //$table->id();
+            $table->primary(['company_id','branch_id','jop_position_id']);
             $table->unsignedSmallInteger('company_id')->default(0);
             $table->unsignedSmallInteger('branch_id')->default(0);
             $table->unsignedSmallInteger('jop_position_id')->default(0);
-            $table->unsignedSmallInteger('department_id')->default(0);            
+            //$table->unsignedSmallInteger('department_id')->default(0);            
             $table->integer('quantity');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

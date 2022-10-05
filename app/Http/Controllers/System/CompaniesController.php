@@ -49,15 +49,22 @@ class CompaniesController extends Controller
     {
         $this->validate($request, [               
             'name' => 'required|max:255|unique:companies',         
+            'business_name' => 'nullable|max:255|unique:companies',         
+            'legal_representative' => 'nullable|max:255',         
+            'public_deed' => 'nullable|max:255',        
+            'rfc' => [ 'nullable', 'unique:companies', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ], 
         ]); 
 
         $Company = new Company;
 
         $Company->name = $request->name;
         $Company->business_name = $request->business_name;
+        $Company->legal_representative = $request->legal_representative;
+        $Company->public_deed = $request->public_deed;
+        $Company->rfc = $request->rfc;
         $Company->address = $request->address;
         $Company->zip_code = $request->zip_code;
-
+        
         $Company->save();
 
         return redirect()->route('system.companies');
@@ -72,13 +79,19 @@ class CompaniesController extends Controller
     public function update($id,Request $request)
     {
         $this->validate($request, [               
-            'name' => 'required|max:255|unique:companies,id,'.$id,         
+            'name' => 'required|max:255|unique:companies,id,'.$id,     
+            'business_name' => 'nullable|max:255|unique:companies,id,'.$id,       
+            'legal_representative' => 'nullable|max:255',         
+            'public_deed' => 'nullable|max:255',    
+            'rfc' => [ 'nullable', 'unique:companies,id,'.$id, 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ], 
         ]);
-
         $company = Company::find($id);
 
         $company->name = $request->name;
         $company->business_name = $request->business_name;
+        $company->legal_representative = $request->legal_representative;
+        $company->public_deed = $request->public_deed;
+        $company->rfc = $request->rfc;
         $company->address = $request->address;
         $company->zip_code = $request->zip_code;
 

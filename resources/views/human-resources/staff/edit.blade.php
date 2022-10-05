@@ -34,7 +34,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="staff-address-data-tab" data-toggle="pill" href="#staff-address-data" role="tab" aria-controls="staff-address-data" aria-selected="false">Direccion</a>
-                    </li>                   
+                    </li>     
+                    <li class="nav-item">
+                        <a class="nav-link" id="staff-working-hours-data-tab" data-toggle="pill" href="#staff-working-hours-data" role="tab" aria-controls="staff-working-hours-data" aria-selected="false">Horario</a>
+                    </li>               
                 </ul>
             </div>
 
@@ -52,6 +55,12 @@
                             @include('human-resources.staff.include.update_address')      
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="staff-working-hours-data" role="tabpanel" aria-labelledby="staff-working-hours-data-tab">
+                        <div class="row">
+                            @include('human-resources.staff.include.update_working_hours')      
+                        </div>
+                    </div>
+                    
                 </div>
                 
                 <div class="col-12">
@@ -68,7 +77,7 @@
                     
                 <div class="col-sm-12 p-2 d-flex justify-content-between">
                     
-                    <a href="{{ url()->previous(); }}" class="btn btn-default">
+                    <a href="{{ route('hr.staff') }}" class="btn btn-default">
                         Cancelar
                     </a>
                     
