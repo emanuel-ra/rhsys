@@ -645,6 +645,22 @@ return [
                     'location' => 'https://unpkg.com/imask',
                 ]
             ],
+        ],
+
+        'summernote' => [
+            'active' => false ,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css',
+                ]
+            ],
         ]
     ],
 

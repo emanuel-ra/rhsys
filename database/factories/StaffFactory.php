@@ -44,6 +44,45 @@ class StaffFactory extends Factory
 
         $dt = $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now');
         $resignation_date = $dt->format("Y-m-d"); 
+
+
+        $working_hours = [
+            'monday' => [
+                'enable' => true,
+                'start' => '09:00' ,
+                'end' => '18:30' ,
+            ],
+            'tuesday' => [
+                'enable' => true,
+                'start' => '09:00' ,
+                'end' => '18:30' ,
+            ],
+            'wednesday' => [
+                'enable' => true,
+                'start' => '09:00' ,
+                'end' => '18:30' ,
+            ],
+            'thursday' => [
+                'enable' => true,
+                'start' => '09:00' ,
+                'end' => '18:30' ,
+            ],
+            'friday' => [
+                'enable' => true,
+                'start' => '09:00' ,
+                'end' => '18:30' ,
+            ],
+            'saturday' => [
+                'enable' => true,
+                'start' => '09:00' ,
+                'end' => '18:30' ,
+            ],
+            'sunday' => [
+                'enable' => false,
+                'start' => '' ,
+                'end' => '' ,
+            ]
+        ];
         
         return [
             'name' => $this->faker->name() , 
@@ -80,7 +119,10 @@ class StaffFactory extends Factory
             'supervisor' => $supervisor ,
             'activities' => $this->faker->text(350) ,
             //'expiration_date' => $this->faker->name() ,
+            'working_hours' => json_encode($working_hours) ,
+            'daily_salary' => $this->faker->randomFloat(2, 100, $max = 1000) ,
         ];
+        
     }    
     public function enableStatus(){
         return $this->state([

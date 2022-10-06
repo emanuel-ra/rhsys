@@ -157,6 +157,11 @@
     </div>
 </div>
 
+<div class="col-sm-12">
+   <label for="">Actividades</label>
+   <textarea name="activities" class="form-control"></textarea>
+</div>
+
 @section('js')
     <script>
         var element = document.getElementById('mobile_phone');

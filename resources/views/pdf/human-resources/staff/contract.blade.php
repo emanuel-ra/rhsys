@@ -30,9 +30,41 @@
         .signature{
             width: 100%;           
         }
+        .text-danger{ color: red;}
     </style>
 </head>
 <body>
+
+    @if ($Company->business_name=='')
+        <div style="width: 100%;text-align:center;padding:5px;border: 1px solid red;border-radius:5px;">
+            <h1 class="text-danger">Falta configurar razon social de la empresa</h1>
+        </div>
+    @endif
+
+    @if ($Company->legal_representative=='')
+        <div style="width: 100%;text-align:center;padding:5px;border: 1px solid red;border-radius:5px;">
+            <h1 class="text-danger">Falta configurar nombre del representate legal</h1>
+        </div>
+    @endif
+
+    @if ($Company->address=='')
+        <div style="width: 100%;text-align:center;padding:5px;border: 1px solid red;border-radius:5px;">
+            <h1 class="text-danger">Falta configurar la direccion de la empresa</h1>
+        </div>
+    @endif
+
+    @if ($Company->rfc=='')
+        <div style="width: 100%;text-align:center;padding:5px;border: 1px solid red;border-radius:5px;">
+            <h1 class="text-danger">Falta configurar el RFC de la empresa</h1>
+        </div>
+    @endif
+
+    @if ($Company->public_deed=='')
+        <div style="width: 100%;text-align:center;padding:5px;border: 1px solid red;border-radius:5px;">
+            <h1 class="text-danger">Falta configurar la escritura pública de la empresa</h1>
+        </div>
+    @endif
+
     <div style="text-align: justify;">
         CONTRATO INDIVIDUAL DE TRABAJO POR TIEMPO DETERMINADO QUE SE CELEBRA CONFORME A LO ESTABLECIDO EN EL ARTÍCULO 25 Y 37 FRACCIÓN I DE LA LEY FEDERAL DEL TRABAJO VIGENTE, POR UNA PARTE, CON EL CARÁCTER DE PATRÓN, LA SOCIEDAD <b>{{strtoupper($Company->business_name)}}</b> A TRAVES DE SU REPRESENTANTE LEGAL EL C. <b>{{strtoupper($Company->legal_representative)}}</b>, Y POR LA OTRA COMO TRABAJADOR EL/LA C. <b>{{strtoupper($data->name)}}</b>, CONFORME A LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
     </div>
@@ -169,8 +201,8 @@
     <div class="signature">
         <table>
             <tr>
-                <td style="height: 70px;"></td>
-                <td style="height: 70px;"></td>
+                <td style="height: 55px;"></td>
+                <td style="height: 55px;"></td>
             </tr>
             <tr>
                 <td style="text-align: center;" valign="top" >

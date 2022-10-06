@@ -1,5 +1,27 @@
 <?php
+function wh_format($value){
+    $days = [
+        'monday' => [] ,
+        'tuesday' => [] ,
+        'wednesday'  => [] ,
+        'thursday' => [] ,
+        'friday' => [] ,
+        'saturday' => [] ,
+        'sunday' => [] ,
+    ];
+    if($value==""){ $days = []; }
+
+    $json = json_decode($value, true);
+
+    foreach($json as $key => $value)
+    {
+        $days[$key] = [$value["enable"],$value["start"],$value["end"],$key];             
+    }
+
+    return $days;
+}
 function wh_short_format($value){
+    if($value==""){return 'Sin horario configurado';}
     $json = json_decode($value, true);
 
     $days = [

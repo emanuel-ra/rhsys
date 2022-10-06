@@ -5,7 +5,6 @@
 @section('plugins.TempusDominusBs4', true)
 
 
-
 @yield('body')
 
 @section('css')

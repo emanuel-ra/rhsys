@@ -104,6 +104,27 @@
                         </section>
                     </div>
                 </div>       
+
+                <div class="row">
+                    <div class="col-12 col-sm-4 mt-2">
+                        <section>
+                            <strong>Salario: </strong>${{ number_format($data->daily_salary,2) }}, <br>
+                            <strong>Actividades: </strong>{{ $data->activities }}, <br>
+                        </section>
+                    </div>
+                    <div class="col-12 col-sm-4 mt-2">
+                        <h4>Horario</h4>
+                        <section>
+                            <ol>
+                                @foreach (wh_format($data->working_hours) as $key => $value)
+                                    <li>
+                                        <b>{{ Lang::get('days.'.$key) }} </b>: {{ (!$value[0]) ? 'Descanso':$value[1].' A '.$value[2] }} 
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </section>
+                    </div>
+                </div>
                 
                 @if ($data->status_id == 5)
                     <div class="callout callout-danger">

@@ -82,7 +82,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                                         <li>                                                
-                                            <a class="dropdown-item" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
+                                            <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
                                                 <i class="fas fa-file-pdf"></i> Contrato
                                             </a>
                                         </li>

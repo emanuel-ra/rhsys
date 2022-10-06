@@ -94,6 +94,7 @@ class StaffController extends Controller
         ->with('Boss')             
         ->find($id);   
 
+
         return view('human-resources.staff.view',['data'=>$data]);
     }
     public function register(){
@@ -139,7 +140,8 @@ class StaffController extends Controller
             'rfc' => [ 'nullable', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
             'nss' => [ 'nullable', 'unique:staff', 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
-        
+            
+            'activities' => 'nullable|max:550' ,
         ]);     
         
         
@@ -215,6 +217,8 @@ class StaffController extends Controller
         $Staff->working_hours = json_encode($working_hours);
         $Staff->daily_salary = $request->daily_salary;
         $Staff->user_id = $request->user()->id;
+        $Staff->activities = $request->activities;
+        
         if($request->hired_date!='')
             $Staff->born_date = $request->hired_date;      
         if($request->born_date!='')
@@ -279,6 +283,8 @@ class StaffController extends Controller
             'rfc' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
             'nss' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
+
+            'activities' => 'nullable|max:550' ,
         
         ]);   
         
@@ -353,7 +359,7 @@ class StaffController extends Controller
         $Staff->working_hours = json_encode($working_hours);  
         $Staff->expiration_date = $request->expiration_date;
         $Staff->daily_salary = $request->daily_salary;
-
+        $Staff->activities = $request->activities;
         $Staff->save();
 
 
@@ -417,8 +423,7 @@ class StaffController extends Controller
         
         $data = Staff::with('Country')->with('MaritalStatus')->with('Position')->find($id);
         $Company = Company::find($data->company_id);
-        
-        
+                
         $pdf = Pdf::loadView('pdf.human-resources.staff.contract', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
     }
