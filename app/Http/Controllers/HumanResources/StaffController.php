@@ -15,6 +15,7 @@ use App\Models\MaritalStatus;
 use App\Models\ReasonsToLeaveWork;
 use App\Models\StaffLogs;
 use App\Models\StaffRotation;
+use App\Models\Status;
 use Carbon\Carbon;
 use PDF;
 
@@ -28,7 +29,7 @@ class StaffController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['permission: staff.index|staff.create|staff.update|staff.unsubscribe|staff.subscribe']);
+        $this->middleware(['permission: staff.index|staff.create|staff.update|staff.unsubscribe|staff.subscribe|staff.contract']);
          // Configuración para fechas en español
          \Carbon\Carbon::setUTF8(true);
          \Carbon\Carbon::setLocale(config('app.locale'));
@@ -60,6 +61,23 @@ class StaffController extends Controller
                 ->orWhere('code', 'LIKE', "%".$request->searchKeyword."%");
         }
 
+        if(isset($request->branch_id)){
+            $query = $query->Where('branch_id', $request->branch_id);
+        }
+
+        if(isset($request->department_id)){
+            $query = $query->Where('department_id', $request->department_id);
+        }
+
+        if(isset($request->jop_position_id)){
+            $query = $query->Where('jop_position_id', $request->jop_position_id);
+        }
+
+        if(isset($request->status_id)){
+            $query = $query->Where('status_id', $request->status_id);
+        }
+
+
         $query->with('User');
         $query->with('Position');
         $query->with('Department');
@@ -75,7 +93,25 @@ class StaffController extends Controller
         
         $data = $query->paginate(50); 
 
-        return view('human-resources.staff.app',['data'=>$data,'keyword' => $request->searchKeyword]);
+
+        $branches = Branch::select('id','name')->where('enable',1)->get();
+        $departments = Department::select('id','name')->where('enable',1)->get();
+        $jop_positions = JopPosition::select('id','name')->where('enable',1)->get();
+        $status = Status::select('id','name')->whereIn('id',array(4,5))->where('enable',1)->get();
+        return view('human-resources.staff.app',[
+            'data'=>$data ,
+            'branches'=>$branches ,
+            'departments'=>$departments ,
+            'jop_positions'=>$jop_positions ,
+            'status'=>$status ,
+
+            'keyword' => $request->searchKeyword ,
+            'branch_id' => $request->branch_id ,
+            'department_id' => $request->department_id ,
+            'jop_position_id' => $request->jop_position_id ,
+            'status_id' => $request->status_id ,
+            
+        ]);
     }  
     public function view($id){
        
@@ -93,9 +129,10 @@ class StaffController extends Controller
         ->with('stafflogs')     
         ->with('Boss')             
         ->find($id);   
-
-
-        return view('human-resources.staff.view',['data'=>$data]);
+       
+        return view('human-resources.staff.view',[
+            'data'=>$data
+        ]);
     }
     public function register(){
 
@@ -121,7 +158,8 @@ class StaffController extends Controller
     {       
                 
         $this->validate($request, [               
-            'code' => 'required|max:255|unique:staff',         
+            'code' => 'required|max:20|unique:staff',         
+            'checker_code' => 'nullable|max:20|unique:staff',         
             'name' => 'required|max:255',     
             'email' => 'required|email|max:255',                 
             'mobile_phone' => 'required|max:15',            
@@ -137,9 +175,9 @@ class StaffController extends Controller
             'hired_date' => 'required|max:10',
             'born_date' => 'required|max:10',
 
-            'rfc' => [ 'nullable', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
-            'curp' => [ 'nullable', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
-            'nss' => [ 'nullable', 'unique:staff', 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
+            'rfc' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
+            'curp' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
+            'nss' => [ 'nullable','max:20', 'unique:staff', 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
             
             'activities' => 'nullable|max:550' ,
         ]);     
@@ -188,6 +226,7 @@ class StaffController extends Controller
 
         $Staff->name = $request->name;
         $Staff->code = $request->code;
+        $Staff->checker_code = $request->checker_code;
         $Staff->genre = $request->genre;
         $Staff->curp = $request->curp;
         $Staff->rfc = $request->rfc;
@@ -263,7 +302,8 @@ class StaffController extends Controller
     public function update($id,Request $request)
     {                
         $this->validate($request, [               
-            'code' => 'required|max:255|unique:staff,code,'.$id.',id' ,  
+            'code' => 'required|max:20|unique:staff,code,'.$id.',id' ,  
+            'checker_code' => 'nullable|max:20|unique:staff,code,'.$id.',id' ,      
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',                 
             'mobile_phone' => 'required|max:15',            
@@ -280,9 +320,9 @@ class StaffController extends Controller
             'born_date' => 'required|max:10',
 
 
-            'rfc' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
-            'curp' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
-            'nss' => [ 'nullable', 'unique:staff,id,'.$id, 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
+            'rfc' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
+            'curp' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
+            'nss' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
 
             'activities' => 'nullable|max:550' ,
         
@@ -330,6 +370,7 @@ class StaffController extends Controller
 
         $Staff->name = $request->name;
         $Staff->code = $request->code;
+        $Staff->checker_code = $request->checker_code;
         $Staff->genre = $request->genre;
         $Staff->curp = $request->curp;
         $Staff->rfc = $request->rfc;

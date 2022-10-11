@@ -291,6 +291,7 @@ return [
     
     'menu' => [
         // Navbar items:
+        /*
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -298,6 +299,7 @@ return [
             'method'       => 'post',         
             'input_name' => 'searchKeyword'
         ],
+        */
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -416,14 +418,39 @@ return [
             'icon'    => 'fas fa-users',
             'submenu' =>[
                 [
-                    'text' => 'interview_appointment',
-                    'url'  => 'recruitment/census',
-                    'icon' => 'fas fa-fw fa-user',
+                    'text' => 'requisitions',
+                    'route'  => 'recruitment.requisitions',
+                    'icon' => 'fas fa-clipboard-list',
                     'can' =>  'interview.appointment.index' ,
                 ],
+                [
+                    'text' => 'prospects',
+                    'route'  => 'recruitment.prospects',
+                    'icon' => 'fas fa-clipboard-list',
+                    'can' =>  'recruitment.prospects.index' ,
+                ],
+                [
+                    'text' => 'interview_appointment',
+                    'route'  => 'interview.appointment',
+                    'icon' => 'fas fa-fw fa-user',
+                    //'can' =>  'interview.appointment.index' ,
+                ],
             ]
-        ],              
-
+        ], 
+        
+        [
+            'text'    => 'reports',
+            'icon'    => 'fas fa-clipboard-list',
+            'submenu' =>[
+                [
+                    'text' => 'census',
+                    'route'  => 'reports.census',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' =>  'reports.census.index' ,
+                ],
+            ]
+        ], 
+        
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
@@ -646,7 +673,6 @@ return [
                 ]
             ],
         ],
-
         'summernote' => [
             'active' => false ,
             'files' => [
@@ -659,6 +685,42 @@ return [
                     'type' => 'css',
                     'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css',
+                ]
+            ],
+        ],
+        'fullcalendar' => [
+            'active' => false ,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.min.js',
+                ],
+
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.3/main.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.3/locales/es.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.3/main.min.css',
                 ]
             ],
         ]

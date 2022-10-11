@@ -125,11 +125,11 @@
     </p>
     
     <p>
-        TERCERA.- El presente contrato tendrá la duración de un periodo que se contara a partir de la firma del presente contrato, es decir, del <b>{{ \Carbon\Carbon::parse($data->hired_date)->formatLocalized('%d de %B %Y') }}</b> Y <b>{{ ($data->hired_date=='') ? 'Indeterminado' : \Carbon\Carbon::parse($data->expiration_date)->formatLocalized('%d de %B %Y')  }}</b>; en virtud de así exigirlo la naturaleza del trabajo que se desempeñara, señalado en la cláusula anterior, o bien cuando se termine la actividad objeto del presente contrato, lo que acontezca primero. Al termino establecido, concluirá la relación de trabajo, sin responsabilidad del patrón. 
+        TERCERA.- El presente contrato tendrá la duración de un periodo que se contara a partir de la firma del presente contrato, es decir, del <b>{{ \Carbon\Carbon::parse($data->hired_date)->formatLocalized('%d de %B %Y') }}</b> Y <b>{{ ($data->expiration_date=='') ? 'Indeterminado' : \Carbon\Carbon::parse($data->expiration_date)->formatLocalized('%d de %B %Y')  }}</b>; en virtud de así exigirlo la naturaleza del trabajo que se desempeñara, señalado en la cláusula anterior, o bien cuando se termine la actividad objeto del presente contrato, lo que acontezca primero. Al termino establecido, concluirá la relación de trabajo, sin responsabilidad del patrón. 
     </p>
 
     <p>
-        CUARTA.- “EL PATRON” de conformidad con el artículo 82 de la Ley Federal Del Trabajo cubrirá por los servicios contratados un salario por cuota diaria equivalente a $<b>{{number_format($data->daily_salary,2)}}</b> ({{number_to_letters(number_format($data->daily_salary,2),'MXN')}}), en el cual queda incluida la parte proporcional correspondiente al día de descanso semanal.          
+        CUARTA.- “EL PATRON” de conformidad con el artículo 82 de la Ley Federal Del Trabajo cubrirá por los servicios contratados un salario por cuota diaria equivalente a $<b>{{number_format($data->daily_salary,2)}}</b> ({{number_to_letters($data->daily_salary,'MXN')}}), en el cual queda incluida la parte proporcional correspondiente al día de descanso semanal.          
     </p>
     <p>
         Dicha retribución se pagará los días 15 y 30 de cada mes, según corresponda en día laborable y en caso de que dichos días cayeran en un día inhábil, el pago se hará un día anterior hábil.         

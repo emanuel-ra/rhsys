@@ -87,6 +87,7 @@ class StaffFactory extends Factory
         return [
             'name' => $this->faker->name() , 
             'code' => $this->faker->unique()->numberBetween(100, 500) ,
+            'checker_code' => $this->faker->unique()->numberBetween(100, 500) ,
             'genre' => $gender ,
             'curp' => 'XEXX010101HNEXXXA4' ,
             'rfc' => 'XAXX010101000' ,

@@ -20,5 +20,10 @@ class StatusSeeder extends Seeder
         Status::create(['name'=>'Alta']);
         Status::create(['name'=>'Baja']);        
         Status::create(['name'=>'Vencido']);
+        Status::create(['name'=>'Pendiente']);
+        Status::create(['name'=>'Aceptado']);
+        Status::create(['name'=>'Rechazado']);
+        Status::create(['name'=>'Archivado']);
+        Status::create(['name'=>'Stand by']);
     }
 }

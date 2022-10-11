@@ -19,4 +19,5 @@ mix.scripts([
 'resources/js/branches.js' ,
 'resources/js/states.js' ,
 'resources/js/modals.js' ,
+'resources/js/jop_positions.js' ,
 ], 'public/js/main.js');

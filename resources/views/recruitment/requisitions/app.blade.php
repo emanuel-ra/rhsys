@@ -5,8 +5,8 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('hr.staff') }}">Recursos Humanos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Personal</li>
+                <li class="breadcrumb-item"><a href="{{ route('recruitment.requisitions') }}">Reclutamiento</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Requisiciones</li>
             </ol>
         </nav>
     @stop
@@ -18,9 +18,9 @@
         </button>    
 
         @can('users.create')
-            <a href="{{ route('hr.staff.register') }}" class="btn btn-primary">
+            <a href="{{ route('recruitment.requisitions.form.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
-                Nueva de alta
+                Nueva de Requisicion
             </a>
         @endcan            
     </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="card-body">
             
-            <form action="{{ route('hr.staff') }}" method="post" id="form_filters" class="row">    
+            <form action="{{ route('recruitment.requisitions') }}" method="post" id="form_filters" class="row">    
                 @csrf           
                 <div class="col-12 col-lg-3">
                     <label for="branch_id">Sucursal</label>
@@ -75,15 +75,6 @@
                         @endforeach
                     </select>
                 </div>
-
-                <div class="col-12 mt-2">
-                    <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping">
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." name="searchKeyword" value="{{ $keyword }}" aria-describedby="addon-wrapping">
-                    </div>
-                </div>
             </form>
            
         </div>
@@ -107,43 +98,33 @@
             <table id="table_records" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Clave</th>
-                        <th>Checador</th>
-                        <th>Nombre</th>                        
-                        <th>Contacto</th>                        
-                        <th>Empresa</th>                        
-                        <th>Departamento</th>
-                        <th>Ingreso</th>
-                        <th>Creado</th>
+                        <th>Empresa</th>
+                        <th>Sucursal</th>
+                        <th>Departamento</th>                        
+                        <th>Puesto</th>                        
+                        <th>Cantidad Requerida</th>                        
+                        <th>Fecha Solicitud</th>
+                        <th>Solicitante</th>
+                        <th>Dias Transcurridos</th>
                         <th>Estatus</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                    @foreach ($data as $item)
+                        @php
+                           $diff = now()->diffInDays(Carbon\Carbon::parse($item->request_date));                           
+                        @endphp
                         <tr>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ $item->checker_code }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>
-                                Email:<a href="mailto:{{ $item->email }} ">{{ $item->email }} </a><br>
-                                Tel:<a href="tel:+52{{ $item->mobile_phone }}">{{ $item->mobile_phone }}</a>
-                            </td>
-                            <td>{{ $item->company->name }} <br> {{ $item->branch->name }}</td>                            
-                            <td>
-                                {{ $item->department->name }} <br>
-                                <b>Puesto: </b>{{ $item->position->name }} <br>
-                                <b>Supervisor: </b>{{ ($item->supervisor) ? 'si':'no' }}                                
-                            </td>
-                            <td>
-                                {{ $item->hired_date }} <br>
-                                <b>Antiguedad: </b> 
-                                <span class="badge badge-info">
-                                    {{  \Carbon\Carbon::parse($item->hired_date)->age }} Años
-                                </span>
-                            </td>
-                            <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
-                            <td class="{{ ($item->status_id == 4) ? 'text-success':'text-danger' }}">{{ $item->status->name }}</td>
+                            <td>{{ $item->company->name }}</td>
+                            <td>{{ $item->branch->name }}</td>
+                            <td>{{ $item->department->name }}</td>
+                            <td>{{ $item->position->name }}</td>
+                            <td>{{ $item->request_quantity }}</td>
+                            <td>{{ $item->request_date }}</td>
+                            <td>{{ $item->supervisor->name }}</td>
+                            <td>{{ $diff }}</td>                            
+                            <td>{{ $item->status->name }}</td>
                             <td>
                                 <div class="dropdown dropleft show">
                                     <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,7 +133,7 @@
                                 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         
-                                        @can('staff.contract')
+                                        {{-- @can('staff.contract')
                                         <li>                                                
                                             <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
                                                 <i class="fas fa-file-pdf"></i> Contrato
@@ -182,7 +163,7 @@
                                                 <a class="dropdown-item" href="{{ route('hr.staff.unsubscribe',['id' => $item->id]) }}"><i class="fas fa-user-slash text-danger"></i> Dar de Baja</a>    
                                             @endif
                                             
-                                        @endcan
+                                        @endcan --}}
                                         
                                     </div>
                                 </div>
@@ -192,18 +173,17 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Clave</th>
-                        <th>Checador</th>
-                        <th>Nombre</th>                        
-                        <th>Contacto</th>                        
-                        <th>Empresa</th>                        
-                        <th>Departamento</th>
-                        <th>Ingreso</th>
-                        <th>Creado</th>
+                        <th>Empresa</th>
+                        <th>Sucursal</th>
+                        <th>Departamento</th>                        
+                        <th>Puesto</th>                        
+                        <th>Cantidad Requerida</th>                        
+                        <th>Fecha Solicitud</th>
+                        <th>Solicitante</th>
+                        <th>Dias Transcurridos</th>
                         <th>Estatus</th>
                         <th></th>
-                    </tr>
-                    </tr>
+                    </tr>                   
                 </tfoot>
             </table>
         </div>

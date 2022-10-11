@@ -13,6 +13,6 @@ class Branch extends Model
         return $this->hasOne(Company::class,'id','company_id');
     }
     public function AuthorizedPost(){
-        return $this->hasMany(AuthorizedPost::class,'branch_id','branch_id');
+        return $this->hasMany(AuthorizedPost::class,'branch_id','id')->with('CurrentStaff');
     }
 }

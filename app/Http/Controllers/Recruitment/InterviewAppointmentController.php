@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Recruitment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CensusController extends Controller
+class InterviewAppointmentController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -15,6 +15,7 @@ class CensusController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        //$this->middleware(['permission: recruitment.prospects.index|recruitment.prospects.create|recruitment.prospects.update']);
     }
 
     /**
@@ -22,8 +23,8 @@ class CensusController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('recruitment.census.app');
+        return view('recruitment.interview.app');
     }
 }

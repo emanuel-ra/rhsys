@@ -85,4 +85,10 @@ class JopPositionController extends Controller
         return redirect()->route('system.jop.position.index');
 
     }
+    // AJAX
+    public function getJson(Request $request){
+        $data = JopPosition::where('department_id',$request->department_id)->get(); 
+
+        return Response()->json($data,200);
+    }
 }

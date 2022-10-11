@@ -228,14 +228,68 @@ Route::prefix('hr')->group(function () {
 
 
 Route::prefix('recruitment')->group(function () {    
-    Route::get('/census', [App\Http\Controllers\Recruitment\CensusController::class, 'index'])
-    ->middleware(['permission:census.index'])
-    ->name('census');
+
+    // REQUISITIONS
+    Route::prefix('requisitions')->group(function (){
+    
+        Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'index'])
+        ->middleware(['permission:recruitment.requisitions.index'])
+        ->name('recruitment.requisitions');
+        
+        Route::get('/form/create', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'create'])
+        ->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.requisitions.form.create');
+        
+        Route::post('/store', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'store'])
+        ->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.requisitions.store');
+    });
+    // Route::get('/requisitions/form/update', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'update'])
+    // ->middleware(['permission:recruitment.requisitions.update'])
+    // ->name('recruitment.requisitions.form.edit');
+
+    // PROSPECTS prospects
+    Route::prefix('prospects')->group(function (){
+
+        Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\ProspectsController::class, 'index'])
+        ->middleware(['permission:recruitment.requisitions.index'])
+        ->name('recruitment.prospects');
+        
+        Route::get('/form/create', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
+        ->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.prospects.form.create');
+
+        Route::get('/form/edit', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
+        ->middleware(['permission:recruitment.requisitions.update'])
+        ->name('recruitment.prospects.form.edit');
+
+        Route::get('/form/tracing/{id}', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
+        ->middleware(['permission:recruitment.prospects.tracing'])
+        ->name('recruitment.prospects.form.tracing');
+        
+        //POST
+        Route::post('/store', [App\Http\Controllers\Recruitment\ProspectsController::class, 'store'])
+        ->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.prospects.store');       
+    });
+   
+    Route::prefix('interview/appointment')->group(function (){
+        Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'index'])
+        //->middleware(['permission:recruitment.requisitions.index'])
+        ->name('interview.appointment');
+    }); 
+});
+
+Route::prefix('reports')->group(function () { 
+    Route::get('/census', [App\Http\Controllers\Reports\CensusController::class, 'index'])
+    ->middleware(['permission:reports.census.index'])
+    ->name('reports.census');
 });
 
 Route::prefix('ajax')->group(function () {    
     Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
     Route::post('/states', [App\Http\Controllers\System\StatesController::class, 'getJson']);
+    Route::post('/jop/positions', [App\Http\Controllers\System\JopPositionController::class, 'getJson']);
 });
 
 

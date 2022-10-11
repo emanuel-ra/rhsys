@@ -1,8 +1,11 @@
 <div class="col-sm-12 col-md-2">
-    <x-dg-input type="text" label="Clave" name="code" maxlength="255" value="{{ $Staff->code }}" placeholder=""  />
+    <x-dg-input type="text" label="Clave" name="code" maxlength="20" value="{{ $Staff->code }}" placeholder=""  />
+</div>
+<div class="col-sm-12 col-md-2">
+    <x-dg-input type="text" label="Clave Checador" name="checker_code" maxlength="20" value="{{ $Staff->checker_code }}" placeholder=""  />
 </div>
 
-<div class="col-sm-12 col-md-10">
+<div class="col-sm-12 col-md-8">
     <x-dg-input type="text" label="Nombre" name="name" maxlength="255" value="{{ $Staff->name }}" placeholder=""  />
 </div>
 

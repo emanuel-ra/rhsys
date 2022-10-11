@@ -5,8 +5,8 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('hr.staff') }}">Recursos Humanos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Personal</li>
+                <li class="breadcrumb-item"><a href="{{ route('recruitment.prospects') }}">Reclutamiento</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Prospectos</li>
             </ol>
         </nav>
     @stop
@@ -18,9 +18,9 @@
         </button>    
 
         @can('users.create')
-            <a href="{{ route('hr.staff.register') }}" class="btn btn-primary">
+            <a href="{{ route('recruitment.prospects.form.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
-                Nueva de alta
+                Nueva Prospecto
             </a>
         @endcan            
     </div>
@@ -36,32 +36,15 @@
         </div>
         <div class="card-body">
             
-            <form action="{{ route('hr.staff') }}" method="post" id="form_filters" class="row">    
+            <form action="{{ route('recruitment.requisitions') }}" method="post" id="form_filters" class="row">    
                 @csrf           
+                
                 <div class="col-12 col-lg-3">
-                    <label for="branch_id">Sucursal</label>
-                    <select name="branch_id" id="branch_id" class="form-control">
+                    <label for="status_id">Estatus</label>
+                    <select name="status_id" id="status_id" class="form-control">
                         <option value=""></option>
-                        @foreach ($branches as $item)
-                            <option {{ ($item->id == $branch_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-12 col-lg-3">
-                    <label for="department_id">Departamento</label>
-                    <select name="department_id" id="department_id" class="form-control">
-                        <option value=""></option>
-                        @foreach ($departments as $item)
-                            <option {{ ($item->id == $department_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-12 col-lg-3">
-                    <label for="jop_position_id">Puesto</label>
-                    <select name="jop_position_id" id="jop_position_id" class="form-control">
-                        <option value=""></option>
-                        @foreach ($jop_positions as $item)
-                            <option {{ ($item->id == $jop_position_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
+                        @foreach ($status as $item)
+                            <option {{ ($item->id == $status_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -76,14 +59,16 @@
                     </select>
                 </div>
 
-                <div class="col-12 mt-2">
-                    <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping">
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." name="searchKeyword" value="{{ $keyword }}" aria-describedby="addon-wrapping">
-                    </div>
+                <div class="col-12 col-lg-3">
+                    <label for="status_id">Estatus</label>
+                    <select name="status_id" id="status_id" class="form-control">
+                        <option value=""></option>
+                        @foreach ($status as $item)
+                            <option {{ ($item->id == $status_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
+
             </form>
            
         </div>
@@ -107,43 +92,31 @@
             <table id="table_records" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Clave</th>
-                        <th>Checador</th>
-                        <th>Nombre</th>                        
-                        <th>Contacto</th>                        
-                        <th>Empresa</th>                        
-                        <th>Departamento</th>
-                        <th>Ingreso</th>
-                        <th>Creado</th>
-                        <th>Estatus</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Email</th>                        
+                        <th>Vacante</th>                        
+                        <th>Fuente</th>                        
+                        <th>Estatus</th>                        
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                    @foreach ($data as $item)
+                        @php
+                           $diff = now()->diffInDays(Carbon\Carbon::parse($item->request_date));                           
+                        @endphp
                         <tr>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ $item->checker_code }}</td>
+                            
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->mobile_phone }}</td>
+                            <td>{{ $item->email }}</td>
                             <td>
-                                Email:<a href="mailto:{{ $item->email }} ">{{ $item->email }} </a><br>
-                                Tel:<a href="tel:+52{{ $item->mobile_phone }}">{{ $item->mobile_phone }}</a>
+                                {{ $item->requisitions->branch->name }} <br>
+                                <b>{{ $item->requisitions->position->name }}</b>
                             </td>
-                            <td>{{ $item->company->name }} <br> {{ $item->branch->name }}</td>                            
-                            <td>
-                                {{ $item->department->name }} <br>
-                                <b>Puesto: </b>{{ $item->position->name }} <br>
-                                <b>Supervisor: </b>{{ ($item->supervisor) ? 'si':'no' }}                                
-                            </td>
-                            <td>
-                                {{ $item->hired_date }} <br>
-                                <b>Antiguedad: </b> 
-                                <span class="badge badge-info">
-                                    {{  \Carbon\Carbon::parse($item->hired_date)->age }} Años
-                                </span>
-                            </td>
-                            <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
-                            <td class="{{ ($item->status_id == 4) ? 'text-success':'text-danger' }}">{{ $item->status->name }}</td>
+                            <td>{{ $item->prospectsource->name }}</td>
+                            <td>{{ $item->status->name }}</td>
                             <td>
                                 <div class="dropdown dropleft show">
                                     <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,23 +125,27 @@
                                 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         
-                                        @can('staff.contract')
-                                        <li>                                                
-                                            <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
-                                                <i class="fas fa-file-pdf"></i> Contrato
-                                            </a>
-                                        </li>
+                                        @can('recruitment.prospects.tracing')
+                                            <li>                                                
+                                                <a class="dropdown-item" href="{{ route('recruitment.prospects.form.tracing',['id' => $item->id]) }}">
+                                                    <i class="fas fa-network-wired"></i> Seguimiento
+                                                </a>
+                                            </li>
                                         @endcan  
 
-                                        @can('users.update')
-                                            <div class="dropdown-divider"></div>   
+                                        @can('recruitment.prospects.update')
+                                            <div class="dropdown-divider"></div>  
+
                                             <li>                                                
-                                                <a class="dropdown-item" href="{{ route('hr.staff.edit',['id' => $item->id]) }}">
+                                                <a class="dropdown-item" href="{{ route('recruitment.prospects.form.edit',['id' => $item->id]) }}">
                                                     <i class="fas fa-user-edit"></i> Editar
                                                 </a>
                                             </li>
                                         @endcan   
                                         
+                                        {{--
+
+                                       
                                         @can('users.update')
                                             <div class="dropdown-divider"></div>       
                                             <a class="dropdown-item" href="{{route('hr.staff.view',['id'=> $item->id])}}">
@@ -182,7 +159,7 @@
                                                 <a class="dropdown-item" href="{{ route('hr.staff.unsubscribe',['id' => $item->id]) }}"><i class="fas fa-user-slash text-danger"></i> Dar de Baja</a>    
                                             @endif
                                             
-                                        @endcan
+                                        @endcan --}}
                                         
                                     </div>
                                 </div>
@@ -192,18 +169,14 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Clave</th>
-                        <th>Checador</th>
-                        <th>Nombre</th>                        
-                        <th>Contacto</th>                        
-                        <th>Empresa</th>                        
-                        <th>Departamento</th>
-                        <th>Ingreso</th>
-                        <th>Creado</th>
-                        <th>Estatus</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Email</th>                        
+                        <th>Vacante</th>                        
+                        <th>Fuente</th>                        
+                        <th>Estatus</th>                        
                         <th></th>
-                    </tr>
-                    </tr>
+                    </tr>                   
                 </tfoot>
             </table>
         </div>

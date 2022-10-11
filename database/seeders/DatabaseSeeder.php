@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             ReasonsToLeaveWorkSeeder::class ,
             StaffSeeder::class ,
             StaffRotationSeeder::class ,
+            AuthorizedPostSeeder::class ,
+            ProspectSourceSeeder::class ,
         ]);
     }
 }

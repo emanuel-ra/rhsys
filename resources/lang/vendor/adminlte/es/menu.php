@@ -47,6 +47,8 @@ return [
     // [    R   ]
         'recruitment'   => 'Reclutamiento',
         'roles'         => 'Roles',
+        'reports'       => 'Reportes',    
+        'requisitions'  => 'Requisiciones' ,
     // [    S   ]
         'staff'         => 'Personal',
         'system'        => 'Sistema',

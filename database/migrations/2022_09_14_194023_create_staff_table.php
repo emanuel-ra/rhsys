@@ -16,11 +16,12 @@ class CreateStaffTable extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
-            $table->string('genre')->nullable();
-            $table->string('curp')->nullable();
-            $table->string('rfc')->nullable();
-            $table->string('nss')->nullable();
+            $table->string('code',20);
+            $table->string('checker_code',20)->nullable();
+            $table->string('genre',20)->nullable();
+            $table->string('curp',20)->nullable();
+            $table->string('rfc',20)->nullable();
+            $table->string('nss',20)->nullable();
             $table->string('email')->nullable();                                    
             $table->string('mobile_phone')->nullable();            
             $table->string('address')->nullable();      

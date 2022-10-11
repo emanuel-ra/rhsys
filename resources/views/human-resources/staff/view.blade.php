@@ -107,7 +107,8 @@
 
                 <div class="row">
                     <div class="col-12 col-sm-4 mt-2">
-                        <section>
+                        <section>                            
+                            <strong>Clave Checador: </strong>{{ $data->checker_code }}, <br>
                             <strong>Salario: </strong>${{ number_format($data->daily_salary,2) }}, <br>
                             <strong>Actividades: </strong>{{ $data->activities }}, <br>
                         </section>

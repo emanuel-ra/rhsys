@@ -57,4 +57,5 @@ class Staff extends Model
     public function StaffRotation(){
         return $this->hasOne(StaffRotation::class, 'staff_id', 'id')->select('id','name');
     }
+
 }
