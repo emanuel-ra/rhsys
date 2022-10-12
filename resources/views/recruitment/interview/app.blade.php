@@ -20,9 +20,9 @@
         </button>    
 
         @can('users.create')
-            <a href="{{ route('recruitment.prospects.form.create') }}" class="btn btn-primary">
+            <a href="{{ route('recruitment.interview.form.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
-                Nueva Prospecto
+                Agendar Entrevista
             </a>
         @endcan            
     </div>
@@ -56,10 +56,23 @@
 
             document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
+                var calendar = new FullCalendar.Calendar(calendarEl, {   
+                    headerToolbar: {
+                        left  : 'prev,next today',
+                        center: 'title',
+                        right : 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },              
+                    initialView: 'dayGridMonth' ,
+                    timeZone: 'America/Mexico_City',
+                    themeSystem: 'bootstrap'
                 });
+                calendar.setOption('locale', 'es');
+                calendar.setOption('timeZoneParam', 'es');
                 calendar.render();
+
+                calendar.on('dateClick', function(info) {
+                    console.log('clicked on ' + info.dateStr);
+                });
             });
         </script>        
     @endsection

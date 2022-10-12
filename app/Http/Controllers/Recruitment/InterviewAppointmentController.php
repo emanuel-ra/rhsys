@@ -27,4 +27,8 @@ class InterviewAppointmentController extends Controller
     {
         return view('recruitment.interview.app');
     }
+    public function create()
+    {
+        return view('recruitment.interview.register');
+    }
 }

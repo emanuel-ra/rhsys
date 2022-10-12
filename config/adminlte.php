@@ -431,7 +431,7 @@ return [
                 ],
                 [
                     'text' => 'interview_appointment',
-                    'route'  => 'interview.appointment',
+                    'route'  => 'recruitment.interview.appointment',
                     'icon' => 'fas fa-fw fa-user',
                     //'can' =>  'interview.appointment.index' ,
                 ],
@@ -705,18 +705,7 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.min.js',
-                ],
-
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.3/main.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.3/locales/es.min.js',
-                ],
+                ],          
                 [
                     'type' => 'css',
                     'asset' => false,

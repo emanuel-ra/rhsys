@@ -276,7 +276,12 @@ Route::prefix('recruitment')->group(function () {
     Route::prefix('interview/appointment')->group(function (){
         Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'index'])
         //->middleware(['permission:recruitment.requisitions.index'])
-        ->name('interview.appointment');
+        ->name('recruitment.interview.appointment');
+
+
+        Route::get('/form/create', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'create'])
+        //->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.interview.form.create');
     }); 
 });
 
