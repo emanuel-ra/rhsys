@@ -142,6 +142,16 @@
                                                 </a>
                                             </li>
                                         @endcan   
+
+                                        @can('recruitment.prospects.update')
+                                            <div class="dropdown-divider"></div>  
+
+                                            <li>                                                
+                                                <a class="dropdown-item" href="{{ route('recruitment.interview.form.create',['id' => $item->id]) }}">
+                                                    <i class="fas fa-calendar-plus"></i> Agendar Entrevista
+                                                </a>
+                                            </li>
+                                        @endcan  
                                         
                                         {{--
 

@@ -13,20 +13,6 @@
         </nav>
     @stop
 
-    <div class="col-sm-12 p-2 d-flex justify-content-end">
-
-        <button class="btn btn-info mr-2" onclick="document.getElementById('form_filters').submit();">
-            <i class="fa fa-search"></i>
-        </button>    
-
-        @can('users.create')
-            <a href="{{ route('recruitment.interview.form.create') }}" class="btn btn-primary">
-                <i class="fa fa-plus"></i>          
-                Agendar Entrevista
-            </a>
-        @endcan            
-    </div>
-
  
     <div class="card  col-12">
         <div class="card-header">
@@ -64,15 +50,38 @@
                     },              
                     initialView: 'dayGridMonth' ,
                     timeZone: 'America/Mexico_City',
-                    themeSystem: 'bootstrap'
+                    themeSystem: 'bootstrap' ,
+                    eventSources: [
+                        // your event source
+                        {
+                            url: '/ajax/get/events',
+                            method: 'POST',
+                            extraParams: {
+                                _token: '{{ csrf_token() }}',
+                            },
+                            failure: function(error) {
+                                //alert('there was an error while fetching events!');
+                                console.log(error)
+                            },
+                            //color: 'yellow',   // a non-ajax option
+                            //textColor: 'black' // a non-ajax option
+                        }
+                    ],
+                        
                 });
                 calendar.setOption('locale', 'es');
                 calendar.setOption('timeZoneParam', 'es');
+
+               
+
+
+
                 calendar.render();
 
                 calendar.on('dateClick', function(info) {
                     console.log('clicked on ' + info.dateStr);
                 });
+                
             });
         </script>        
     @endsection

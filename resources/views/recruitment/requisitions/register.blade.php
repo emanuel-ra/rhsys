@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="col-sm-12 col-md-3">
-                        <x-dg-input-date id="request_date" name="request_date" label="Fecha Nacimiento" value="{{old('born_date')}}" required />
+                        <x-dg-input-date id="request_date" name="request_date" label="Fecha" value="{{old('request_date')}}" required />
                     </div>
 
                     <div class="form-group col-12">

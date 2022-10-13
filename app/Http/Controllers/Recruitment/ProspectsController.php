@@ -111,6 +111,7 @@ class ProspectsController extends Controller
         $Prospects->requisition_id = $request->requisition_id;
         $Prospects->sources_id = $request->sources_id;
         $Prospects->status_id = 1;
+        $Prospects->user_id = $request->user()->id;
         $Prospects->save();
      
         return redirect()->route('recruitment.prospects');    

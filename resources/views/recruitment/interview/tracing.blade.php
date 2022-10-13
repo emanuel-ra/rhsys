@@ -1,6 +1,6 @@
 @extends('app')
-
-@section('plugins.imask', true)
+{{-- 
+@section('plugins.imask', true) --}}
 
 @section('content')
 
@@ -16,7 +16,7 @@
 
     <div class="card card-tabs">
         <div class="card-header">
-            <h3 class="card-title">Agendar Entrevista</h3>
+            <h3 class="card-title">Seguimiento Entrevista</h3>
             <div class="card-tools">
                 <!-- Maximize Button -->
                 <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -30,41 +30,54 @@
                 <input type="hidden" name="prospect_id" value="{{ $data->id }}">
                 <div class="row p-2">
                     
-                    <div class="col-sm-12">
-                        <x-dg-input type="text" label="Nombre" name="name" maxlength="255" value="{{$data->name}}" disabled placeholder=""  />
+                    <div class="col-sm-12 col-lg-4">
+                        <x-dg-input type="text" label="Nombre" name="name" maxlength="255" value="{{$data->prospect->name}}" disabled placeholder=""  />
                     </div>
 
-                    <div class="col-sm-12 col-lg-3">
-                        <x-dg-input type="text" label="Email" name="email" maxlength="255" value="{{$data->email}}" disabled placeholder=""  />
+                    <div class="col-sm-12 col-lg-4">
+                        <x-dg-input type="text" label="Email" name="email" maxlength="255" value="{{$data->prospect->email}}" disabled placeholder=""  />
                     </div>
 
-                    <div class="col-sm-12 col-lg-3">
-                        <x-dg-input type="text" label="Teléfono/Celular" name="telefono" maxlength="255" value="{{$data->mobile_phone}}" disabled placeholder=""  />
+                    <div class="col-sm-12 col-lg-4">
+                        <x-dg-input type="text" label="Tipo de Entrevista" name="telefono" maxlength="255" value="{{$data->prospect->mobile_phone}}" disabled placeholder=""  />
                     </div>
                     
-                    <div class="col-sm-12 col-lg-3">
-                        <label for="">Tipo de entrevista</label>
-                        <select name="type_interview_id" id="type_interview_id" class="form-control" required>
-                            <option value=""></option>
-                            @foreach ($TypeInterview as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="col-sm-12 col-lg-4">
+                        <x-dg-input type="text" label="Sucursal" name="telefono" maxlength="255" value="{{$data->prospect->requisitions->branch->name}}" disabled placeholder=""  />
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <x-dg-input type="text" label="Vacante" name="telefono" maxlength="255" value="{{$data->prospect->requisitions->position->name}}" disabled placeholder=""  />
                     </div>
 
-                    <div class="col-sm-12 col-lg-3">
+                    <div class="col-sm-12 col-lg-4">
+                        <x-dg-input type="text" label="Tipo de Entrevista" name="telefono" maxlength="255" value="{{$data->type_interview->name}}" disabled placeholder=""  />
+                    </div>
+
+                    <div class="col-sm-12 col-lg-4">
                         <label for="">Fecha y hora de la entrevista</label>
                         <div class="input-group date" id="datetimepicker1" data-target-input="nearest">                            
                             <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div> 
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" data-toggle="datetimepicker" name="interview_date" required/>
+                            <input type="text" class="form-control datetimepicker-input" value="{{ $data->interview_date }}" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-4">
+                        <label >Asiste?</label>
+                        <div class="icheck-primary">
+                            <input type="radio" id="attendance_yes" name="attendance" class="icheck-primary" value="1" />
+                            <label for="attendance_yes">Si</label>
+                        </div>
+                        <div class="icheck-danger">
+                            <input type="radio" id="attendance_no" name="attendance" class="icheck-danger" value="0" />
+                            <label for="attendance_no">No</label>
                         </div>
                     </div>
 
                     <div class="col-sm-12">
                         <label for="">Observeaciones</label>
-                        <textarea name="commentaries" class="form-control" maxlength="500"></textarea>
+                        <textarea name="observations" class="form-control" maxlength="500"></textarea>
                     </div>
 
                 </div>
@@ -105,14 +118,7 @@
 @section('js')
     <script type="text/javascript">
         $(function () {
-            $('#datetimepicker1').datetimepicker({
-                icons: {
-                    time: "far fa-clock",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                } 
-            });
+          
         });
     </script>
 @endsection

@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')  
+   .sass('resources/sass/app.scss', 'public/css')   
    .sourceMaps();
 
 mix.scripts([
@@ -20,4 +20,7 @@ mix.scripts([
 'resources/js/states.js' ,
 'resources/js/modals.js' ,
 'resources/js/jop_positions.js' ,
-], 'public/js/main.js');
+], 'public/js/main.js')
+.styles([
+   'node_modules/icheck-bootstrap/icheck-bootstrap.min.css',      
+], 'public/css/app.css');

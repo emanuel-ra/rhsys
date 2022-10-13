@@ -187,6 +187,7 @@ return [
         'hired_date' => 'hired date' ,
         'born_date' => 'born date' ,
         'expiration_date' => 'expiration date' ,
+        'interview_date' => 'interview date' ,
     ],
 
 ];

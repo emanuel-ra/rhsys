@@ -259,7 +259,7 @@ Route::prefix('recruitment')->group(function () {
         ->middleware(['permission:recruitment.requisitions.create'])
         ->name('recruitment.prospects.form.create');
 
-        Route::get('/form/edit', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
+        Route::get('/form/edit/{id}', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
         ->middleware(['permission:recruitment.requisitions.update'])
         ->name('recruitment.prospects.form.edit');
 
@@ -273,15 +273,22 @@ Route::prefix('recruitment')->group(function () {
         ->name('recruitment.prospects.store');       
     });
    
-    Route::prefix('interview/appointment')->group(function (){
+    Route::prefix('interview/appointment/')->group(function (){
         Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'index'])
         //->middleware(['permission:recruitment.requisitions.index'])
         ->name('recruitment.interview.appointment');
 
-
-        Route::get('/form/create', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'create'])
+        Route::get('/form/create/{id}', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'create'])
         //->middleware(['permission:recruitment.requisitions.create'])
         ->name('recruitment.interview.form.create');
+
+        Route::get('/open/{id}', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'open'])
+        //->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.interview.open');
+
+        Route::post('/store', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'store'])
+        ->middleware(['permission:recruitment.requisitions.create'])
+        ->name('recruitment.interview.store'); 
     }); 
 });
 
@@ -295,6 +302,10 @@ Route::prefix('ajax')->group(function () {
     Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
     Route::post('/states', [App\Http\Controllers\System\StatesController::class, 'getJson']);
     Route::post('/jop/positions', [App\Http\Controllers\System\JopPositionController::class, 'getJson']);
+
+
+    // GET JSON EVENTS FOR CALENDAR INTERVIEWS 
+    Route::post('/get/events', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'getJson']);
 });
 
 

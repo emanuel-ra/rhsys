@@ -135,7 +135,8 @@ return [
         'born_date' => 'fecha de nacimiento' ,
         'expiration_date' => 'fecha de vencimiento' ,  
         'reason_unsubscribe_text' => 'otro motivo de baja' ,        
-        'reason_unsubscribe_id' => 'motivo de baja' ,        
+        'reason_unsubscribe_id' => 'motivo de baja' ,     
+        'interview_date' => 'fecha de la entrevista' ,   
     ],
 
 ];
