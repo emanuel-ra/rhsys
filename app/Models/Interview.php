@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Interview extends Model
 {
     use HasFactory;
-    public function prospect(){ 
-        return $this->hasOne(Prospects::class,'id', 'prospect_id')->with('ProspectSource')->with('Requisitions')->with('Status');
+    public function candidate(){ 
+        return $this->hasOne(Candidate::class,'id', 'candidate_id')->with('CandidateSource')->with('Requisitions')->with('Status');
     }
     public function status(){ 
         return $this->hasOne(Status::class,'id', 'status_id')->select('id','name');

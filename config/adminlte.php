@@ -424,10 +424,10 @@ return [
                     'can' =>  'interview.appointment.index' ,
                 ],
                 [
-                    'text' => 'prospects',
-                    'route'  => 'recruitment.prospects',
+                    'text' => 'candidates',
+                    'route'  => 'recruitment.candidates',
                     'icon' => 'fas fa-clipboard-list',
-                    'can' =>  'recruitment.prospects.index' ,
+                    'can' =>  'recruitment.candidates.index' ,
                 ],
                 [
                     'text' => 'interview_appointment',

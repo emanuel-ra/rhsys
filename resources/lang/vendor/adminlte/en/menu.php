@@ -23,6 +23,7 @@ return [
     // [    C   ]
         'companies'     => 'Company',
         'census'        => 'Census',    
+        'candidates'    => 'Candidates',            
     // [    D   ]
         'departments'   => 'Departments' ,
         'dashboard'     => 'Dashboard',

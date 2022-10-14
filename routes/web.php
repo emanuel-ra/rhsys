@@ -249,31 +249,32 @@ Route::prefix('recruitment')->group(function () {
     // ->name('recruitment.requisitions.form.edit');
 
     // PROSPECTS prospects
-    Route::prefix('prospects')->group(function (){
+    Route::prefix('candidates')->group(function (){
 
-        Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\ProspectsController::class, 'index'])
+        Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\CandidatesController::class, 'index'])
         ->middleware(['permission:recruitment.requisitions.index'])
-        ->name('recruitment.prospects');
+        ->name('recruitment.candidates');
         
-        Route::get('/form/create', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
+        Route::get('/form/create', [App\Http\Controllers\Recruitment\CandidatesController::class, 'create'])
         ->middleware(['permission:recruitment.requisitions.create'])
-        ->name('recruitment.prospects.form.create');
+        ->name('recruitment.candidates.form.create');
 
-        Route::get('/form/edit/{id}', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
+        Route::get('/form/edit/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'create'])
         ->middleware(['permission:recruitment.requisitions.update'])
-        ->name('recruitment.prospects.form.edit');
+        ->name('recruitment.candidates.form.edit');
 
-        Route::get('/form/tracing/{id}', [App\Http\Controllers\Recruitment\ProspectsController::class, 'create'])
-        ->middleware(['permission:recruitment.prospects.tracing'])
-        ->name('recruitment.prospects.form.tracing');
+        Route::get('/form/tracing/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'create'])
+        ->middleware(['permission:recruitment.candidates.tracing'])
+        ->name('recruitment.candidates.form.tracing');
         
         //POST
-        Route::post('/store', [App\Http\Controllers\Recruitment\ProspectsController::class, 'store'])
+        Route::post('/store', [App\Http\Controllers\Recruitment\CandidatesController::class, 'store'])
         ->middleware(['permission:recruitment.requisitions.create'])
-        ->name('recruitment.prospects.store');       
+        ->name('recruitment.candidates.store');       
     });
    
     Route::prefix('interview/appointment/')->group(function (){
+        
         Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'index'])
         //->middleware(['permission:recruitment.requisitions.index'])
         ->name('recruitment.interview.appointment');

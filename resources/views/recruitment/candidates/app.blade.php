@@ -5,8 +5,8 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('recruitment.prospects') }}">Reclutamiento</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Prospectos</li>
+                <li class="breadcrumb-item"><a href="{{ route('recruitment.candidates') }}">Reclutamiento</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Candidatos</li>
             </ol>
         </nav>
     @stop
@@ -18,9 +18,9 @@
         </button>    
 
         @can('users.create')
-            <a href="{{ route('recruitment.prospects.form.create') }}" class="btn btn-primary">
+            <a href="{{ route('recruitment.candidates.form.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>          
-                Nueva Prospecto
+                Nueva Candidato
             </a>
         @endcan            
     </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="card-body">
             
-            <form action="{{ route('recruitment.requisitions') }}" method="post" id="form_filters" class="row">    
+            <form action="{{ route('recruitment.candidates') }}" method="post" id="form_filters" class="row">    
                 @csrf           
                 
                 <div class="col-12 col-lg-3">
@@ -115,7 +115,7 @@
                                 {{ $item->requisitions->branch->name }} <br>
                                 <b>{{ $item->requisitions->position->name }}</b>
                             </td>
-                            <td>{{ $item->prospectsource->name }}</td>
+                            <td>{{ $item->candidatesource->name }}</td>
                             <td>{{ $item->status->name }}</td>
                             <td>
                                 <div class="dropdown dropleft show">
@@ -125,25 +125,25 @@
                                 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         
-                                        @can('recruitment.prospects.tracing')
+                                        @can('recruitment.candidates.tracing')
                                             <li>                                                
-                                                <a class="dropdown-item" href="{{ route('recruitment.prospects.form.tracing',['id' => $item->id]) }}">
+                                                <a class="dropdown-item" href="{{ route('recruitment.candidates.form.tracing',['id' => $item->id]) }}">
                                                     <i class="fas fa-network-wired"></i> Seguimiento
                                                 </a>
                                             </li>
                                         @endcan  
 
-                                        @can('recruitment.prospects.update')
+                                        @can('recruitment.candidates.update')
                                             <div class="dropdown-divider"></div>  
 
                                             <li>                                                
-                                                <a class="dropdown-item" href="{{ route('recruitment.prospects.form.edit',['id' => $item->id]) }}">
+                                                <a class="dropdown-item" href="{{ route('recruitment.candidates.form.edit',['id' => $item->id]) }}">
                                                     <i class="fas fa-user-edit"></i> Editar
                                                 </a>
                                             </li>
                                         @endcan   
 
-                                        @can('recruitment.prospects.update')
+                                        @can('recruitment.candidates.update')
                                             <div class="dropdown-divider"></div>  
 
                                             <li>                                                

@@ -85,11 +85,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'recruitment.requisitions.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         Permission::create(['name' => 'recruitment.requisitions.update'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
 
-        // PROSPECTS
-        Permission::create(['name' => 'recruitment.prospects.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'recruitment.prospects.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'recruitment.prospects.update'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'recruitment.prospects.tracing'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        // CANDIDATES
+        Permission::create(['name' => 'recruitment.candidates.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.candidates.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.candidates.update'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.candidates.tracing'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         
         //INTERVIEW APPOINTMENT
         Permission::create(['name' => 'interview.appointment.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Recruitment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Prospects;
-use App\Models\ProspectSource;
+use App\Models\Candidate;
+use App\Models\CandidateSource;
 use App\Models\Requisitions;
 use App\Models\Status;
 
-class ProspectsController extends Controller
+class CandidatesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,7 +19,7 @@ class ProspectsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['permission: recruitment.prospects.index|recruitment.prospects.create|recruitment.prospects.update']);
+        $this->middleware(['permission:recruitment.candidates.index|recruitment.candidates.create|recruitment.candidates.update']);
     }
 
     /**
@@ -30,7 +30,7 @@ class ProspectsController extends Controller
     public function index(Request $request)
     {   
 
-        $query = Prospects::query();
+        $query = Candidate::query();
 
         $query = $query->where('status_id','!=',2);    
 
@@ -55,7 +55,7 @@ class ProspectsController extends Controller
         // $jop_positions = JopPosition::select('id','name')->where('enable',1)->get();
         $status = Status::select('id','name')->whereIn('id',array(1,8,9,10,11))->where('enable',1)->get();
 
-        $query->with('ProspectSource');
+        $query->with('CandidateSource');
         $query->with('Requisitions');
         // $query->with('Company');
         // $query->with('Branch');
@@ -67,7 +67,7 @@ class ProspectsController extends Controller
         $data = $query->paginate(50); 
         //return $data;
         //$data = Requisitions::paginate(10);
-        return view('recruitment.prospects.app',[
+        return view('recruitment.candidates.app',[
             'data' => $data ,
             // 'branches' => $branches ,
             // 'departments' => $departments ,
@@ -82,12 +82,12 @@ class ProspectsController extends Controller
     }
     public function create(){
 
-        $ProspectSource = ProspectSource::select('id','name')->where('enable',1)->get();
+        $CandidateSource = CandidateSource::select('id','name')->where('enable',1)->get();
         $Requisitions = Requisitions::select('id','jop_position_id','branch_id')->with('Position')->with('Branch')->get();
         //return $Requisitions;
         //$Staff = Staff::select('id','name','jop_position_id')->where('status_id',4)->where('supervisor',1)->get();
-        return view('recruitment.prospects.register',[
-            'ProspectSource' => $ProspectSource ,
+        return view('recruitment.candidates.register',[
+            'CandidateSource' => $CandidateSource ,
             'Requisitions' => $Requisitions ,
             //'Staff' => $Staff ,
         ]);
@@ -103,17 +103,17 @@ class ProspectsController extends Controller
         ]
         );     
 
-        $Prospects = new Prospects;
+        $Candidate = new Candidate;
 
-        $Prospects->name = $request->name;
-        $Prospects->email = $request->email;
-        $Prospects->mobile_phone = $request->mobile_phone;
-        $Prospects->requisition_id = $request->requisition_id;
-        $Prospects->sources_id = $request->sources_id;
-        $Prospects->status_id = 1;
-        $Prospects->user_id = $request->user()->id;
-        $Prospects->save();
+        $Candidate->name = $request->name;
+        $Candidate->email = $request->email;
+        $Candidate->mobile_phone = $request->mobile_phone;
+        $Candidate->requisition_id = $request->requisition_id;
+        $Candidate->sources_id = $request->sources_id;
+        $Candidate->status_id = 1;
+        $Candidate->user_id = $request->user()->id;
+        $Candidate->save();
      
-        return redirect()->route('recruitment.prospects');    
+        return redirect()->route('recruitment.candidates');    
     }
 }

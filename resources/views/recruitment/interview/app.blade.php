@@ -7,8 +7,8 @@
     @section('content_header')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('recruitment.prospects') }}">Reclutamiento</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Prospectos</li>
+                <li class="breadcrumb-item"><a href="{{ route('recruitment.interview.appointment') }}">Reclutamiento</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Entrevistas</li>
             </ol>
         </nav>
     @stop

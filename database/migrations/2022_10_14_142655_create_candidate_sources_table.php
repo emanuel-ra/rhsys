@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProspectSourcesTable extends Migration
+class CreateCandidateSourcesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProspectSourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prospect_sources', function (Blueprint $table) {
+        Schema::create('candidate_sources', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->tinyInteger('enable')->default(1);
@@ -28,6 +28,6 @@ class CreateProspectSourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prospect_sources');
+        Schema::dropIfExists('candidate_sources');
     }
 }

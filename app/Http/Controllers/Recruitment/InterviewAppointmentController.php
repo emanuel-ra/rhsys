@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Recruitment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Prospects;
+use App\Models\Candidate;
 use App\Models\TypeInterview;
 use App\Models\Interview;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +36,7 @@ class InterviewAppointmentController extends Controller
     }
     public function create($id)
     {
-        $data = Prospects::find($id);
+        $data = Candidate::find($id);
         $TypeInterview = TypeInterview::where('enable',1)->get();
         return view('recruitment.interview.register',[
             'data'=>$data ,
@@ -85,7 +85,7 @@ class InterviewAppointmentController extends Controller
         );   
         
         $data = DB::table('interviews AS A')  
-        ->join('prospects AS B', 'A.prospect_id','=','B.id')
+        ->join('candidates AS B', 'A.candidate_id','=','B.id')
         ->select(
             'A.id',
             'B.name as title',

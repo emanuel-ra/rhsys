@@ -8,8 +8,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">            
                 <li class="breadcrumb-item active" aria-current="page">Reclutamiento</li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('recruitment.prospects') }}">Prospectos</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('recruitment.prospects.form.create') }}">Nuevo</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('recruitment.candidates') }}">Candidatos</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('recruitment.candidates.form.create') }}">Nuevo</a></li>
             </ol>
         </nav>
     @stop
@@ -26,7 +26,7 @@
         <div class="card-body  p-0">
 
            
-            <form action="{{ route('recruitment.prospects.store') }}" method="POST">
+            <form action="{{ route('recruitment.candidates.store') }}" method="POST">
                 @csrf
 
                 <div class="row p-2">
@@ -48,7 +48,7 @@
                         <label for="sources_id">Fuente</label>
                         <select name="sources_id" id="sources_id" class="form-control" required >
                             <option value=""></option>
-                            @foreach ($ProspectSource as $item)
+                            @foreach ($CandidateSource as $item)
                                 <option {{ ($item->id==old('sources_id')) ? 'selected':'' }} value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>

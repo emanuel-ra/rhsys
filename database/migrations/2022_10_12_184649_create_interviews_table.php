@@ -17,7 +17,7 @@ class CreateInterviewsTable extends Migration
             $table->id();
             $table->string('commentaries',500)->nullable();
             $table->string('observations',500)->nullable();
-            $table->unsignedSmallInteger('prospect_id')->default(0);
+            $table->unsignedSmallInteger('candidate_id')->default(0);
             $table->unsignedSmallInteger('status_id')->default(1);
             $table->unsignedSmallInteger('type_interview_id')->default(1);
             $table->unsignedSmallInteger('user_id')->default(1);
