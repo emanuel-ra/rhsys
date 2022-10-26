@@ -36,6 +36,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th></th>
                         <th>Nombre Comercial</th>
                         <th>Razon Social</th>
                         <th>Direccion</th>
@@ -47,6 +48,11 @@
                    @foreach ($companies as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
+                            <td>                                
+                                @if ($item->image!='' && \File::exists(public_path().'/images/logo/'.$item->image))
+                                    <img src="{{'/images/logo/'.$item->image}}" style="max-width: 100px;" alt="logo">
+                                @endif
+                            </td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->business_name }}</td>
                             <td>{{ $item->address }}</td>
@@ -83,6 +89,7 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
+                        <th></th>
                         <th>Nombre Comercial</th>
                         <th>Razon Social</th>
                         <th>Direccion</th>

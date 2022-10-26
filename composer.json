@@ -38,7 +38,8 @@
         },
         "files" : [
             "app/Helpers/NumberToLettersHelper.php" ,
-            "app/Helpers/WorkingHoursHelper.php"
+            "app/Helpers/WorkingHoursHelper.php" ,
+            "app/Helpers/CleanUpStrings.php"
         ]
     },
     "scripts": {

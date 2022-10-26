@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('plugins.FileInput', true)
+
 @section('content')
 
 @section('content_header')
@@ -7,14 +9,14 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Sistemas</li>
             <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('system.companies') }}">Empresas</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('system.companies.register') }}">Logotipo</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('system.companies.upload.logo',['id'=>$id]) }}">Logotipo</a></li>
         </ol>
     </nav>
 @stop
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Carga Logotipo</h3>
+        <h3 class="card-title">Carga Logotipo: <b>{{ $company->name }}</b></h3>
         <div class="card-tools">
             <!-- Maximize Button -->
             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
@@ -24,21 +26,12 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="{{ route('system.companies.store') }}" method="POST">
+        <form action="{{ route('system.companies.store.logo') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
+            <input type="hidden" name="id" value="{{ $id }}">
             <div class="form-group">
 
-                <label for="exampleInputFile">File input</label>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                    </div>
-                </div>
+                <input id="input-logo" type="file" class="file" name="image" data-preview-file-type="text">
 
             </div>
 
@@ -47,10 +40,7 @@
                 <a href="{{ route('system.companies') }}" class="btn btn-default">
                     Cancelar
                 </a>
-
-                <button class="btn btn-primary">
-                    Guardar
-                </button>
+                
             </div>
 
         </form>
@@ -59,4 +49,15 @@
 </div>
 <!-- /.card -->
 
+@section('js')
+    <script>
+        $("#input-logo").fileinput({
+            'language':'es' ,
+            initialPreview: [
+                "<img src='/images/logo/{{ $company->image }}' class='file-preview-image' alt='logo' title='logo'>"
+            ]            
+        });
+
+    </script>
+@endsection
 @stop

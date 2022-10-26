@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use File;
 
 class CompaniesController extends Controller
 {
@@ -103,5 +104,35 @@ class CompaniesController extends Controller
     public function upload_logo($id){
         $company = Company::find($id);
         return view('system.companies.upload-logo',['company'=>$company,'id'=>$id]);
+    }
+    public function store_logo(Request $request){
+        $this->validate($request, [               
+            'id' => 'required|integer',              
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',       
+        ]); 
+
+        $company = Company::find($request->id);
+
+        $path = public_path().'/images/logo/';
+        if(!File::exists($path)) {
+            File::makeDirectory($path, $mode = 0777, true, true);
+        }
+                
+        File::delete($path.$company->image);
+
+        if ($image = $request->file('image')) {         
+            $logo = str_replace(' ','-',clean_up_string($company->name) . "." . $image->getClientOriginalExtension());
+            $image->move($path, $logo);
+            //$input['image'] = "$logo";
+        }
+
+
+       
+
+
+        $company->image = $logo;
+        $company->save();
+
+        return redirect()->route('system.companies');
     }
 }

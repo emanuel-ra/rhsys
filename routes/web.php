@@ -46,6 +46,9 @@ Route::prefix('system')->group(function () {
         Route::get('/upload/logo/{id}', [App\Http\Controllers\System\CompaniesController::class, 'upload_logo'])
         ->middleware(['permission:companies.upload.logo'])
         ->name('system.companies.upload.logo');
+        Route::post('/upload/logo', [App\Http\Controllers\System\CompaniesController::class, 'store_logo'])
+        ->middleware(['permission:companies.upload.logo'])
+        ->name('system.companies.store.logo');
 
         
     });
