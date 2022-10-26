@@ -36,6 +36,7 @@ class CreateStaffTable extends Migration
             $table->string('reason_unsubscribe_text')->nullable();
             $table->string('activities',550)->nullable();
             $table->string('blood_type',20)->nullable();
+            $table->string('blood_place',20)->nullable();
             
             $table->string('father_name')->nullable();
             $table->string('mother_name')->nullable();

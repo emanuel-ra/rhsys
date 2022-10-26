@@ -122,13 +122,8 @@ class CompaniesController extends Controller
 
         if ($image = $request->file('image')) {         
             $logo = str_replace(' ','-',clean_up_string($company->name) . "." . $image->getClientOriginalExtension());
-            $image->move($path, $logo);
-            //$input['image'] = "$logo";
+            $image->move($path, $logo);            
         }
-
-
-       
-
 
         $company->image = $logo;
         $company->save();

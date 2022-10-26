@@ -35,12 +35,24 @@
 
             </div>
 
+            <div class="col-12">
+                @if ($errors->any())
+                    <div class="col-12 alert alert-danger" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+
             <div class="col-sm-12 p-2 d-flex justify-content-between">
 
                 <a href="{{ route('system.companies') }}" class="btn btn-default">
                     Cancelar
                 </a>
-                
+
             </div>
 
         </form>
@@ -55,7 +67,9 @@
             'language':'es' ,
             initialPreview: [
                 "<img src='/images/logo/{{ $company->image }}' class='file-preview-image' alt='logo' title='logo'>"
-            ]            
+            ],          
+            initialPreviewShowDelete:false ,
+            //allowedFileTypes:['jpeg','png','jpg','gif','svg']
         });
 
     </script>

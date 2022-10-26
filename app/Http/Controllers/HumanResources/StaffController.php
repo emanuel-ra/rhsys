@@ -502,7 +502,7 @@ class StaffController extends Controller
     }
     public function pdf_contract($id){
         
-        $data = Staff::with('Country')->with('MaritalStatus')->with('Position')->find($id);
+        $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
         $Company = Company::find($data->company_id);
                 
         $pdf = Pdf::loadView('pdf.human-resources.staff.contract', ['data'=>$data,'Company'=>$Company]);
@@ -510,6 +510,7 @@ class StaffController extends Controller
     }
     public function pdf_personal_data($id){
         $data = Staff::with('Country')->with('MaritalStatus')->with('Position')->find($id);
+        //return  $data;
         $Company = Company::find($data->company_id);
         $pdf = Pdf::loadView('pdf.human-resources.staff.personal-data', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
