@@ -23,7 +23,10 @@ class CreateStaffTable extends Migration
             $table->string('rfc',20)->nullable();
             $table->string('nss',20)->nullable();
             $table->string('email')->nullable();                                    
-            $table->string('mobile_phone')->nullable();            
+            $table->string('mobile_phone')->nullable();     
+            $table->string('landline_number')->nullable();         
+            $table->string('landline_emergency_phone')->nullable();
+            $table->string('mobile_emergency_phone')->nullable();
             $table->string('address')->nullable();      
             $table->string('suburb')->nullable();      
             $table->string('zip_code')->nullable();      
@@ -32,7 +35,13 @@ class CreateStaffTable extends Migration
             $table->string('bank_account')->nullable();
             $table->string('reason_unsubscribe_text')->nullable();
             $table->string('activities',550)->nullable();
-                       
+            $table->string('blood_type',20)->nullable();
+            
+            $table->string('father_name')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('spouse_name')->nullable();
+            $table->string('chields_name',500)->nullable();
+
             $table->unsignedSmallInteger('company_id')->default(0);
             $table->unsignedSmallInteger('branch_id')->default(0);            
             $table->unsignedSmallInteger('jop_position_id')->default(0);
@@ -46,7 +55,8 @@ class CreateStaffTable extends Migration
             $table->unsignedSmallInteger('state_id')->nullable();
             $table->unsignedSmallInteger('status_id')->default(4);
             $table->unsignedSmallInteger('supervisor_id')->default(0);
-
+            $table->unsignedSmallInteger('type_of_contract_id')->default(0);
+            
             $table->unsignedSmallInteger('socioeconomic')->default(0);
             $table->unsignedSmallInteger('supervisor')->default(0);
             

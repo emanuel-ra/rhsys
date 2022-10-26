@@ -16,7 +16,7 @@ class CompaniesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['permission: companies.index|companies.create|companies.update|companies.delete']);
+        $this->middleware(['permission: companies.index|companies.create|companies.update|companies.delete|system.companies.upload.logo']);
     }
 
     /**
@@ -99,5 +99,9 @@ class CompaniesController extends Controller
 
         return redirect()->route('system.companies');
 
+    }
+    public function upload_logo($id){
+        $company = Company::find($id);
+        return view('system.companies.upload-logo',['company'=>$company,'id'=>$id]);
     }
 }

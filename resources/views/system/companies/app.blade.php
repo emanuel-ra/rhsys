@@ -65,6 +65,15 @@
                                                 </a>
                                             </li>
                                         @endcan                                        
+
+                                        @can('companies.upload.logo')
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('system.companies.upload.logo',['id' => $item->id]) }}">
+                                                    <i class="fas fa-cloud-upload-alt"></i> Logotipo
+                                                </a>
+                                            </li>
+                                        @endcan   
+
                                     </div>
                                 </div>
                             </td>                        

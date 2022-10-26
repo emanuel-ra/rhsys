@@ -152,12 +152,20 @@
                                 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         
-                                        @can('staff.contract')
-                                        <li>                                                
-                                            <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
-                                                <i class="fas fa-file-pdf"></i> Contrato
-                                            </a>
-                                        </li>
+                                        @can('staff.pdf.contract')
+                                            <li>                                                
+                                                <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
+                                                    <i class="fas fa-file-pdf"></i> Contrato
+                                                </a>
+                                            </li>
+                                        @endcan  
+
+                                        @can('staff.pdf.personal.data')
+                                            <li>                                                
+                                                <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.personal.data',['id' => $item->id]) }}">
+                                                    <i class="fas fa-file-pdf"></i> Datos Personales
+                                                </a>
+                                            </li>
                                         @endcan  
 
                                         @can('users.update')

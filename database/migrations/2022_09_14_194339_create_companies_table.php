@@ -22,6 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('rfc')->nullable();
+            $table->string('image')->nullable();;
             $table->tinyInteger('enable')->default(1);
             $table->timestamps();
         });

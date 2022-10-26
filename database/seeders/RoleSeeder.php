@@ -26,7 +26,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'companies.create'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'companies.update'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'companies.delete'])->syncRoles([$role_admin,$role_manage_rh]);
-
+        Permission::create(['name' => 'companies.upload.logo'])->syncRoles([$role_admin,$role_manage_rh]);
+        
          // branches
         Permission::create(['name' => 'branches.index'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'branches.create'])->syncRoles([$role_admin,$role_manage_rh]);
@@ -70,8 +71,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'staff.update'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'staff.view'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'staff.unsubscribe'])->syncRoles([$role_admin,$role_manage_rh]);
-        Permission::create(['name' => 'staff.contract'])->syncRoles([$role_admin,$role_manage_rh]);
-
+        Permission::create(['name' => 'staff.pdf.contract'])->syncRoles([$role_admin,$role_manage_rh]);
+        Permission::create(['name' => 'staff.pdf.personal.data'])->syncRoles([$role_admin,$role_manage_rh]);
+       
         //staff job vacancy
        
         Permission::create(['name' => 'authorized.job.vacancies.index'])->syncRoles([$role_admin,$role_manage_rh]);

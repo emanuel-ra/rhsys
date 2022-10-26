@@ -52,21 +52,22 @@
 </div>
 
 <div class="col-sm-12 col-lg-6 col-xl-4">
-    <x-dg-select id="department_id" name="department_id" label="Departamentos" inputclass="form-select" >        
-        <x-dg-option value=""></x-dg-option>
+
+    <label for="">Departamento</label>
+    <select name="department_id" id="department_id" class="form-control" onchange="GetJopPositions(this.value,'{{ csrf_token() }}','jop_position_id','{{ url('') }}')">
+        <option value=""></option>
         @foreach ($Department as $item)
-        <option {{ ($Staff->department_id==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
+            <option {{ ($Staff->department_id==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
         @endforeach
-    </x-dg-select>
+    </select>
+
 </div>
 
 <div class="col-sm-12 col-lg-6 col-xl-4">
-    <x-dg-select id="jop_position_id" name="jop_position_id" label="Puesto" inputclass="form-select" >        
-        <x-dg-option value=""></x-dg-option>
-        @foreach ($JopPosition as $item)
-        <option {{ ($Staff->jop_position_id==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
-        @endforeach
-    </x-dg-select>
+    <label for="">Puesto</label>
+    <select name="jop_position_id" id="jop_position_id" class="form-control">
+        <option value=""></option>
+    </select>
 </div>
 
 <div class="col-sm-12 col-lg-6 col-xl-4">
@@ -171,9 +172,14 @@
         var element = document.getElementById('mobile_phone');
         var maskOptions = { mask: '(00) 0000-0000' };
         var mask = IMask(element, maskOptions);
+        var mask = IMask(document.getElementById('mobile_phone'), maskOptions);
+        var mask = IMask(document.getElementById('landline_number'), maskOptions);
+        var mask = IMask(document.getElementById('landline_emergency_phone'), maskOptions);
+        var mask = IMask(document.getElementById('mobile_emergency_phone'), maskOptions);
 
         GetBranches(document.getElementById('company_id').value,'{{ csrf_token() }}','branch_id','{{ url('') }}',{{$Staff->branch_id}})
         GetStates({{$Staff->country_id}},'{{ csrf_token() }}','state_id','{{ url('') }}',{{ $Staff->state_id }})
+        GetJopPositions({{$Staff->department_id}},'{{ csrf_token() }}','jop_position_id','{{ url('') }}',{{ $Staff->jop_position_id }})
                        
     </script>
     @if ($Staff->working_hours!=null)

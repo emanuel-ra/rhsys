@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             StaffRotationSeeder::class ,
             AuthorizedPostSeeder::class ,
             CandidateSourceSeeder::class ,
-            TypeInterviewSeeder::class
+            TypeInterviewSeeder::class ,
+            TypeOfContractSeeder::class ,
         ]);
     }
 }

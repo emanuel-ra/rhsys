@@ -30,6 +30,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="staff-general-data-tab" data-toggle="pill" href="#staff-general-data" role="tab" aria-controls="staff-general-data" aria-selected="true">Datos Generales</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="staff-contact-data-tab" data-toggle="pill" href="#staff-contact-data" role="tab" aria-controls="staff-contact-data" aria-selected="false">Contacto</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" id="staff-address-data-tab" data-toggle="pill" href="#staff-address-data" role="tab" aria-controls="staff-address-data" aria-selected="false">Direccion</a>
                     </li>
@@ -46,6 +51,11 @@
                     <div class="tab-pane fade active show" id="staff-general-data" role="tabpanel" aria-labelledby="staff-general-data-tab">
                         <div class="row">
                             @include('human-resources.staff.include.register_general')                        
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="staff-contact-data" role="tabpanel" aria-labelledby="staff-address-data-tab">
+                        <div class="row">
+                            @include('human-resources.staff.include.register_contact')      
                         </div>
                     </div>
                     <div class="tab-pane fade" id="staff-address-data" role="tabpanel" aria-labelledby="staff-address-data-tab">

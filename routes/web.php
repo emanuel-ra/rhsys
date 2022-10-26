@@ -42,6 +42,12 @@ Route::prefix('system')->group(function () {
         Route::post('/update/{id}', [App\Http\Controllers\System\CompaniesController::class, 'update'])
         ->middleware(['permission:companies.update'])
         ->name('system.companies.update');
+
+        Route::get('/upload/logo/{id}', [App\Http\Controllers\System\CompaniesController::class, 'upload_logo'])
+        ->middleware(['permission:companies.upload.logo'])
+        ->name('system.companies.upload.logo');
+
+        
     });
 
     Route::prefix('branches')->group(function () {    
@@ -200,6 +206,10 @@ Route::prefix('hr')->group(function () {
             Route::get('/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_contract'])
             //->middleware(['permission:staff.unsubscribe'])
             ->name('hr.staff.pdf.contract');  
+
+            Route::get('/personal-data/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_personal_data'])
+            //->middleware(['permission:staff.unsubscribe'])
+            ->name('hr.staff.pdf.personal.data');  
         });
              
     });  

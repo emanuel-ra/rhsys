@@ -10,13 +10,12 @@
     <x-dg-input type="text" label="Nombre" name="name" maxlength="255" value="{{old('name')}}" placeholder=""  />
 </div>
 
-
-<div class="col-sm-12 col-lg-6">
+<div class="col-sm-12 col-lg-4">
     <x-dg-input type="text" label="Email" id="email" name="email" maxlength="255" value="{{old('email')}}" placeholder=""  />
 </div>
 
-<div class="col-sm-12 col-lg-6">
-    <x-dg-input type="text" label="Teléfono/Celular" id="mobile_phone" name="mobile_phone" maxlength="255" value="{{old('mobile_phone')}}" placeholder=""  />
+<div class="col-sm-12 col-lg-4">
+    <x-dg-input type="text" label="Teléfono celular" id="mobile_phone" name="mobile_phone" maxlength="255" value="{{old('mobile_phone')}}" placeholder=""  />
 </div>
 
 
@@ -52,25 +51,24 @@
     </select>
 </div>
 
-<div class="col-sm-12 col-lg-6 col-xl-4">
-    <x-dg-select id="department_id" name="department_id" label="Departamentos" inputclass="form-select" >        
-        <x-dg-option value=""></x-dg-option>
+<div class="col-sm-12 col-lg-6 col-xl-4">   
+    <label for="">Departamento</label>
+    <select name="department_id" id="department_id" class="form-control" onchange="GetJopPositions(this.value,'{{ csrf_token() }}','jop_position_id','{{ url('') }}')">
+        <option value=""></option>
         @foreach ($Department as $item)
-        <option {{ (old('department_id')==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
+            <option {{ (old('department_id')==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
         @endforeach
-    </x-dg-select>
+    </select>
 </div>
 
-<div class="col-sm-12 col-lg-6 col-xl-4">
-    <x-dg-select id="jop_position_id" name="jop_position_id" label="Puesto" inputclass="form-select" >        
-        <x-dg-option value=""></x-dg-option>
-        @foreach ($JopPosition as $item)
-        <option {{ (old('jop_position_id')==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
-        @endforeach
-    </x-dg-select>
+<div class="col-sm-12 col-lg-6 col-xl-3">
+    <label for="">Puesto</label>
+    <select name="jop_position_id" id="jop_position_id" class="form-control">
+        <option value=""></option>
+    </select>
 </div>
 
-<div class="col-sm-12 col-lg-6 col-xl-4">
+<div class="col-sm-12 col-lg-6 col-xl-3">
     <x-dg-select id="scholarship_id" name="scholarship_id" label="Escolaridad" inputclass="form-select" >        
         <x-dg-option value=""></x-dg-option>
         @foreach ($Scholarship as $item)
@@ -97,6 +95,15 @@
     </x-dg-select>
 </div>
 
+<div class="col-sm-12 col-lg-6 col-xl-3">
+    <x-dg-select id="type_of_contract_id" name="type_of_contract_id" label="Tipo de Contrato" inputclass="form-select" >        
+        <x-dg-option value=""></x-dg-option>
+        @foreach ($TypeOfContract as $item)
+        <option {{ (old('type_of_contract_id')==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
+        @endforeach
+    </x-dg-select>
+</div>
+
 <div class="col-sm-12 col-md-2">
     <x-dg-input-date id="born_date" name="born_date" label="Fecha Nacimiento" value="{{old('born_date')}}"  />
 </div>
@@ -111,6 +118,21 @@
 
 <div class="col-sm-12 col-md-3">
     <x-dg-input id="daily_salary" name="daily_salary" label="Salario Diario" value="{{old('daily_salary')}}" />
+</div>
+
+<div class="form-group col-sm-12 col-md-3">
+    <label for="blood_type">Tipo de Sangre</label>
+    <input type="text"  list="l_blood_type" id="blood_type" name="blood_type" class="form-control" value="{{old('blood_type')}}">
+    <datalist id="l_blood_type">
+        <option value="A positivo (A +)">        
+        <option value="A negativo (A-)">        
+        <option value="B positivo (B +)">  
+        <option value="B negativo (B-)">        
+        <option value="AB positivo (AB+)">        
+        <option value="AB negativo (AB-)">        
+        <option value="O positivo (O+)">   
+        <option value="O negativo (O-)">   
+    </datalist>
 </div>
 
 <div class="col-sm-12 col-md-3">
@@ -167,10 +189,14 @@
 </div>
 
 @section('js')
-    <script>
-        var element = document.getElementById('mobile_phone');
+    <script>       
+        var element = document.querySelectorAll('phone-input')
+
         var maskOptions = { mask: '(00) 0000-0000' };
-        var mask = IMask(element, maskOptions);
+        var mask = IMask(document.getElementById('mobile_phone'), maskOptions);
+        var mask = IMask(document.getElementById('landline_number'), maskOptions);
+        var mask = IMask(document.getElementById('landline_emergency_phone'), maskOptions);
+        var mask = IMask(document.getElementById('mobile_emergency_phone'), maskOptions);
         
     </script>
 @endsection

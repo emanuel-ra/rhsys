@@ -13,11 +13,11 @@
                 </td>
                 <td>
                     <label for="">Hora de Entrada</label>
-                    <input type="time" name="monday[]" class="form-control">
+                    <input type="time" name="monday[]" class="form-control" value="09:00">
                 </td>
                 <td>
                     <label for="">Hora de Salida</label>
-                    <input type="time" name="monday[]" class="form-control">
+                    <input type="time" name="monday[]" class="form-control" value="18:30">
                 </td>
             </tr>
             <tr>
@@ -26,11 +26,11 @@
                 </td>
                 <td>
                     <label for="">Hora de Entrada</label>
-                    <input type="time" name="tuesday[]" class="form-control">
+                    <input type="time" name="tuesday[]" class="form-control" value="09:00">
                 </td>
                 <td>
                     <label for="">Hora de Salida</label>
-                    <input type="time" name="tuesday[]" class="form-control">
+                    <input type="time" name="tuesday[]" class="form-control" value="18:30">
                 </td>
             </tr>
             <tr>
@@ -39,11 +39,11 @@
                 </td>
                 <td>
                     <label for="">Hora de Entrada</label>
-                    <input type="time" name="wednesday[]" class="form-control">
+                    <input type="time" name="wednesday[]" class="form-control" value="09:00">
                 </td>
                 <td>
                     <label for="">Hora de Salida</label>
-                    <input type="time" name="wednesday[]" class="form-control">
+                    <input type="time" name="wednesday[]" class="form-control" value="18:30">
                 </td>
             </tr>
             <tr>
@@ -52,11 +52,11 @@
                 </td>
                 <td>
                     <label for="">Hora de Entrada</label>
-                    <input type="time" name="thursday[]" class="form-control">
+                    <input type="time" name="thursday[]" class="form-control" value="09:00">
                 </td>
                 <td>
                     <label for="">Hora de Salida</label>
-                    <input type="time" name="thursday[]" class="form-control">
+                    <input type="time" name="thursday[]" class="form-control" value="18:30">
                 </td>
             </tr>
             <tr>
@@ -65,11 +65,11 @@
                 </td>
                 <td>
                     <label for="">Hora de Entrada</label>
-                    <input type="time" name="friday[]" class="form-control">
+                    <input type="time" name="friday[]" class="form-control" value="09:00">
                 </td>
                 <td>
                     <label for="">Hora de Salida</label>
-                    <input type="time" name="friday[]" class="form-control">
+                    <input type="time" name="friday[]" class="form-control" value="18:30">
                 </td>
             </tr>
             <tr>
@@ -78,11 +78,11 @@
                 </td>
                 <td>
                     <label for="">Hora de Entrada</label>
-                    <input type="time" name="saturday[]" class="form-control">
+                    <input type="time" name="saturday[]" class="form-control" value="09:00">
                 </td>
                 <td>
                     <label for="">Hora de Salida</label>
-                    <input type="time" name="saturday[]" class="form-control">
+                    <input type="time" name="saturday[]" class="form-control" value="18:30">
                 </td>
             </tr>
             <tr>

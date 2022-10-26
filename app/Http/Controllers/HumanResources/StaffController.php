@@ -16,6 +16,7 @@ use App\Models\ReasonsToLeaveWork;
 use App\Models\StaffLogs;
 use App\Models\StaffRotation;
 use App\Models\Status;
+use App\Models\TypeOfContract;
 use Carbon\Carbon;
 use PDF;
 
@@ -96,7 +97,7 @@ class StaffController extends Controller
 
         $branches = Branch::select('id','name')->where('enable',1)->get();
         $departments = Department::select('id','name')->where('enable',1)->get();
-        $jop_positions = JopPosition::select('id','name')->where('enable',1)->get();
+        $jop_positions = JopPosition::select('id','name')->where('enable',1)->get();        
         $status = Status::select('id','name')->whereIn('id',array(4,5))->where('enable',1)->get();
         return view('human-resources.staff.app',[
             'data'=>$data ,
@@ -143,7 +144,8 @@ class StaffController extends Controller
         $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
         $Country = Country::select('id','name')->where('enable',1)->get();
         $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
-    
+        $TypeOfContract = TypeOfContract::select('id','name')->where('enable',1)->get();
+
         return view('human-resources.staff.register',[        
             'Supervisor' => $Supervisor ,   
             'Company' => $Company ,
@@ -151,12 +153,13 @@ class StaffController extends Controller
             'JopPosition' => $JopPosition ,
             'Scholarship' => $Scholarship ,
             'Country' => $Country ,     
-            'MaritalStatus' => $MaritalStatus ,             
+            'MaritalStatus' => $MaritalStatus ,
+            'TypeOfContract' => $TypeOfContract ,             
         ]);
     }   
     public function store(Request $request)
-    {       
-                
+    {                       
+      
         $this->validate($request, [               
             'code' => 'required|max:20|unique:staff',         
             'checker_code' => 'nullable|max:20|unique:staff',         
@@ -174,6 +177,15 @@ class StaffController extends Controller
             'socioeconomic' => 'required',
             'hired_date' => 'required|max:10',
             'born_date' => 'required|max:10',
+            'daily_salary' => 'required' ,
+            'father_name' => 'nullable|max:255',
+            'mother_name' => 'nullable|max:255',
+            'spouse_name' => 'nullable|max:255',
+            'chields_name' => 'nullable|max:500',
+            'landline_number' => 'nullable|max:255',
+            'mobile_emergency_phone' => 'nullable|max:255',
+            'landline_emergency_phone' => 'nullable|max:255',
+
 
             'rfc' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
@@ -257,7 +269,17 @@ class StaffController extends Controller
         $Staff->daily_salary = $request->daily_salary;
         $Staff->user_id = $request->user()->id;
         $Staff->activities = $request->activities;
-        
+
+        $Staff->landline_number = $request->landline_number;
+        $Staff->landline_emergency_phone = $request->landline_emergency_phone;
+        $Staff->mobile_emergency_phone = $request->mobile_emergency_phone;
+        $Staff->blood_type = $request->blood_type;
+        $Staff->father_name = $request->father_name;
+        $Staff->mother_name = $request->mother_name;
+        $Staff->spouse_name = $request->spouse_name;
+        $Staff->chields_name = $request->chields_name;
+        $Staff->type_of_contract_id = $request->type_of_contract_id;
+                
         if($request->hired_date!='')
             $Staff->born_date = $request->hired_date;      
         if($request->born_date!='')
@@ -318,7 +340,14 @@ class StaffController extends Controller
             'socioeconomic' => 'required',
             'hired_date' => 'required|max:10',
             'born_date' => 'required|max:10',
-
+            'daily_salary' => 'required' ,
+            'father_name' => 'nullable|max:255',
+            'mother_name' => 'nullable|max:255',
+            'spouse_name' => 'nullable|max:255',
+            'chields_name' => 'nullable|max:500',
+            'landline_number' => 'nullable|max:255',
+            'mobile_emergency_phone' => 'nullable|max:255',
+            'landline_emergency_phone' => 'nullable|max:255',
 
             'rfc' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
@@ -401,6 +430,17 @@ class StaffController extends Controller
         $Staff->expiration_date = $request->expiration_date;
         $Staff->daily_salary = $request->daily_salary;
         $Staff->activities = $request->activities;
+
+        $Staff->landline_number = $request->landline_number;
+        $Staff->landline_emergency_phone = $request->landline_emergency_phone;
+        $Staff->mobile_emergency_phone = $request->mobile_emergency_phone;
+        $Staff->blood_type = $request->blood_type;
+        $Staff->father_name = $request->father_name;
+        $Staff->mother_name = $request->mother_name;
+        $Staff->spouse_name = $request->spouse_name;
+        $Staff->chields_name = $request->chields_name;
+        $Staff->type_of_contract_id = $request->type_of_contract_id;
+
         $Staff->save();
 
 
@@ -466,6 +506,12 @@ class StaffController extends Controller
         $Company = Company::find($data->company_id);
                 
         $pdf = Pdf::loadView('pdf.human-resources.staff.contract', ['data'=>$data,'Company'=>$Company]);
+        return $pdf->stream();
+    }
+    public function pdf_personal_data($id){
+        $data = Staff::with('Country')->with('MaritalStatus')->with('Position')->find($id);
+        $Company = Company::find($data->company_id);
+        $pdf = Pdf::loadView('pdf.human-resources.staff.personal-data', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
     }
 }
