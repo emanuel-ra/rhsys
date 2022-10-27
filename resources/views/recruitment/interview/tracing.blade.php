@@ -27,26 +27,29 @@
 
             <form action="{{ route('recruitment.interview.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="prospect_id" value="{{ $data->id }}">
+                
+                <input type="hidden" name="candidate_id" value="{{ $data->id }}">
+
                 <div class="row p-2">
                     
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Nombre" name="name" maxlength="255" value="{{$data->prospect->name}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Nombre" name="name" maxlength="255" value="{{$data->candidate->name}}" disabled placeholder=""  />
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Email" name="email" maxlength="255" value="{{$data->prospect->email}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Email" name="email" maxlength="255" value="{{$data->candidate->email}}" disabled placeholder=""  />
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Tipo de Entrevista" name="telefono" maxlength="255" value="{{$data->prospect->mobile_phone}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Tipo de Entrevista" name="telefono" maxlength="255" value="{{$data->candidate->mobile_phone}}" disabled placeholder=""  />
                     </div>
                     
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Sucursal" name="telefono" maxlength="255" value="{{$data->prospect->requisitions->branch->name}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Sucursal" name="telefono" maxlength="255" value="{{$data->candidate->requisitions->branch->name}}" disabled placeholder=""  />
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Vacante" name="telefono" maxlength="255" value="{{$data->prospect->requisitions->position->name}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Vacante" name="telefono" maxlength="255" value="{{$data->candidate->requisitions->position->name}}" disabled placeholder=""  />
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
@@ -55,16 +58,16 @@
 
                     <div class="col-sm-12 col-lg-4">
                         <label for="">Fecha y hora de la entrevista</label>
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">                            
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group date"  >                            
+                            <div class="input-group-append" >
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div> 
                             <input type="text" class="form-control datetimepicker-input" value="{{ $data->interview_date }}" readonly/>
                         </div>
                     </div>
-
+                    
                     <div class="col-12 p-4">
-                        <label >Asiste?</label>
+                        <label>Asiste?</label>
                         <div class="icheck-primary">
                             <input type="radio" id="attendance_yes" name="attendance" class="icheck-primary" value="1" />
                             <label for="attendance_yes">Si</label>
@@ -74,6 +77,29 @@
                             <label for="attendance_no">No</label>
                         </div>
                     </div>
+                    
+                    <div class="col-12 row">
+                    
+                        <div class="col-12 col-lg-1">
+                            <label for="">Reprogramar</label>
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="someCheckboxId" />
+                                <label for="someCheckboxId">Si</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-lg-2">                        
+                            <label for="">Nueva fecha</label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">                            
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div> 
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" data-toggle="datetimepicker" name="interview_date" required/>
+                            </div>
+
+                        </div>
+                    </div>
+
 
                     <div class="col-sm-12">
                         <label for="">Observeaciones</label>
@@ -118,7 +144,14 @@
 @section('js')
     <script type="text/javascript">
         $(function () {
-          
+            $('#datetimepicker1').datetimepicker({
+                icons: {
+                    time: "far fa-clock",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                } 
+            });
         });
     </script>
 @endsection

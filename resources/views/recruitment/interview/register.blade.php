@@ -27,7 +27,7 @@
 
             <form action="{{ route('recruitment.interview.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="prospect_id" value="{{ $data->id }}">
+                <input type="hidden" name="candidate_id" value="{{ $data->id }}">
                 <div class="row p-2">
                     
                     <div class="col-sm-12">

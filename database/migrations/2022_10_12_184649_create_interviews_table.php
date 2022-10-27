@@ -22,6 +22,7 @@ class CreateInterviewsTable extends Migration
             $table->unsignedSmallInteger('type_interview_id')->default(1);
             $table->unsignedSmallInteger('user_id')->default(1);
             $table->tinyInteger('attendance')->default(0);
+            $table->tinyInteger('reschedule')->default(0);
             $table->datetime('interview_date');
             $table->timestamps();
         });

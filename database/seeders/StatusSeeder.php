@@ -25,5 +25,6 @@ class StatusSeeder extends Seeder
         Status::create(['name'=>'Rechazado']);
         Status::create(['name'=>'Archivado']);
         Status::create(['name'=>'Stand by']);
+        Status::create(['name'=>'Reagendada']);        
     }
 }

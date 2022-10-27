@@ -46,7 +46,7 @@ class InterviewAppointmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [               
-            'prospect_id' => 'required|integer',         
+            'candidate_id' => 'required|integer',         
             'type_interview_id' => 'required|integer',         
             'interview_date' => ['required','after:today'] ,
             'commentaries' => ['nullable','max:500'] 
@@ -56,7 +56,7 @@ class InterviewAppointmentController extends Controller
         $Interview = new Interview;
 
         $Interview->commentaries = $request->commentaries;
-        $Interview->prospect_id = $request->prospect_id;
+        $Interview->candidate_id = $request->candidate_id;
         $Interview->status_id = 1;
         $Interview->type_interview_id = $request->type_interview_id;
         $Interview->user_id = $request->user()->id;
@@ -66,7 +66,7 @@ class InterviewAppointmentController extends Controller
         return redirect()->route('recruitment.interview.appointment');
     }
     public function open($id){
-        $data = Interview::with('prospect')->with('status')->with('type_interview')->find($id);
+        $data = Interview::with('candidate')->with('status')->with('type_interview')->find($id);
        
         if($data->attendance){
             return view('recruitment.interview.view',['data' => $data ,]);
