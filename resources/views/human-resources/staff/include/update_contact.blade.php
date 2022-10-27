@@ -16,6 +16,10 @@
     <x-dg-input type="text" label="Nombre de los hijos" name="chields_name" maxlength="500" value="{{ $Staff->chields_name }}" placeholder=""  />
 </div>
 
+<div class="col-sm-12">
+    <x-dg-input type="text" label="Nombre de contacto de emergencias" name="name_person_emergency" maxlength="255" value="{{ $Staff->name_person_emergency }}" placeholder=""  />
+</div>
+
 <div class="col-sm-12 col-lg-2">
     <x-dg-input type="text" label="Teléfono fijo" id="landline_number" name="landline_number" maxlength="255" value="{{ $Staff->landline_number }}" placeholder=""  />
 </div>

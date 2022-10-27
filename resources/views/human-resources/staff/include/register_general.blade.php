@@ -108,6 +108,10 @@
     <x-dg-input-date id="born_date" name="born_date" label="Fecha Nacimiento" value="{{old('born_date')}}"  />
 </div>
 
+<div class="col-sm-12 col-md-3">
+    <x-dg-input id="born_place" name="born_place" label="Lugar de nacimiento" value="{{old('born_place')}}" />
+</div>
+
 <div class="col-sm-12 col-md-2">
     <x-dg-input-date id="hired_date" name="hired_date" label="Fecha ingreso" value="{{old('hired_date')}}"  />
 </div>
@@ -120,7 +124,7 @@
     <x-dg-input id="daily_salary" name="daily_salary" label="Salario Diario" value="{{old('daily_salary')}}" />
 </div>
 
-<div class="form-group col-sm-12 col-md-3">
+<div class="form-group col-sm-12 col-md-2">
     <label for="blood_type">Tipo de Sangre</label>
     <input type="text"  list="l_blood_type" id="blood_type" name="blood_type" class="form-control" value="{{old('blood_type')}}">
     <datalist id="l_blood_type">
@@ -135,7 +139,7 @@
     </datalist>
 </div>
 
-<div class="col-sm-12 col-md-3">
+<div class="col-sm-12 col-md-2">
     <label for="">Es supervisor?</label>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="supervisor" id="supervisor_si" value="1">
@@ -151,7 +155,7 @@
     </div>
 </div>
 
-<div class="col-sm-12 col-md-3">
+<div class="col-sm-12 col-md-2">
     <label for="">Socioeconómico</label>
     <div class="form-check">
         <input class="form-check-input" checked type="radio" name="socioeconomic" id="socioeconomic_si" value="1">

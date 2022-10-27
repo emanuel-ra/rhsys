@@ -186,6 +186,9 @@ class StaffController extends Controller
             'mobile_emergency_phone' => 'nullable|max:255',
             'landline_emergency_phone' => 'nullable|max:255',
 
+            'name_person_emergency' => 'nullable|max:255',
+            'born_place' => 'nullable|max:255',
+
 
             'rfc' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
@@ -279,7 +282,9 @@ class StaffController extends Controller
         $Staff->spouse_name = $request->spouse_name;
         $Staff->chields_name = $request->chields_name;
         $Staff->type_of_contract_id = $request->type_of_contract_id;
-                
+        $Staff->name_person_emergency = $request->name_person_emergency;
+        $Staff->born_place = $request->born_place;
+
         if($request->hired_date!='')
             $Staff->born_date = $request->hired_date;      
         if($request->born_date!='')
@@ -308,6 +313,7 @@ class StaffController extends Controller
         $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
         $Country = Country::select('id','name')->where('enable',1)->get();
         $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
+        $TypeOfContract = TypeOfContract::select('id','name')->where('enable',1)->get();
         //return $Staff;
         return view('human-resources.staff.edit',[
             'Staff' => $Staff ,
@@ -318,6 +324,7 @@ class StaffController extends Controller
             'Scholarship' => $Scholarship ,
             'Country' => $Country ,     
             'MaritalStatus' => $MaritalStatus ,
+            'TypeOfContract' => $TypeOfContract ,
             'id' => $id ,
         ]);
     }
@@ -354,6 +361,11 @@ class StaffController extends Controller
             'nss' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
 
             'activities' => 'nullable|max:550' ,
+
+            
+            'name_person_emergency' => 'nullable|max:255',
+            'born_place' => 'nullable|max:255',
+
         
         ]);   
         
@@ -440,6 +452,10 @@ class StaffController extends Controller
         $Staff->spouse_name = $request->spouse_name;
         $Staff->chields_name = $request->chields_name;
         $Staff->type_of_contract_id = $request->type_of_contract_id;
+        
+        $Staff->name_person_emergency = $request->name_person_emergency;
+        $Staff->born_place = $request->born_place;
+        
 
         $Staff->save();
 

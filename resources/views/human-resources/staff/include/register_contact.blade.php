@@ -11,9 +11,12 @@
     <x-dg-input type="text" label="Nombre de cónyuge" name="spouse_name" maxlength="255" value="{{old('spouse_name')}}" placeholder=""  />
 </div>
 
-
 <div class="col-sm-12">
     <x-dg-input type="text" label="Nombre de los hijos" name="chields_name" maxlength="500" value="{{old('chields_name')}}" placeholder=""  />
+</div>
+
+<div class="col-sm-12">
+    <x-dg-input type="text" label="Nombre de contacto de emergencias" name="name_person_emergency" maxlength="255" value="{{old('name_person_emergency')}}" placeholder=""  />
 </div>
 
 <div class="col-sm-12 col-lg-2">

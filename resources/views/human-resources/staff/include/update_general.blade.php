@@ -10,11 +10,11 @@
 </div>
 
 
-<div class="col-sm-12 col-lg-6">
+<div class="col-sm-12 col-lg-4">
     <x-dg-input type="text" label="Email" id="email" name="email" maxlength="255" value="{{ $Staff->email }}" placeholder=""  />
 </div>
 
-<div class="col-sm-12 col-lg-6">
+<div class="col-sm-12 col-lg-4">
     <x-dg-input type="text" label="Teléfono/Celular" id="mobile_phone" name="mobile_phone" maxlength="255" value="{{ $Staff->mobile_phone }}" placeholder=""  />
 </div>
 
@@ -63,14 +63,14 @@
 
 </div>
 
-<div class="col-sm-12 col-lg-6 col-xl-4">
+<div class="col-sm-12 col-lg-6 col-xl-3">
     <label for="">Puesto</label>
     <select name="jop_position_id" id="jop_position_id" class="form-control">
         <option value=""></option>
     </select>
 </div>
 
-<div class="col-sm-12 col-lg-6 col-xl-4">
+<div class="col-sm-12 col-lg-6 col-xl-3">
     <x-dg-select id="scholarship_id" name="scholarship_id" label="Escolaridad" inputclass="form-select" >        
         <x-dg-option value=""></x-dg-option>
         @foreach ($Scholarship as $item)
@@ -97,8 +97,21 @@
     </x-dg-select>
 </div>
 
+<div class="col-sm-12 col-lg-6 col-xl-3">
+    <x-dg-select id="type_of_contract_id" name="type_of_contract_id" label="Tipo de Contrato" inputclass="form-select" >        
+        <x-dg-option value=""></x-dg-option>
+        @foreach ($TypeOfContract as $item)
+            <option {{ ($Staff->type_of_contract_id==$item->id) ? 'selected':''; }} value="{{ $item->id }}">{{ $item->name }}</option>
+        @endforeach
+    </x-dg-select>
+</div>
+
 <div class="col-sm-12 col-md-2">
     <x-dg-input-date id="born_date" name="born_date" label="Fecha Nacimiento" value="{{$Staff->born_date}}"  />
+</div>
+
+<div class="col-sm-12 col-md-3">
+    <x-dg-input id="born_place" name="born_place" label="Lugar de nacimiento" value="{{$Staff->born_place}}" />
 </div>
 
 <div class="col-sm-12 col-md-2">

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contrato</title>
+    <title>Datos Personales</title>
 </head>
 <body>
 
     <style>
         *{
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, Helvetica, sans-serif; 
         }
         header{
             width: 100%;
@@ -20,19 +20,20 @@
         .data{ font-size: 10pt; }        
         .p-10{ padding: 10px;}
         .text-center{ text-align: center }
+        .text-right{ text-align: right }
     </style>
 
    
     <header>
-        <table >
+        <table>
             <tr>
-                <td valign="top" style="padding: 0;margin:0;width: 150px;">
+                <td align="center" style="width: 100px;height: 100px;padding:0px;">
                     @if ($Company->image!='' && \File::exists('./images/logo/'.$Company->image))
-                        <img src="{{'./images/logo/'.$Company->image}}" style="max-width: 100px;" alt="logo">
+                        <img src="{{'./images/logo/'.$Company->image}}" style="width: 100px;height: 100px;" alt="logo">
                     @endif                 
                 </td>
-                <td style="border: 1px solid #000; text-align:center"><h1 class="bg-danger">DATOS PERSONALES</h1></td>
-                <td style="font-size: 8pt;border:1px dashed #000;">
+                <td style="border: 1px solid #000; text-align:center;width: 300px;"><h1 class="bg-danger">DATOS PERSONALES</h1></td>
+                <td style="font-size: 8pt;border:1px dashed #000; padding:0;width: 145px;">
                     <table>
                         <tr>
                             <td style="border-bottom: 1px dashed #000;border-right:1px dashed #000;">CÓDIGO</td>
@@ -57,37 +58,37 @@
     <section class="data">
         <table style="width: 100%;" cellpadding="0" cellspacing="0">
             <tr>
-                <td>NOMBRE COMPLETO</td>
+                <td style="width: 130px;">NOMBRE COMPLETO</td>
                 <td class="p-10" style="border: 1px solid #000;text-align:center" colspan="5"><b>{{$data->name}}</b></td>
             </tr>
             <tr><td colspan="6" style="height: 5px;"></td></tr>
             <tr>
                 <td>FECHA DE <br> NACIMIENTO</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000; text-align:center">
+                <td class="p-10" colspan="1" style="border: 1px solid #000; text-align:center">
                     {{ \Carbon\Carbon::create($data->born_date)->format('d/m/Y')}}
                     <br>
                     <small style="color: gray;font-size:7.5pt">DD MM AAAA</small>
                 </td>
                 <td class="text-center">LUGAR DE <br> NACIMINETO</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->blood_place}}</td>
+                <td class="p-10" colspan="3" style="border: 1px solid #000">{{$data->born_place}}</td>
             </tr>
 
             <tr><td colspan="6" style="height: 5px;"></td></tr>
 
             <tr>
                 <td>RFC</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->rfc}}</td>
+                <td class="p-10" style="border: 1px solid #000">{{$data->rfc}}</td>
                 <td class="text-center">C.U.R.P</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->curp}}</td>
+                <td class="p-10" colspan="3" style="border: 1px solid #000">{{$data->curp}}</td>
             </tr>
             
             <tr><td colspan="6" style="height: 5px;"></td></tr>
 
             <tr>
                 <td>NÚMERO DE SS</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->nss}}</td>
+                <td class="p-10" style="border: 1px solid #000">{{$data->nss}}</td>
                 <td class="text-center">ESTADO CIVIL</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->maritalstatus->name}}</td>
+                <td class="p-10" colspan="3" style="border: 1px solid #000">{{$data->maritalstatus->name}}</td>
             </tr>
 
             <tr><td colspan="6" style="height: 5px;"></td></tr>
@@ -122,12 +123,12 @@
                 <td class="p-10" style="border: 1px solid #000;text-align:center" colspan="5"><b>{{$data->chields_name}}</b></td>
             </tr>
 
-            <tr><td colspan="6" style="height: 5px;border-bottom:1px solid #000;"></td></tr>
-            <tr><td colspan="6" style="height: 5px;"></td></tr>
+            <tr><td colspan="6" style="height: 20px;border-bottom:1px solid #000;"></td></tr>
+            <tr><td colspan="6" style="height: 20px;"></td></tr>
 
             <tr>
                 <td>DOMICILIO CALLE Y NO.</td>
-                <td class="p-10" colspan="2" style="border: 1px solid #000">{{ wordwrap($data->address,15, "\n",false) }}</td>
+                <td class="p-10" colspan="2" style="border: 1px solid #000;width:150px;">{{ $data->address }}</td>
                 <td class="text-center">COLONIA</td>
                 <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->suburb}}</td>
             </tr>
@@ -154,15 +155,48 @@
             </tr>
 
 
-            <tr><td colspan="6" style="height: 5px;border-bottom:1px solid #000;"></td></tr>
-            <tr><td colspan="6" style="height: 5px;"></td></tr>
+            <tr><td colspan="6" style="height: 20px;border-bottom:1px solid #000;"></td></tr>
+            <tr><td colspan="6" style="height: 20px;"></td></tr>
 
             <tr>
                 <td>EN CASO DE EMERGENCIA, <br> LLAMAR A; </td>
-                <td class="p-10" style="border: 1px solid #000;text-align:center" colspan="5"><b>{{$data->chields_name}}</b></td>
+                <td class="p-10" style="border: 1px solid #000;text-align:center" colspan="5">
+                    <b>{{$data->name_person_emergency}}</b>
+                </td>
+            </tr>
+            
+            <tr><td colspan="6" style="height: 5px;"></td></tr>
+
+            <tr>
+                <td>TEL. CELULAR</td>
+                <td class="p-10" style="border: 1px solid #000">{{$data->mobile_emergency_phone}}</td>
+                <td class="text-center" colspan="2">TEL. FIJO O <br> REACADOS</td>
+                <td class="p-10" colspan="2" style="border: 1px solid #000">{{$data->landline_emergency_phone}}</td>
+            </tr>
+
+            <tr><td colspan="6" style="height: 20px;border-bottom:1px solid #000;"></td></tr>
+            <tr><td colspan="6" style="height: 20px;"></td></tr>
+
+            <tr>
+                <td colspan="2" class="text-center">RATIFICO QUE LOS DATOS AQUÍ ESCRITOS SON VERDADEROS</td>
+                <td colspan="2"></td>
+                <td colspan="2" class="text-center">RECURSOS HUMANOS</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="border-bottom: 1px solid #000;height: 70px;margin-right:3px;"></td>
+                <td colspan="2"></td>
+                <td colspan="2" style="border-bottom: 1px solid #000;height: 70px;margin-right:3px;"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="text-center" style="">NOMBRE Y FIRMA</td>
+                <td colspan="2"></td>
+                <td colspan="2" class="text-center" style="">NOMBRE Y FIRMA</td>
             </tr>
 
         </table>
+
     </section>
     
 </body>
