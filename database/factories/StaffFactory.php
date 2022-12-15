@@ -127,7 +127,7 @@ class StaffFactory extends Factory
             'unsubscribe_date' => ($status_id==5) ? $resignation_date : null ,
             'reason_unsubscribe_id' => ($status_id==5) ? ReasonsToLeaveWork::all()->random()->id  : 0  ,
             'supervisor' => $supervisor ,
-            'activities' => $this->faker->text(350) ,
+            //'activities' => $this->faker->text(350) ,
             //'expiration_date' => $this->faker->name() ,
             'working_hours' => json_encode($working_hours) ,
             'daily_salary' => $this->faker->randomFloat(2, 100, $max = 1000) ,

@@ -206,9 +206,19 @@ Route::prefix('hr')->group(function () {
         ->name('hr.staff.post.unsubscribe');  
 
         Route::prefix('PDF')->group(function (){
-            Route::get('/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_contract'])
+
+            Route::get('/specific/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_specific_contract'])
             //->middleware(['permission:staff.unsubscribe'])
-            ->name('hr.staff.pdf.contract');  
+            ->name('hr.staff.pdf.specific.contract');  
+            
+            Route::get('/indeterminate/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_indeterminate_contract'])
+            //->middleware(['permission:staff.unsubscribe'])
+            ->name('hr.staff.pdf.indeterminate.contract');  
+
+            Route::get('/indeterminate/period/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_indeterminate_period_contract'])
+            //->middleware(['permission:staff.unsubscribe'])
+            ->name('hr.staff.pdf.indeterminate.period.contract');  
+
 
             Route::get('/personal-data/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_personal_data'])
             //->middleware(['permission:staff.unsubscribe'])

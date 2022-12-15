@@ -17,7 +17,7 @@ class Staff extends Model
         return $this->hasOne(User::class, 'id','user_id');
     }
     public function Position(){ 
-        return $this->hasOne(JopPosition::class, 'id','jop_position_id')->select('id','name');
+        return $this->hasOne(JopPosition::class, 'id','jop_position_id')->select('id','name','activities');
     }
     public function Department(){ 
         return $this->hasOne(Department::class,'id', 'department_id')->select('id','name');

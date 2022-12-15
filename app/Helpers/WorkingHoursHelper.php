@@ -20,7 +20,7 @@ function wh_format($value){
 
     return $days;
 }
-function wh_short_format($value){
+function wh_short_format($value,$format = 'full'){
     if($value==""){return 'Sin horario configurado';}
     $json = json_decode($value, true);
 
@@ -74,5 +74,9 @@ function wh_short_format($value){
         $x.= " & ".Lang::get('days.'.$i[3]).' de '.$i[1].' a '.$i[2].', ' ;
     });   
 
-    return Lang::get('days.'.$same[0][3]).' a '.Lang::get('days.'.$same[count($same)-1][3]).' de '.$same[0][1].' a '.$same[0][2].$x.' descansando el día '.Lang::get('days.'.$free_day).' de cada semana';
+    if($format=='full')
+        return Lang::get('days.'.$same[0][3]).' a '.Lang::get('days.'.$same[count($same)-1][3]).' de '.$same[0][1].' a '.$same[0][2].$x.' descansando el día '.Lang::get('days.'.$free_day).' de cada semana';
+    
+    if($format=='specific')
+        return Lang::get('days.'.$same[0][3]).' a '.Lang::get('days.'.$same[count($same)-1][3]).' iniciado su jornada laboral a las '.$same[0][1].' horas horas y se suspenderán sus labores a las a las 13:00 horas para que “EL TRABAJADOR” descanse y pueda tomar sus alimentos dentro o fuera de la fuente de trabajo elección del “EL TRABAJADOR” y sin estar o quedar bajo la subordinación de “EL PATRÓN” o disposición de este, y al concluir su periodo de reposo retorna a su jornada laboral a las 13:31 horas concluyendo su jornada daría a las '.$same[0][2].$x.' horas';
 }

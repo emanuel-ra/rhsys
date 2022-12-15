@@ -40,6 +40,10 @@
                     <x-dg-input type="text" label="Nombre del puesto" name="name" maxlength="255" value="{{old('name')}}" placeholder="Capture el nombre del puesto" required />
                 </div>
                 
+                <div class="col-sm-12">
+                    <label for="">Actividades</label>
+                    <textarea name="activities" class="form-control"></textarea>
+                </div>
 
                 <div class="row">
                     @if ($errors->any())

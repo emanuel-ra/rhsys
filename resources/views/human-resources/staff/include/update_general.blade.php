@@ -173,12 +173,6 @@
         </label>
     </div>
 </div>
-
-<div class="col-sm-12">
-    <label for="">Actividades</label>
-    <textarea name="activities" class="form-control">{{ $Staff->activities }}</textarea>
- </div>
-
  
 @section('js')
     <script>

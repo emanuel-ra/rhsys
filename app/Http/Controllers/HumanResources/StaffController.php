@@ -192,9 +192,7 @@ class StaffController extends Controller
 
             'rfc' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable','max:20', 'unique:staff', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
-            'nss' => [ 'nullable','max:20', 'unique:staff', 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
-            
-            'activities' => 'nullable|max:550' ,
+            'nss' => [ 'nullable','max:20', 'unique:staff', 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],                        
         ]);     
         
         
@@ -270,8 +268,7 @@ class StaffController extends Controller
         $Staff->status_id = 4;
         $Staff->working_hours = json_encode($working_hours);
         $Staff->daily_salary = $request->daily_salary;
-        $Staff->user_id = $request->user()->id;
-        $Staff->activities = $request->activities;
+        $Staff->user_id = $request->user()->id;        
 
         $Staff->landline_number = $request->landline_number;
         $Staff->landline_emergency_phone = $request->landline_emergency_phone;
@@ -359,9 +356,6 @@ class StaffController extends Controller
             'rfc' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$/' ],
             'curp' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/' ],
             'nss' => [ 'nullable','max:20', 'unique:staff,id,'.$id, 'regex:/^(\d{2})(\d{2})(\d{2})\d{5}$/' ],
-
-            'activities' => 'nullable|max:550' ,
-
             
             'name_person_emergency' => 'nullable|max:255',
             'born_place' => 'nullable|max:255',
@@ -441,7 +435,6 @@ class StaffController extends Controller
         $Staff->working_hours = json_encode($working_hours);  
         $Staff->expiration_date = $request->expiration_date;
         $Staff->daily_salary = $request->daily_salary;
-        $Staff->activities = $request->activities;
 
         $Staff->landline_number = $request->landline_number;
         $Staff->landline_emergency_phone = $request->landline_emergency_phone;
@@ -516,12 +509,31 @@ class StaffController extends Controller
 
         return redirect()->route('hr.staff.view',['id'=>$request->id]);
     }
-    public function pdf_contract($id){
+    public function pdf_specific_contract($id){
         
         $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
+        //return $data;
         $Company = Company::find($data->company_id);
                 
-        $pdf = Pdf::loadView('pdf.human-resources.staff.contract', ['data'=>$data,'Company'=>$Company]);
+        $pdf = Pdf::loadView('pdf.human-resources.staff.specific-contract', ['data'=>$data,'Company'=>$Company]);
+        return $pdf->stream();
+    }
+    public function pdf_indeterminate_contract($id){
+        
+        $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
+        //return $data;
+        $Company = Company::find($data->company_id);
+                
+        $pdf = Pdf::loadView('pdf.human-resources.staff.indeterminate-contract', ['data'=>$data,'Company'=>$Company]);
+        return $pdf->stream();
+    }
+    public function pdf_indeterminate_period_contract($id){
+        
+        $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
+        //return $data;
+        $Company = Company::find($data->company_id);
+                
+        $pdf = Pdf::loadView('pdf.human-resources.staff.indeterminate-period-contract', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
     }
     public function pdf_personal_data($id){

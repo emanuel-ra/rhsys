@@ -154,10 +154,23 @@
                                         
                                         @can('staff.pdf.contract')
                                             <li>                                                
-                                                <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
-                                                    <i class="fas fa-file-pdf"></i> Contrato
+                                                <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.specific.contract',['id' => $item->id]) }}">
+                                                    <i class="fas fa-file-pdf"></i> Contrato Determinado
                                                 </a>
                                             </li>
+
+                                            <li>                                                
+                                                <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.indeterminate.period.contract',['id' => $item->id]) }}">
+                                                    <i class="fas fa-file-pdf"></i> Contrato Indeterminado con periodo de prueba
+                                                </a>
+                                            </li>
+
+                                            <li>                                                
+                                                <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.indeterminate.contract',['id' => $item->id]) }}">
+                                                    <i class="fas fa-file-pdf"></i> Contrato Indeterminado
+                                                </a>
+                                            </li>
+
                                         @endcan  
 
                                         @can('staff.pdf.personal.data')

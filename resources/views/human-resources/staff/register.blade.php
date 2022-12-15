@@ -82,12 +82,10 @@
                     @endif
                 </div>
                     
-                <div class="col-sm-12 p-2 d-flex justify-content-between">
-                    
+                <div class="col-sm-12 p-2 d-flex justify-content-between">                    
                     <a href="{{ route('hr.staff') }}" class="btn btn-default">
                         Cancelar
                     </a>
-
                     <button class="btn btn-primary">
                         Guardar
                     </button>
