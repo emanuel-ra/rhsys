@@ -266,7 +266,12 @@ Route::prefix('recruitment')->group(function () {
         Route::post('/store', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'store'])
         ->middleware(['permission:recruitment.requisitions.create'])
         ->name('recruitment.requisitions.store');
+
+        Route::post('/cancel', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'cancel'])
+        ->middleware(['permission:recruitment.requisitions.cancel'])
+        ->name('recruitment.requisitions.cancel');
     });
+
     // Route::get('/requisitions/form/update', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'update'])
     // ->middleware(['permission:recruitment.requisitions.update'])
     // ->name('recruitment.requisitions.form.edit');
@@ -313,6 +318,12 @@ Route::prefix('recruitment')->group(function () {
         Route::post('/store', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'store'])
         ->middleware(['permission:recruitment.requisitions.create'])
         ->name('recruitment.interview.store'); 
+
+        Route::post('/tracing', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'tracing'])
+        //->middleware(['permission:recruitment.requisitions.tracing'])
+        ->name('recruitment.interview.tracing'); 
+
+        
     }); 
 });
 
@@ -331,5 +342,3 @@ Route::prefix('ajax')->group(function () {
     // GET JSON EVENTS FOR CALENDAR INTERVIEWS 
     Route::post('/get/events', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'getJson']);
 });
-
-

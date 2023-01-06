@@ -20,6 +20,7 @@ mix.scripts([
 'resources/js/states.js' ,
 'resources/js/modals.js' ,
 'resources/js/jop_positions.js' ,
+'resources/js/requisitions.js'
 ], 'public/js/main.js')
 .styles([
    'node_modules/icheck-bootstrap/icheck-bootstrap.min.css',      

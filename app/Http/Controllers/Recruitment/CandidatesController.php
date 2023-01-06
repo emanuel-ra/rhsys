@@ -83,7 +83,7 @@ class CandidatesController extends Controller
     public function create(){
 
         $CandidateSource = CandidateSource::select('id','name')->where('enable',1)->get();
-        $Requisitions = Requisitions::select('id','jop_position_id','branch_id')->with('Position')->with('Branch')->get();
+        $Requisitions = Requisitions::select('id','jop_position_id','branch_id')->where('status_id',1)->with('Position')->with('Branch')->get();
         //return $Requisitions;
         //$Staff = Staff::select('id','name','jop_position_id')->where('status_id',4)->where('supervisor',1)->get();
         return view('recruitment.candidates.register',[

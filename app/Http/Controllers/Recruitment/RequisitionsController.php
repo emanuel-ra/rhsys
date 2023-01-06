@@ -67,11 +67,13 @@ class RequisitionsController extends Controller
         $query->with('Branch');
         $query->with('Supervisor');
         $query->with('Status');
+        $query->with('User');
+        $query->with('UserCancel');
         
 
         $query->orderByDesc('id');
         
-        $data = $query->paginate(50); 
+        $data = $query->paginate(2); 
         //return $data;
         //$data = Requisitions::paginate(10);
         return view('recruitment.requisitions.app',[
@@ -140,5 +142,27 @@ class RequisitionsController extends Controller
         $Requisitions->save();
      
         return redirect()->route('recruitment.requisitions');    
+    }
+    public function cancel(Request $request)
+    {        
+        $this->validate($request, [               
+            'requisition_id' => 'required|integer',         
+            'cancelation_reason' => 'required|max:500',                     
+        ]);        
+        
+        $Requisitions = Requisitions::find($request->requisition_id);
+
+        try{
+            $Requisitions->cancelation_reason = trim($request->cancelation_reason);
+            $Requisitions->cancelation_user_id = $request->user()->id;
+            $Requisitions->cancel_date = \Carbon\Carbon::now();
+            $Requisitions->status_id = 14;
+            $Requisitions->save();
+            return redirect()->route('recruitment.requisitions');    
+        }
+        catch(\Exception $e){
+            // do task when error
+            //echo $e->getMessage();   // insert query
+         }
     }
 }

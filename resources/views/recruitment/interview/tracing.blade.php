@@ -25,10 +25,11 @@
 
         <div class="card-body  p-0">
 
-            <form action="{{ route('recruitment.interview.store') }}" method="POST">
+            <form action="{{ route('recruitment.interview.tracing') }}" method="POST">
                 @csrf
                 
-                <input type="hidden" name="candidate_id" value="{{ $data->id }}">
+                <input type="hidden" name="id" value="{{ $data->id }}">
+                
 
                 <div class="row p-2">
                     
@@ -41,19 +42,19 @@
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Tipo de Entrevista" name="telefono" maxlength="255" value="{{$data->candidate->mobile_phone}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Teléfono" name="mobile_phone" maxlength="255" value="{{$data->candidate->mobile_phone}}" disabled placeholder=""  />
                     </div>
                     
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Sucursal" name="telefono" maxlength="255" value="{{$data->candidate->requisitions->branch->name}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Sucursal" name="branch_name" maxlength="255" value="{{$data->candidate->requisitions->branch->name}}" disabled placeholder=""  />
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Vacante" name="telefono" maxlength="255" value="{{$data->candidate->requisitions->position->name}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Vacante" name="position_name" maxlength="255" value="{{$data->candidate->requisitions->position->name}}" disabled placeholder=""  />
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
-                        <x-dg-input type="text" label="Tipo de Entrevista" name="telefono" maxlength="255" value="{{$data->type_interview->name}}" disabled placeholder=""  />
+                        <x-dg-input type="text" label="Tipo de Entrevista" name="type_interview" maxlength="255" value="{{$data->type_interview->name}}" disabled placeholder=""  />
                     </div>
 
                     <div class="col-sm-12 col-lg-4">
@@ -65,8 +66,9 @@
                             <input type="text" class="form-control datetimepicker-input" value="{{ $data->interview_date }}" readonly/>
                         </div>
                     </div>
-                    
-                    <div class="col-12 p-4">
+
+                                        
+                    <div class="col-12 col-sm-1">
                         <label>Asiste?</label>
                         <div class="icheck-primary">
                             <input type="radio" id="attendance_yes" name="attendance" class="icheck-primary" value="1" />
@@ -77,29 +79,31 @@
                             <label for="attendance_no">No</label>
                         </div>
                     </div>
-                    
-                    <div class="col-12 row">
-                    
-                        <div class="col-12 col-lg-1">
-                            <label for="">Reprogramar</label>
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="someCheckboxId" />
-                                <label for="someCheckboxId">Si</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-lg-2">                        
-                            <label for="">Nueva fecha</label>
-                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">                            
-                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div> 
-                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" data-toggle="datetimepicker" name="interview_date" required/>
-                            </div>
-
+                
+                    <div class="col-12 col-lg-1">
+                        <label for="">Reprogramar</label>
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="reschedule" name="reschedule" />
+                            <label for="reschedule">Si</label>
                         </div>
                     </div>
 
+                    <div class="col-sm-12 col-lg-2">                        
+                        <label for="">Nueva fecha</label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">                            
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div> 
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" data-toggle="datetimepicker" name="interview_new_date"/>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12">                        
+                        <blockquote>
+                            <b>Comentarios</b> <br>
+                            {{ $data->commentaries }}
+                        </blockquote>
+                    </div>
 
                     <div class="col-sm-12">
                         <label for="">Observeaciones</label>

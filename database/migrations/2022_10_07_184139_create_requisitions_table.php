@@ -20,6 +20,7 @@ class CreateRequisitionsTable extends Migration
             $table->unsignedSmallInteger('jop_position_id')->default(0);
             $table->unsignedSmallInteger('department_id')->default(0);
             $table->unsignedSmallInteger('user_id')->default(0);
+            $table->unsignedSmallInteger('cancelation_user_id')->default(0);
             $table->unsignedSmallInteger('supervisor_id')->default(0);
             $table->unsignedSmallInteger('status_id')->default(1);
 
@@ -28,8 +29,10 @@ class CreateRequisitionsTable extends Migration
 
             $table->date('request_date')->nullable();
             $table->date('closed_date')->nullable();
+            $table->date('cancel_date')->nullable();
 
             $table->string('commentaries',500)->nullable();            
+            $table->string('cancelation_reason',500)->nullable();            
             $table->timestamps();
         });
     }

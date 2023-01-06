@@ -57,7 +57,7 @@ class InterviewAppointmentController extends Controller
 
         $Interview->commentaries = $request->commentaries;
         $Interview->candidate_id = $request->candidate_id;
-        $Interview->status_id = 1;
+        $Interview->status_id = 7;
         $Interview->type_interview_id = $request->type_interview_id;
         $Interview->user_id = $request->user()->id;
         $Interview->interview_date = \Carbon\Carbon::create($request->interview_date);
@@ -66,15 +66,57 @@ class InterviewAppointmentController extends Controller
         return redirect()->route('recruitment.interview.appointment');
     }
     public function open($id){
+
         $data = Interview::with('candidate')->with('status')->with('type_interview')->find($id);
-       
-        if($data->attendance){
+        
+        if($data->status_id==13){
             return view('recruitment.interview.view',['data' => $data ,]);
         }
+
+        $TypeInterview = TypeInterview::where('enable',1)->get();
+
         return view('recruitment.interview.tracing',[
             'data' => $data ,
+            'TypeInterview' => $TypeInterview ,
         ]);
        
+    }
+    public function tracing(Request $request)
+    {
+        $this->validate($request, [               
+                'id' => 'required|integer',         
+                'attendance' => 'required|integer',         
+                'observations' => ['nullable','max:500'] ,
+                'interview_new_date' => 'required_with:reschedule,on'
+            ]
+        );   
+
+        $Interview = Interview::find($request->id);
+
+        if(isset($request->reschedule)){
+            $new = new Interview;
+            $new->commentaries = "";
+            $new->candidate_id = $Interview->candidate_id;
+            $new->status_id = 7;
+            $new->type_interview_id = $Interview->type_interview_id;
+            $new->user_id = $request->user()->id;
+            $new->interview_date = \Carbon\Carbon::create($request->interview_new_date);
+            $new->save();
+        }
+
+
+        $Interview->attendance = (int) $request->attendance;
+        $Interview->reschedule = (isset($request->reschedule)) ? 1:0;
+        $Interview->updated_at = \Carbon\Carbon::now();
+        $Interview->observations = $request->observations;
+        $Interview->status_id = 13;
+
+        $Interview->reschedule_id = $new->id;
+        $Interview->reschedule_date = \Carbon\Carbon::create($request->interview_new_date);
+
+        $Interview->save();        
+        
+        return redirect()->route('recruitment.interview.appointment');
     }
     public function getJson(Request $request){
         //$data = Interview::with('prospect')->with('status')->with('type_interview')->get();

@@ -27,4 +27,10 @@ class Requisitions extends Model
     public function Status(){ 
         return $this->hasOne(Status::class,'id', 'status_id')->select('id','name');
     }
+    public function User(){ 
+        return $this->hasOne(User::class,'id', 'user_id')->select('id','name');
+    }
+    public function UserCancel(){ 
+        return $this->hasOne(User::class,'id', 'cancelation_user_id')->select('id','name');
+    }
 }

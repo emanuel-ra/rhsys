@@ -80,6 +80,18 @@
         </div>
     </div>
     
+    <div class="col-12">
+        @if ($errors->any())
+            <div class="col-12 alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
+
     <div class="card  col-12">
         <div class="card-header">
           <h3 class="card-title">Listado</h3>
@@ -107,6 +119,8 @@
                         <th>Solicitante</th>
                         <th>Dias Transcurridos</th>
                         <th>Estatus</th>
+                        <th>Registro</th>
+                        <th>Cancelación</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -125,6 +139,16 @@
                             <td>{{ $item->supervisor->name }}</td>
                             <td>{{ $diff }}</td>                            
                             <td>{{ $item->status->name }}</td>
+                            <td>{{ $item->user->name }}</td>
+                            <td>
+                                <b>Por:</b> {{ @$item->usercancel->name }}                                
+                                <br>
+                                <b>Fecha:</b> {{ $item->cancel_date }}                                
+                                <br>
+                                {{ $item->cancelation_reason }}
+                                <br>
+
+                            </td>
                             <td>
                                 <div class="dropdown dropleft show">
                                     <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,7 +156,19 @@
                                     </a>
                                 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        @can('recruitment.requisitions.cancel')
+                                            @if ($item->status_id==1)
+                                                <li>                                                
+                                                    <a class="dropdown-item" id="requisition_name" data-title="{{ $item->company->name }} ➡ {{ $item->company->name }}" href="javascript:requisition.modal.cancelation.open({{ $item->id }})">
+                                                        <i class="fas fa-ban"></i> Cancelar
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endcan  
+
+                                       
                                         
+
                                         {{-- @can('staff.contract')
                                         <li>                                                
                                             <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.contract',['id' => $item->id]) }}">
@@ -182,6 +218,8 @@
                         <th>Solicitante</th>
                         <th>Dias Transcurridos</th>
                         <th>Estatus</th>
+                        <th>Registro</th>
+                        <th>Cancelación</th>
                         <th></th>
                     </tr>                   
                 </tfoot>
@@ -195,6 +233,8 @@
         </div>
     </div>
     <!-- /.card -->
+
+    @include('recruitment.requisitions.modal.cancel')
       
     @section('js')
         <script>
