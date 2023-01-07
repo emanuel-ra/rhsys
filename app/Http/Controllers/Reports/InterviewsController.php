@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Interview;
 
-class RequisitionsController extends Controller
+class InterviewsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,7 +27,7 @@ class RequisitionsController extends Controller
     public function index()
     {
         $interviews = Interview::with('type_interview')->with('User')->with('candidate')->get();
-        
+
         return view('reports.interviews.app',['interviews'=>$interviews]);
     }
 }

@@ -20,7 +20,8 @@ class CreateInterviewsTable extends Migration
             $table->unsignedSmallInteger('candidate_id')->default(0);
             $table->unsignedSmallInteger('status_id');
             $table->unsignedSmallInteger('type_interview_id')->default(1);
-            $table->unsignedSmallInteger('user_id')->default(1);
+            $table->unsignedSmallInteger('user_id')->default(0);
+            $table->unsignedSmallInteger('user_interviewer_id')->default(0);
             $table->tinyInteger('attendance')->default(0);
             $table->tinyInteger('reschedule')->default(0);
             $table->unsignedSmallInteger('reschedule_id')->default(0);

@@ -99,7 +99,7 @@ class InterviewAppointmentController extends Controller
             $new->candidate_id = $Interview->candidate_id;
             $new->status_id = 7;
             $new->type_interview_id = $Interview->type_interview_id;
-            $new->user_id = $request->user()->id;
+            $new->user_interviewer_id = $request->user()->id;
             $new->interview_date = \Carbon\Carbon::create($request->interview_new_date);
             $new->save();
         }
