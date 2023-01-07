@@ -73,9 +73,8 @@ class RequisitionsController extends Controller
 
         $query->orderByDesc('id');
         
-        $data = $query->paginate(2); 
-        //return $data;
-        //$data = Requisitions::paginate(10);
+        $data = $query->paginate(50); 
+        
         return view('recruitment.requisitions.app',[
             'data' => $data ,
             'branches' => $branches ,

@@ -102,5 +102,6 @@ class RoleSeeder extends Seeder
         
         // REPORT         
         Permission::create(['name' => 'reports.census.index'])->syncRoles([$role_admin,$role_manage_rh]);
+        Permission::create(['name' => 'reports.recruitment.interview.index'])->syncRoles([$role_admin,$role_manage_rh]);
     }
 }

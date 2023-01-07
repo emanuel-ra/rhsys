@@ -432,11 +432,11 @@ return [
                 [
                     'text' => 'interview_appointment',
                     'route'  => 'recruitment.interview.appointment',
-                    'icon' => 'fas fa-fw fa-user',
+                    'icon' => 'fas fa-calendar-times',
                     //'can' =>  'interview.appointment.index' ,
                 ],
             ]
-        ], 
+        ],
         
         [
             'text'    => 'reports',
@@ -447,6 +447,12 @@ return [
                     'route'  => 'reports.census',
                     'icon' => 'fas fa-fw fa-user',
                     'can' =>  'reports.census.index' ,
+                ],
+                [
+                    'text' => 'Entrevistas',
+                    'route'  => 'reports.interviews',
+                    'icon' => 'fas fa-calendar-check',
+                    'can' =>  'reports.recruitment.interview.index' ,
                 ],
             ]
         ], 
@@ -685,6 +691,21 @@ return [
                     'type' => 'css',
                     'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css',
+                ]
+            ],
+        ],
+        'icheck' => [
+            'active' => false ,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.css',
                 ]
             ],
         ],

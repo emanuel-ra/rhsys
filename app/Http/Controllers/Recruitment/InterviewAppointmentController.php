@@ -103,18 +103,17 @@ class InterviewAppointmentController extends Controller
             $new->interview_date = \Carbon\Carbon::create($request->interview_new_date);
             $new->save();
         }
-
-
+        
         $Interview->attendance = (int) $request->attendance;
         $Interview->reschedule = (isset($request->reschedule)) ? 1:0;
         $Interview->updated_at = \Carbon\Carbon::now();
         $Interview->observations = $request->observations;
         $Interview->status_id = 13;
 
-        $Interview->reschedule_id = $new->id;
-        $Interview->reschedule_date = \Carbon\Carbon::create($request->interview_new_date);
+        $Interview->reschedule_id = (isset($request->reschedule)) ? $new->id:0;
+        $Interview->reschedule_date = (isset($request->reschedule)) ? \Carbon\Carbon::create($request->interview_new_date):null;
 
-        $Interview->save();        
+        $Interview->save();
         
         return redirect()->route('recruitment.interview.appointment');
     }

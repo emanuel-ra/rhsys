@@ -24,7 +24,9 @@ class CreateCandidatesTable extends Migration
             $table->unsignedSmallInteger('user_id')->default(0);            
             $table->string('commentaries',500)->nullable();
             $table->tinyInteger('is_hired')->default(0);
+            $table->tinyInteger('is_accepted')->default(0);
             $table->date('hired_date')->nullable();
+            $table->date('accepted_date')->nullable();
             $table->timestamps();
         });
     }

@@ -287,18 +287,31 @@ Route::prefix('recruitment')->group(function () {
         ->middleware(['permission:recruitment.requisitions.create'])
         ->name('recruitment.candidates.form.create');
 
-        Route::get('/form/edit/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'create'])
+        Route::get('/form/edit/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'edit'])
         ->middleware(['permission:recruitment.requisitions.update'])
         ->name('recruitment.candidates.form.edit');
 
-        Route::get('/form/tracing/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'create'])
+        Route::get('/form/tracing/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'tracing'])
         ->middleware(['permission:recruitment.candidates.tracing'])
         ->name('recruitment.candidates.form.tracing');
         
         //POST
         Route::post('/store', [App\Http\Controllers\Recruitment\CandidatesController::class, 'store'])
         ->middleware(['permission:recruitment.requisitions.create'])
-        ->name('recruitment.candidates.store');       
+        ->name('recruitment.candidates.store');   
+
+        Route::post('/update', [App\Http\Controllers\Recruitment\CandidatesController::class, 'update'])
+        ->middleware(['permission:recruitment.requisitions.update'])
+        ->name('recruitment.candidates.update');       
+
+        Route::post('/update/accepted', [App\Http\Controllers\Recruitment\CandidatesController::class, 'update_accepted'])
+        ->middleware(['permission:recruitment.candidates.tracing'])
+        ->name('recruitment.candidates.update.accepted');
+
+        Route::post('/update/hired', [App\Http\Controllers\Recruitment\CandidatesController::class, 'update_hired'])
+        ->middleware(['permission:recruitment.candidates.tracing'])
+        ->name('recruitment.candidates.update.hired');
+
     });
    
     Route::prefix('interview/appointment/')->group(function (){
@@ -331,13 +344,17 @@ Route::prefix('reports')->group(function () {
     Route::get('/census', [App\Http\Controllers\Reports\CensusController::class, 'index'])
     ->middleware(['permission:reports.census.index'])
     ->name('reports.census');
+
+
+    Route::get('/interviews', [App\Http\Controllers\Reports\RequisitionsController::class, 'index'])
+    ->middleware(['permission:reports.recruitment.interview.index'])
+    ->name('reports.interviews');
 });
 
 Route::prefix('ajax')->group(function () {    
     Route::post('/branches', [App\Http\Controllers\System\BranchesController::class, 'getJson']);
     Route::post('/states', [App\Http\Controllers\System\StatesController::class, 'getJson']);
     Route::post('/jop/positions', [App\Http\Controllers\System\JopPositionController::class, 'getJson']);
-
 
     // GET JSON EVENTS FOR CALENDAR INTERVIEWS 
     Route::post('/get/events', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'getJson']);

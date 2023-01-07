@@ -80,27 +80,43 @@ class CandidatesController extends Controller
             'status_id' => $request->status_id ,
         ]);
     }
-    public function create(){
-
+    public function create(){      
         $CandidateSource = CandidateSource::select('id','name')->where('enable',1)->get();
         $Requisitions = Requisitions::select('id','jop_position_id','branch_id')->where('status_id',1)->with('Position')->with('Branch')->get();
-        //return $Requisitions;
-        //$Staff = Staff::select('id','name','jop_position_id')->where('status_id',4)->where('supervisor',1)->get();
+        
         return view('recruitment.candidates.register',[
             'CandidateSource' => $CandidateSource ,
             'Requisitions' => $Requisitions ,
-            //'Staff' => $Staff ,
         ]);
+    }
+    public function edit($id){
+
+        $Candidate = Candidate::find($id);
+        $CandidateSource = CandidateSource::select('id','name')->where('enable',1)->get();
+        $Requisitions = Requisitions::select('id','jop_position_id','branch_id')->where('status_id',1)->with('Position')->with('Branch')->get();
+        
+        return view('recruitment.candidates.edit',[
+            'Candidate' => $Candidate ,
+            'CandidateSource' => $CandidateSource ,
+            'Requisitions' => $Requisitions ,
+        ]);
+    }
+    public function tracing($id){
+        $Candidate = Candidate::with('CandidateSource')->with('Requisitions')->with('Requisitions')->find($id);
+        return view('recruitment.candidates.tracing',[
+            'Candidate' => $Candidate 
+        ]);
+
     }
     public function store(Request $request)
     {     
         $this->validate($request, [               
-            'name' => 'required|max:255',         
-            'email' => ['required_without:mobile_phone','max:255'] ,
-            'mobile_phone' => ['required_without:email','max:255'] ,            
-            'sources_id' => 'required|integer', 
-            'requisition_id' => 'required|integer', 
-        ]
+                'name' => 'required|max:255',         
+                'email' => ['required_without:mobile_phone','max:255'] ,
+                'mobile_phone' => ['required_without:email','max:255'] ,            
+                'sources_id' => 'required|integer', 
+                'requisition_id' => 'required|integer', 
+            ]
         );     
 
         $Candidate = new Candidate;
@@ -116,4 +132,66 @@ class CandidatesController extends Controller
      
         return redirect()->route('recruitment.candidates');    
     }
+    public function update(Request $request)
+    {
+        $this->validate($request, [               
+                'id' => 'required',
+                'name' => 'required|max:255',
+                'email' => ['required_without:mobile_phone','max:255'] ,
+                'mobile_phone' => ['required_without:email','max:255'] ,            
+                'sources_id' => 'required|integer', 
+                'requisition_id' => 'required|integer', 
+            ]
+        );   
+
+
+        $Candidate = Candidate::find($request->id);
+
+        $Candidate->name = $request->name;
+        $Candidate->email = $request->email;
+        $Candidate->mobile_phone = $request->mobile_phone;
+        $Candidate->requisition_id = $request->requisition_id;
+        $Candidate->sources_id = $request->sources_id;
+        //$Candidate->status_id = 1;
+        //$Candidate->user_id = $request->user()->id;        
+        $Candidate->save();
+
+        return redirect()->route('recruitment.candidates');    
+    }
+
+    public function update_accepted(Request $request)
+    {
+        $this->validate($request, [               
+                'id' => 'required',
+                'is_accepted' => 'required|in:1,2',
+            ]
+        );   
+        
+        $Candidate = Candidate::find($request->id);
+        $Candidate->is_accepted = $request->is_accepted;        
+        $Candidate->save();
+
+        return redirect()->route('recruitment.candidates');    
+    }
+
+    public function update_hired(Request $request)
+    {
+        $this->validate($request, [               
+                'id' => 'required',
+                'is_hired' => 'required|in:1,2',
+                'date_hired' => 'required_if:is_hired,1'
+            ],[
+                'date_hired.required_if' => 'La fecha de contratación es obligatoria si el candidato sera contratado'
+            ]
+        ); 
+        
+
+        $Candidate = Candidate::find($request->id);
+        $Candidate->is_hired = $request->is_hired;        
+        $Candidate->hired_date = $request->date_hired;        
+        $Candidate->save();
+
+        return redirect()->route('recruitment.candidates');    
+    }
+
 }

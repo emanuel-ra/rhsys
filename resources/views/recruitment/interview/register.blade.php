@@ -83,7 +83,7 @@
                     
                 <div class="col-sm-12 p-2 d-flex justify-content-between">
                     
-                    <a href="{{ route('recruitment.requisitions') }}" class="btn btn-default">
+                    <a href="{{ route('recruitment.candidates') }}" class="btn btn-default">
                         Cancelar
                     </a>
 
