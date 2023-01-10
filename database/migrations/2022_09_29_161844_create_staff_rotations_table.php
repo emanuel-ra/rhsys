@@ -15,13 +15,13 @@ class CreateStaffRotationsTable extends Migration
     {
         Schema::create('staff_rotations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('staff_id')->default(0);   
-            $table->unsignedSmallInteger('supervisor_id')->default(0);
-            $table->unsignedSmallInteger('company_id')->default(0);
-            $table->unsignedSmallInteger('branch_id')->default(0);
-            $table->unsignedSmallInteger('department_id')->default(0);
-            $table->unsignedSmallInteger('jop_position_id')->default(0);
-            $table->unsignedSmallInteger('scholarship_id')->default(0);
+            $table->unsignedInteger('staff_id')->default(0);   
+            $table->unsignedInteger('supervisor_id')->default(0);
+            $table->unsignedInteger('company_id')->default(0);
+            $table->unsignedInteger('branch_id')->default(0);
+            $table->unsignedInteger('department_id')->default(0);
+            $table->unsignedInteger('jop_position_id')->default(0);
+            $table->unsignedInteger('scholarship_id')->default(0);
             $table->timestamps();
         });
     }

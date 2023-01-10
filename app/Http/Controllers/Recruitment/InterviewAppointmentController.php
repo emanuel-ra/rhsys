@@ -53,16 +53,19 @@ class InterviewAppointmentController extends Controller
         ]
         );     
 
+        $Candidate = Candidate::with('Requisitions')->find($request->candidate_id);
+                
         $Interview = new Interview;
-
+        
         $Interview->commentaries = $request->commentaries;
         $Interview->candidate_id = $request->candidate_id;
         $Interview->status_id = 7;
+        $Interview->branch_id = (int) $Candidate->requisitions->branch_id;
         $Interview->type_interview_id = $request->type_interview_id;
         $Interview->user_id = $request->user()->id;
         $Interview->interview_date = \Carbon\Carbon::create($request->interview_date);
         $Interview->save();
-       
+        
         return redirect()->route('recruitment.interview.appointment');
     }
     public function open($id){

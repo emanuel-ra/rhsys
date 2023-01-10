@@ -15,17 +15,17 @@ class CreateRequisitionsTable extends Migration
     {
         Schema::create('requisitions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('company_id')->default(0);
-            $table->unsignedSmallInteger('branch_id')->default(0);
-            $table->unsignedSmallInteger('jop_position_id')->default(0);
-            $table->unsignedSmallInteger('department_id')->default(0);
-            $table->unsignedSmallInteger('user_id')->default(0);
-            $table->unsignedSmallInteger('cancelation_user_id')->default(0);
-            $table->unsignedSmallInteger('supervisor_id')->default(0);
-            $table->unsignedSmallInteger('status_id')->default(1);
+            $table->unsignedInteger('company_id')->default(0);
+            $table->unsignedInteger('branch_id')->default(0);
+            $table->unsignedInteger('jop_position_id')->default(0);
+            $table->unsignedInteger('department_id')->default(0);
+            $table->unsignedInteger('user_id')->default(0);
+            $table->unsignedInteger('cancelation_user_id')->default(0);
+            $table->unsignedInteger('supervisor_id')->default(0);
+            $table->unsignedInteger('status_id')->default(1);
 
-            $table->unsignedSmallInteger('request_quantity')->default(1);
-            $table->unsignedSmallInteger('hired_quantity')->default(0);
+            $table->unsignedInteger('request_quantity')->default(1);
+            $table->unsignedInteger('hired_quantity')->default(0);
 
             $table->date('request_date')->nullable();
             $table->date('closed_date')->nullable();

@@ -15,8 +15,8 @@ class CreateStaffLogsTable extends Migration
     {
         Schema::create('staff_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('staff_id')->default(0);   
-            $table->unsignedSmallInteger('user_id')->default(0);
+            $table->unsignedInteger('staff_id')->default(0);   
+            $table->unsignedInteger('user_id')->default(0);
             $table->string('description');         
             $table->json('data')->nullable();   
             $table->timestamps();

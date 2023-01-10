@@ -22,7 +22,72 @@
                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
+                    <form action="{{ route('reports.interviews') }}">
+                        <div class="col-12 mt-2">
+                            <div class="row">
+                                
+                                <div class="form-group col-12 col-lg-2">
+                                    <label for="">Fecha Inicio</label>
+                                    <div class="input-group date" id="date_from" data-target-input="nearest">                            
+                                        <div class="input-group-append" data-target="#date_from" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div> 
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#date_from" data-toggle="datetimepicker" name="date_from" value="{{ $date_from }}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-12 col-lg-2">
+                                    <label for="">Fecha Fin</label>
+                                    <div class="input-group date" id="date_to" data-target-input="nearest">                            
+                                        <div class="input-group-append" data-target="#date_to" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div> 
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#date_to" data-toggle="datetimepicker" name="date_to" value="{{ $date_to }}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 col-lg-2">   
+                                    <label for="user_id">Usuario</label>                             
+                                    <select name="user_id" id="user_id" class="form-control">
+                                        <option value="0"></option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-12 col-lg-2">
+                                    <label for="branch_id">Sucursal</label>
+                                    <select name="branch_id" id="branch_id" class="form-control">                                    
+                                        <option value="0"></option>
+                                        @foreach ($branches as $branch)
+                                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-12 col-lg-2">
+                                    <label for="jop_position_id">Puestos</label>
+                                    <select name="jop_position_id" id="jop_position_id" class="form-control">
+                                        <option value="0"></option>
+                                        @foreach ($jop_positions as $jop_position)
+                                            <option value="{{ $jop_position->id }}">{{ $jop_position->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+                                <div class="col-12 p-2">
+                                    <button class="btn btn-primary float-right">
+                                        <i class="fa fa-search"></i> Buscar
+                                    </button>
+                                </div>
+                                
+                            </div>
+                           
+                        </div>
+                    </form>
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -39,8 +104,7 @@
                                 <th>Contratado</th>
                                 <th>Fecha de Contratación</th>
                                 <th>Comentarios</th>
-                                <th>Observaciones</th>
-                                
+                                <th>Observaciones</th>                                
                             </tr>
                         </thead>
                         <tbody>                            
@@ -97,3 +161,29 @@
     @stop
 
 @stop
+
+@section('js')
+    <script>
+        $(function () {
+            $('#date_from').datetimepicker({
+                icons: {
+                    time: "far fa-clock",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                format: 'YYYY-MM-DD'
+            });
+
+            $('#date_to').datetimepicker({
+                icons: {
+                    time: "far fa-clock",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                format: 'YYYY-MM-DD'
+            });
+        });   
+    </script>
+@endsection

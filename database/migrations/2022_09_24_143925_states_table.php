@@ -18,7 +18,7 @@ class StatesTable extends Migration
             $table->string('code')->index();
             $table->string('name');
             $table->tinyInteger('enable')->default(1);
-            $table->unsignedSmallInteger('country_id')->default(0);
+            $table->unsignedInteger('country_id')->default(0);
             $table->timestamps();
         });
     }

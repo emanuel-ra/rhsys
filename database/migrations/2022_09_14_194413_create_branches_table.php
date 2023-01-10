@@ -18,7 +18,7 @@ class CreateBranchesTable extends Migration
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
-            $table->unsignedSmallInteger('company_id')->default(0);
+            $table->unsignedInteger('company_id')->default(0);
             $table->tinyInteger('enable')->default(1);
             $table->timestamps();
         });

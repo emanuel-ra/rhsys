@@ -43,23 +43,23 @@ class CreateStaffTable extends Migration
             $table->string('spouse_name')->nullable();
             $table->string('chields_name',500)->nullable();
 
-            $table->unsignedSmallInteger('company_id')->default(0);
-            $table->unsignedSmallInteger('branch_id')->default(0);            
-            $table->unsignedSmallInteger('jop_position_id')->default(0);
-            $table->unsignedSmallInteger('department_id')->default(0);
-            $table->unsignedSmallInteger('scholarship_id')->default(0);
-            $table->unsignedSmallInteger('maritial_status_id')->default(0);
-            $table->unsignedSmallInteger('user_id')->default(0);
-            $table->unsignedSmallInteger('reason_unsubscribe_id')->default(0);            
+            $table->unsignedInteger('company_id')->default(0);
+            $table->unsignedInteger('branch_id')->default(0);            
+            $table->unsignedInteger('jop_position_id')->default(0);
+            $table->unsignedInteger('department_id')->default(0);
+            $table->unsignedInteger('scholarship_id')->default(0);
+            $table->unsignedInteger('maritial_status_id')->default(0);
+            $table->unsignedInteger('user_id')->default(0);
+            $table->unsignedInteger('reason_unsubscribe_id')->default(0);            
             
-            $table->unsignedSmallInteger('country_id')->default(0);
-            $table->unsignedSmallInteger('state_id')->nullable();
-            $table->unsignedSmallInteger('status_id')->default(4);
-            $table->unsignedSmallInteger('supervisor_id')->default(0);
-            $table->unsignedSmallInteger('type_of_contract_id')->default(0);
+            $table->unsignedInteger('country_id')->default(0);
+            $table->unsignedInteger('state_id')->nullable();
+            $table->unsignedInteger('status_id')->default(4);
+            $table->unsignedInteger('supervisor_id')->default(0);
+            $table->unsignedInteger('type_of_contract_id')->default(0);
             
-            $table->unsignedSmallInteger('socioeconomic')->default(0);
-            $table->unsignedSmallInteger('supervisor')->default(0);
+            $table->unsignedInteger('socioeconomic')->default(0);
+            $table->unsignedInteger('supervisor')->default(0);
             
             $table->date('hired_date')->nullable();
             $table->date('born_date')->nullable();

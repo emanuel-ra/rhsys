@@ -1,5 +1,8 @@
 @extends('app')
 
+@section('plugins.Sweetalert2', true)
+
+
 @section('content')
 
     @section('content_header')
@@ -166,8 +169,22 @@
                                             @endif
                                         @endcan  
 
-                                       
-                                        
+
+                                        @if ($item->status_id==1)
+                                            <li>                                                
+                                                <a class="dropdown-item" id="requisition_name" data-title="{{ $item->company->name }} ➡ {{ $item->company->name }}" href="javascript:Swal.fire('Any fool can use a computer')">
+                                                    <i class="fas fa-check"></i> Completado
+                                                </a>
+                                            </li>                                                
+                                        @endif
+
+                                        @if ($item->status_id==1)
+                                            <li>                                                
+                                                <a class="dropdown-item" id="requisition_name" data-title="{{ $item->company->name }} ➡ {{ $item->company->name }}" href="#">
+                                                    <i class="fas fa-pause"></i> Pausar
+                                                </a>
+                                            </li>                                                
+                                        @endif
 
                                         {{-- @can('staff.contract')
                                         <li>                                                

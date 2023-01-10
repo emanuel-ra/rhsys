@@ -17,7 +17,7 @@ class CreateJopPositionsTable extends Migration
             $table->id();            
             $table->string('name');
             $table->tinyInteger('enable')->default(1);
-            $table->unsignedSmallInteger('department_id')->default(0);
+            $table->unsignedInteger('department_id')->default(0);
             $table->string('activities',550)->nullable();
             $table->timestamps();
         });

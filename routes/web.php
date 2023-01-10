@@ -346,7 +346,7 @@ Route::prefix('reports')->group(function () {
     ->name('reports.census');
 
 
-    Route::get('/interviews', [App\Http\Controllers\Reports\InterviewsController::class, 'index'])
+    Route::match(['get','post'],'/interviews', [App\Http\Controllers\Reports\InterviewsController::class, 'index'])
     ->middleware(['permission:reports.recruitment.interview.index'])
     ->name('reports.interviews');
 });
