@@ -52,12 +52,19 @@ const GetJopPositions = (department_id,token,selector_results,base_url,selected_
 const requisition = {
     modal:{
         cancelation:{
-            open: (id) => {
-                const requisition_name = document.getElementById("requisition_name").getAttribute('data-title');;
+            open: ({id,title}) => {          
                 $("#modal_cancel_requisition").modal('show')
-                document.getElementById("modal_requisition_text").value = requisition_name;
-                document.getElementById("requisition_id").value = id;
+                document.getElementById("modal_requisition_text_cancel").innerText = title;
+                document.getElementById("requisition_id_cancel").value = id;
             } 
+        },
+        completed:{
+            open: (id) => {
+                $("#modal_complete_requisition").modal('show')
+                document.getElementById("modal_requisition_text_complete").innerText = title;
+                document.getElementById("requisition_id_complete").value = id;
+            }
         }
+        
     }
 }

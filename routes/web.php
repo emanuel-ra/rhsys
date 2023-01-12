@@ -270,6 +270,11 @@ Route::prefix('recruitment')->group(function () {
         Route::post('/cancel', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'cancel'])
         ->middleware(['permission:recruitment.requisitions.cancel'])
         ->name('recruitment.requisitions.cancel');
+        
+        Route::get('/complete/{id}', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'complete'])
+        ->middleware(['permission:recruitment.requisitions.complete'])
+        ->name('recruitment.requisitions.complete');
+
     });
 
     // Route::get('/requisitions/form/update', [App\Http\Controllers\Recruitment\RequisitionsController::class, 'update'])

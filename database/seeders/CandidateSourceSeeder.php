@@ -20,5 +20,9 @@ class CandidateSourceSeeder extends Seeder
         CandidateSource::create(['name'=>'RECOMENDADO']);
         CandidateSource::create(['name'=>'OCC']);
         CandidateSource::create(['name'=>'LINKEDIN']);
+        CandidateSource::create(['name'=>'FOMENTO AL EMPLEO']);
+        CandidateSource::create(['name'=>'MODULO']);
+        CandidateSource::create(['name'=>'POSTEO']);
+        CandidateSource::create(['name'=>'VOLANTEO']);
     }
 }

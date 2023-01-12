@@ -28,16 +28,13 @@ class InterviewsController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
-      
-        //$interviews = Interview::with('type_interview')->with('User')->with('candidate')->get();
+    {   
         $query = Interview::query();
 
         $date_from = (isset($request->date_from)) ? $request->date_from:\Carbon\Carbon::now()->startOfMonth();
-        $date_to = (isset($request->date_to)) ? $request->date_to:\Carbon\Carbon::now();
+        $date_to = (isset($request->date_to)) ? $request->date_to:\Carbon\Carbon::now();        
         
-        
-        $query = $query->whereBetween('interview_date',array($date_from,$date_to));  
+        $query = $query->whereBetween('interview_date',array("$date_from 00:00:00","$date_to 23:59:59"));  
 
         if($request->user_id>0){
             $query = $query->Where('user_interviewer_id', $request->user_id);
@@ -47,30 +44,38 @@ class InterviewsController extends Controller
             $query = $query->Where('branch_id', $request->branch_id);
         }
 
-        if($request->jop_position_id>0){
-            $query = $query->Where('jop_position_id', $request->jop_position_id);
+        if($request->attended!=="all"){
+            $query = $query->Where('attendance', (int) $request->attended);
         }
-
+        
         $query->with('type_interview');
-        $query->with('User');
+        $query->with('UserCreated');
+        $query->with('UserInterview');
         $query->with('candidate');
 
         $query->orderByDesc('id');
         
-        $interviews = $query->paginate(50); 
+        $interviews = $query->paginate(25)->withQueryString(); 
 
         $users = User::select('id','name')->get();
         $branches = Branch::select('id','name')->where('enable',1)->get();
-        $jop_positions = JopPosition::select('id','name')->where('enable',1)->get();
-
+      
         return view('reports.interviews.app',[
             'interviews'=> $interviews ,
             'users' => $users ,
             'branches' => $branches ,
-            'jop_positions' => $jop_positions ,
 
             'date_from' => $date_from ,
             'date_to' => $date_to ,
+
+            'attendedOpt' => array(
+                '0'=>'Pendientes' ,
+                '1'=>'Asistió' ,
+                '2'=>'No Asistió' ,
+            ) ,
+                        
+            'req' => $request ,
+           
         ]);
     }
 }

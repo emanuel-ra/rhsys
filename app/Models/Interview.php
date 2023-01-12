@@ -17,7 +17,10 @@ class Interview extends Model
     public function type_interview(){ 
         return $this->hasOne(TypeInterview::class,'id', 'type_interview_id')->select('id','name');
     }
-    public function User(){ 
+    public function UserCreated(){ 
         return $this->hasOne(User::class,'id', 'user_id')->select('id','name');
+    }
+    public function UserInterview(){ 
+        return $this->hasOne(User::class,'id', 'user_interviewer_id')->select('id','name');
     }
 }

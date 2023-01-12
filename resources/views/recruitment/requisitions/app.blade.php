@@ -117,8 +117,10 @@
                         <th>Sucursal</th>
                         <th>Departamento</th>                        
                         <th>Puesto</th>                        
-                        <th>Cantidad Requerida</th>                        
                         <th>Fecha Solicitud</th>
+                        <th>Fecha Completado</th>
+                        <th>Vacante</th>                        
+                        <th>Ingresos</th>
                         <th>Solicitante</th>
                         <th>Dias Transcurridos</th>
                         <th>Estatus</th>
@@ -137,8 +139,10 @@
                             <td>{{ $item->branch->name }}</td>
                             <td>{{ $item->department->name }}</td>
                             <td>{{ $item->position->name }}</td>
-                            <td>{{ $item->request_quantity }}</td>
                             <td>{{ $item->request_date }}</td>
+                            <td>{{ $item->closed_date }}</td>
+                            <td>{{ $item->request_quantity }}</td>
+                            <td>{{ $item->hired_quantity }}</td>
                             <td>{{ $item->supervisor->name }}</td>
                             <td>{{ $diff }}</td>                            
                             <td>{{ $item->status->name }}</td>
@@ -148,7 +152,9 @@
                                 <br>
                                 <b>Fecha:</b> {{ $item->cancel_date }}                                
                                 <br>
-                                {{ $item->cancelation_reason }}
+                                    <a href="javascript:Swal.fire('{{ $item->cancelation_reason }} ')">
+                                        {{ substr($item->cancelation_reason,0 , 20); }}
+                                    </a>
                                 <br>
 
                             </td>
@@ -162,29 +168,31 @@
                                         @can('recruitment.requisitions.cancel')
                                             @if ($item->status_id==1)
                                                 <li>                                                
-                                                    <a class="dropdown-item" id="requisition_name" data-title="{{ $item->company->name }} ➡ {{ $item->company->name }}" href="javascript:requisition.modal.cancelation.open({{ $item->id }})">
+                                                    <a class="dropdown-item" href="javascript:requisition.modal.cancelation.open(
+                                                        {
+                                                            id:{{ $item->id }} ,
+                                                            title: '{{ $item->company->name }} / {{ $item->branch->name }} / {{ $item->department->name }} / {{ $item->position->name }}'
+                                                        }                                                        
+                                                        )">
                                                         <i class="fas fa-ban"></i> Cancelar
                                                     </a>
                                                 </li>
+                                                
                                             @endif
                                         @endcan  
 
+                                        @can('recruitment.requisitions.complete')
+                                            @if ($item->status_id==1)
+                                                <div class="dropdown-divider"></div>                                   
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('recruitment.requisitions.complete',['id'=>$item->id]) }}">
+                                                        <i class="fas fa-check"></i> Completado
+                                                    </a>
+                                                </li>                                                
+                                            @endif
+                                        @endcan  
 
-                                        @if ($item->status_id==1)
-                                            <li>                                                
-                                                <a class="dropdown-item" id="requisition_name" data-title="{{ $item->company->name }} ➡ {{ $item->company->name }}" href="javascript:Swal.fire('Any fool can use a computer')">
-                                                    <i class="fas fa-check"></i> Completado
-                                                </a>
-                                            </li>                                                
-                                        @endif
-
-                                        @if ($item->status_id==1)
-                                            <li>                                                
-                                                <a class="dropdown-item" id="requisition_name" data-title="{{ $item->company->name }} ➡ {{ $item->company->name }}" href="#">
-                                                    <i class="fas fa-pause"></i> Pausar
-                                                </a>
-                                            </li>                                                
-                                        @endif
+                                       
 
                                         {{-- @can('staff.contract')
                                         <li>                                                
@@ -251,7 +259,7 @@
     </div>
     <!-- /.card -->
 
-    @include('recruitment.requisitions.modal.cancel')
+    @include('recruitment.requisitions.modal.cancel')    
       
     @section('js')
         <script>

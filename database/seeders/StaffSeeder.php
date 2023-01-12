@@ -37,7 +37,7 @@ class StaffSeeder extends Seeder
        
         foreach($supervisors as $supervisor)
         {
-            $staff = Staff::factory(rand(1,15))      
+            $staff = Staff::factory(rand(1,10))      
             ->RelSupervisor($supervisor->id)
             ->has(
                 StaffLogs::factory()
@@ -51,8 +51,7 @@ class StaffSeeder extends Seeder
                     ];
                 })
             )        
-            ->create();
-        
+            ->create();        
         }        
     }   
 }

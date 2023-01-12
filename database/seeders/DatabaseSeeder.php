@@ -34,6 +34,9 @@ class DatabaseSeeder extends Seeder
             CandidateSourceSeeder::class ,
             TypeInterviewSeeder::class ,
             TypeOfContractSeeder::class ,
+            RequisitionsSeeder::class ,
+            CandidatesSeeder::class ,
+            //InterviewsSeeder::class ,
         ]);
     }
 }

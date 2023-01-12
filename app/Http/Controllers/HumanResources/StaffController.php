@@ -92,7 +92,7 @@ class StaffController extends Controller
         
         $query->orderByDesc('id');
         
-        $data = $query->paginate(50); 
+        $data = $query->paginate(50)->withQueryString();; 
 
 
         $branches = Branch::select('id','name')->where('enable',1)->get();

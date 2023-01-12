@@ -13,6 +13,8 @@ use App\Models\Status;
 use App\Models\Requisitions;
 use App\Models\Staff;
 use Illuminate\Validation\Rule;
+use App\Models\Candidate;
+use Redirect;
 
 
 class RequisitionsController extends Controller
@@ -73,8 +75,8 @@ class RequisitionsController extends Controller
 
         $query->orderByDesc('id');
         
-        $data = $query->paginate(50); 
-        
+        $data = $query->paginate(25)->withQueryString(); 
+                
         return view('recruitment.requisitions.app',[
             'data' => $data ,
             'branches' => $branches ,
@@ -156,6 +158,32 @@ class RequisitionsController extends Controller
             $Requisitions->cancelation_user_id = $request->user()->id;
             $Requisitions->cancel_date = \Carbon\Carbon::now();
             $Requisitions->status_id = 14;
+            $Requisitions->save();
+            return redirect()->route('recruitment.requisitions');    
+        }
+        catch(\Exception $e){
+            // do task when error
+            //echo $e->getMessage();   // insert query
+         }
+    }
+    public function complete($id){
+                
+        if(!(int)$id){
+            return Redirect::back()->withErrors("Parámetros incorrectos");
+        }
+        
+        $hired_quantity = Candidate::where('requisition_id',$id)->where('is_accepted',1)->count();
+        if(!$hired_quantity){
+            return Redirect::back()->withErrors("No se ha contratado a ningún candidato para esta requisición");
+        }
+
+        $Requisitions = Requisitions::find($id);
+
+        try{
+            $Requisitions->closed_date = \Carbon\Carbon::now();
+            $Requisitions->hired_quantity = $hired_quantity;
+            
+            $Requisitions->status_id = 13;
             $Requisitions->save();
             return redirect()->route('recruitment.requisitions');    
         }

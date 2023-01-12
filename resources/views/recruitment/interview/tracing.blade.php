@@ -75,7 +75,7 @@
                             <label for="attendance_yes">Si</label>
                         </div>
                         <div class="icheck-danger">
-                            <input type="radio" id="attendance_no" name="attendance" class="icheck-danger" value="0" />
+                            <input type="radio" id="attendance_no" name="attendance" class="icheck-danger" value="2" />
                             <label for="attendance_no">No</label>
                         </div>
                     </div>

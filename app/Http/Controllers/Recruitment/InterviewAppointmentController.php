@@ -102,7 +102,7 @@ class InterviewAppointmentController extends Controller
             $new->candidate_id = $Interview->candidate_id;
             $new->status_id = 7;
             $new->type_interview_id = $Interview->type_interview_id;
-            $new->user_interviewer_id = $request->user()->id;
+            $new->user_id = $request->user()->id;
             $new->interview_date = \Carbon\Carbon::create($request->interview_new_date);
             $new->save();
         }
@@ -112,7 +112,7 @@ class InterviewAppointmentController extends Controller
         $Interview->updated_at = \Carbon\Carbon::now();
         $Interview->observations = $request->observations;
         $Interview->status_id = 13;
-
+        $Interview->user_interviewer_id = $request->user()->id;        
         $Interview->reschedule_id = (isset($request->reschedule)) ? $new->id:0;
         $Interview->reschedule_date = (isset($request->reschedule)) ? \Carbon\Carbon::create($request->interview_new_date):null;
 
