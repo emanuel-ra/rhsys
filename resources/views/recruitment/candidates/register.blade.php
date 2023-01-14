@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('plugins.imask', true)
+@section('plugins.FileInput', true)
 
 @section('content')
 
@@ -26,7 +27,7 @@
         <div class="card-body  p-0">
 
            
-            <form action="{{ route('recruitment.candidates.store') }}" method="POST">
+            <form action="{{ route('recruitment.candidates.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row p-2">
@@ -70,6 +71,13 @@
                         <textarea class="form-control" maxlength="500" name="commentaries">{{old('commentaries')}}</textarea>
                     </div>
 
+                    <div class="col-12">
+                        <label for="">Curriculum vitae</label>
+                        <div class="file-loading">
+                            <input id="cv_file" name="cvFile" type="file">
+                        </div>
+                    </div>
+
                 </div>
                 
                 <div class="col-12">
@@ -110,6 +118,19 @@
         var element = document.getElementById('mobile_phone');
         var maskOptions = { mask: '(00) 0000-0000' };
         var mask = IMask(element, maskOptions);
+           
+     
+        $("#cv_file").fileinput({            
+            initialPreviewAsData: true,          
+            language:'es' ,
+            showUpload: false ,
+            showCancel:false ,
+            allowedFileExtensions: ["pdf"],
+            //deleteUrl: "/site/file-delete",
+            overwriteInitial: false,
+            //maxFileSize: 1,
+            initialCaption: ""
+        });
         
     </script>
 @endsection

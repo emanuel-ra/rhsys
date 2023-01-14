@@ -141,6 +141,14 @@
                     </ul>
                 </div>
             @endif
+
+
+            @if(session('success'))
+                <div class="col-12 alert alert-success" role="alert">
+                    <h1>{{session('success')}}</h1>
+                </div>
+                
+            @endif
         </div>
 
     </div>

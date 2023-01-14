@@ -8,6 +8,8 @@ use App\Models\Candidate;
 use App\Models\CandidateSource;
 use App\Models\Requisitions;
 use App\Models\Status;
+use Illuminate\Support\Str;
+use File;
 
 class CandidatesController extends Controller
 {
@@ -20,6 +22,11 @@ class CandidatesController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(['permission:recruitment.candidates.index|recruitment.candidates.create|recruitment.candidates.update']);
+
+        $path = public_path('cv');
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }
     }
 
     /**
@@ -116,6 +123,7 @@ class CandidatesController extends Controller
                 'mobile_phone' => ['required_without:email','max:255'] ,            
                 'sources_id' => 'required|integer', 
                 'requisition_id' => 'required|integer', 
+                'cvFile' => 'nullable|mimes:pdf|max:2048', 
             ]
         );     
 
@@ -128,6 +136,14 @@ class CandidatesController extends Controller
         $Candidate->sources_id = $request->sources_id;
         $Candidate->status_id = 1;
         $Candidate->user_id = $request->user()->id;
+
+        if($request->hasFile('cvFile'))
+        {          
+            $fileName = Str::uuid().'.'.$request->cvFile->extension();  
+            $request->cvFile->move(public_path('cv'), $fileName);       
+            $Candidate->cv_file = $fileName ;
+        }
+
         $Candidate->save();
      
         return redirect()->route('recruitment.candidates');    
@@ -141,6 +157,7 @@ class CandidatesController extends Controller
                 'mobile_phone' => ['required_without:email','max:255'] ,            
                 'sources_id' => 'required|integer', 
                 'requisition_id' => 'required|integer', 
+                //'cvFile' => 'nullable|mimes:pdf|max:2048', 
             ]
         );   
 
@@ -152,6 +169,14 @@ class CandidatesController extends Controller
         $Candidate->mobile_phone = $request->mobile_phone;
         $Candidate->requisition_id = $request->requisition_id;
         $Candidate->sources_id = $request->sources_id;
+
+
+        if($request->hasFile('cvFile'))
+        {          
+            $fileName = Str::uuid().'.'.$request->cvFile->extension();  
+            $request->cvFile->move(public_path('cv'), $fileName);       
+            $Candidate->cv_file = $fileName ;
+        }
         //$Candidate->status_id = 1;
         //$Candidate->user_id = $request->user()->id;        
         $Candidate->save();
@@ -171,7 +196,7 @@ class CandidatesController extends Controller
         $Candidate->is_accepted = $request->is_accepted;        
         $Candidate->save();
 
-        return redirect()->route('recruitment.candidates');    
+        return redirect()->back()->withSuccess('Información guardada correctamente');
     }
 
     public function update_hired(Request $request)
@@ -191,7 +216,23 @@ class CandidatesController extends Controller
         $Candidate->hired_date = $request->date_hired;        
         $Candidate->save();
 
-        return redirect()->route('recruitment.candidates');    
+        return redirect()->back()->withSuccess('Información guardada correctamente'); 
+    }
+    public function delete_cv($id){
+      if(!$id){
+        return redirect()->back()->withErrors(['Error' => 'Parámetros incorrectos']);
+      }
+
+      $Candidate = Candidate::find($id);
+
+      $file = public_path()."/cv/".$Candidate->cv_file;
+      
+      if(File::delete($file)){
+        $Candidate->cv_file = null;
+        $Candidate->save();
+        return redirect()->back()->withSuccess(['Archivo Eliminado']);
+      }
+      return redirect()->back()->withErrors(['Error' => 'Error al eliminar archivo']);
     }
 
 }

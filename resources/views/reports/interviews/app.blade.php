@@ -27,7 +27,8 @@
                 </div>
                 <div class="card-body">
                     
-                    <form action="{{ route('reports.interviews') }}">
+                    <form action="{{ route('reports.interviews') }}" method="POST">
+                        @csrf
                         <div class="col-12 mt-2">
                             <div class="row">
                                 

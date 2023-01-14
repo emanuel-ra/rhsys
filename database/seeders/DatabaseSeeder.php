@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             TypeOfContractSeeder::class ,
             RequisitionsSeeder::class ,
             CandidatesSeeder::class ,
-            //InterviewsSeeder::class ,
+            InterviewsSeeder::class ,
         ]);
     }
 }

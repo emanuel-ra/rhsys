@@ -27,6 +27,7 @@ class CreateCandidatesTable extends Migration
             $table->tinyInteger('is_accepted')->default(0);
             $table->date('hired_date')->nullable();
             $table->date('accepted_date')->nullable();
+            $table->string('cv_file')->nullable();
             $table->timestamps();
         });
     }

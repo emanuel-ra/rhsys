@@ -452,8 +452,8 @@ return [
                     'text' => 'Entrevistas',
                     'route'  => 'reports.interviews',
                     'icon' => 'fas fa-calendar-check',
-                    'can' =>  'reports.recruitment.interview.index' ,
-                ],
+                    'can' =>  'reports.interview.index' ,
+                ]
             ]
         ], 
         

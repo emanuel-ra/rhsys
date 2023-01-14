@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('plugins.imask', true)
+@section('plugins.FileInput', true)
 
 @section('content')
 
@@ -26,7 +27,7 @@
         <div class="card-body  p-0">
 
            
-            <form action="{{ route('recruitment.candidates.update') }}" method="POST">
+            <form action="{{ route('recruitment.candidates.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <input type="hidden" name="id" value="{{ $Candidate->id }}">
@@ -70,7 +71,24 @@
                         <label for="">Comentarios</label>
                         <textarea class="form-control" maxlength="500" name="commentaries">{{$Candidate->commentaries}}</textarea>
                     </div>
+                    
+                    @if ($Candidate->cv_file != null)
+                        <div class="btn-group p-2">                           
+                            <a class="btn btn-danger" href="{{ route('recruitment.candidates.cv.delete',['id'=>$Candidate->id]) }}">
+                                <i class="fa fa-trash"></i> Eliminar Curriculum Vitae
+                            </a>
+                        </div>
+                    @endif
 
+                    @if ($Candidate->cv_file === null)
+                        <div class="col-12">
+                            <label for="">Curriculum vitae</label>
+                            <div class="file-loading">
+                                <input id="cv_file" name="cvFile" type="file">
+                            </div>
+                        </div>
+                    @endif                    
+                    
                 </div>
                 
                 <div class="col-12">
@@ -111,6 +129,19 @@
         var element = document.getElementById('mobile_phone');
         var maskOptions = { mask: '(00) 0000-0000' };
         var mask = IMask(element, maskOptions);
+        
+        $("#cv_file").fileinput({   
+            //initialPreview: [url],                    
+            initialPreviewAsData: true,          
+            language:'es' ,
+            showUpload: false ,
+            showCancel:false ,
+            allowedFileExtensions: ["pdf"] ,           
+            //deleteUrl: "/site/file-delete",
+            overwriteInitial: false,
+            //maxFileSize: 1,
+            initialCaption: ""
+        });
         
     </script>
 @endsection

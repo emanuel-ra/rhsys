@@ -96,13 +96,14 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'recruitment.candidates.tracing'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         
         //INTERVIEW APPOINTMENT
-        Permission::create(['name' => 'interview.appointment.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'interview.appointment.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
-        Permission::create(['name' => 'interview.appointment.update'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.interview.appointment.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.interview.appointment.create'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.interview.appointment.open'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
+        Permission::create(['name' => 'recruitment.interview.appointment.tracing'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
         //-------------------- RECRUITMENT ------------------------------//
         
         // REPORT         
         Permission::create(['name' => 'reports.census.index'])->syncRoles([$role_admin,$role_manage_rh]);
-        Permission::create(['name' => 'reports.recruitment.interview.index'])->syncRoles([$role_admin,$role_manage_rh]);
+        Permission::create(['name' => 'reports.interview.index'])->syncRoles([$role_admin,$role_manage_rh]);
     }
 }

@@ -317,28 +317,32 @@ Route::prefix('recruitment')->group(function () {
         ->middleware(['permission:recruitment.candidates.tracing'])
         ->name('recruitment.candidates.update.hired');
 
+        Route::get('delete/cv/{id}',[App\Http\Controllers\Recruitment\CandidatesController::class, 'delete_cv'])
+        ->middleware(['permission:recruitment.requisitions.update'])
+        ->name('recruitment.candidates.cv.delete'); 
+
     });
    
     Route::prefix('interview/appointment/')->group(function (){
         
-        Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'index'])
-        //->middleware(['permission:recruitment.requisitions.index'])
+        Route::match(['get','post'], '/', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'index'])
+        ->middleware(['permission:recruitment.interview.appointment.index'])
         ->name('recruitment.interview.appointment');
 
         Route::get('/form/create/{id}', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'create'])
-        //->middleware(['permission:recruitment.requisitions.create'])
+        ->middleware(['permission:recruitment.interview.appointment.create'])
         ->name('recruitment.interview.form.create');
 
         Route::get('/open/{id}', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'open'])
-        //->middleware(['permission:recruitment.requisitions.create'])
+        ->middleware(['permission:recruitment.interview.appointment.open'])
         ->name('recruitment.interview.open');
 
         Route::post('/store', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'store'])
-        ->middleware(['permission:recruitment.requisitions.create'])
+        ->middleware(['permission:recruitment.interview.appointment.create'])
         ->name('recruitment.interview.store'); 
 
         Route::post('/tracing', [App\Http\Controllers\Recruitment\InterviewAppointmentController::class, 'tracing'])
-        //->middleware(['permission:recruitment.requisitions.tracing'])
+        ->middleware(['permission:recruitment.interview.appointment.tracing'])
         ->name('recruitment.interview.tracing'); 
 
         
@@ -349,11 +353,11 @@ Route::prefix('reports')->group(function () {
     Route::get('/census', [App\Http\Controllers\Reports\CensusController::class, 'index'])
     ->middleware(['permission:reports.census.index'])
     ->name('reports.census');
-
-
-    Route::match(['get','post'],'/interviews', [App\Http\Controllers\Reports\InterviewsController::class, 'index'])
-    ->middleware(['permission:reports.recruitment.interview.index'])
+    
+    Route::match(['get', 'post'],'/interviews', [App\Http\Controllers\Reports\InterviewsController::class, 'index'])
+    ->middleware(['permission:reports.interview.index'])
     ->name('reports.interviews');
+
 });
 
 Route::prefix('ajax')->group(function () {    

@@ -19,7 +19,7 @@ class InterviewsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['permission:reports.recruitment.interview.index']);
+        $this->middleware(['permission:reports.interview.index']);
     }
 
     /**
@@ -72,10 +72,8 @@ class InterviewsController extends Controller
                 '0'=>'Pendientes' ,
                 '1'=>'Asistió' ,
                 '2'=>'No Asistió' ,
-            ) ,
-                        
-            'req' => $request ,
-           
+            ) ,                        
+            'req' => $request ,           
         ]);
     }
 }
