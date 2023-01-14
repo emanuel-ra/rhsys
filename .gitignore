@@ -16,3 +16,5 @@ yarn-error.log
 /public/vendor/*
 /images/logo/*
 public/images/logo/*
+
+public/cv/*

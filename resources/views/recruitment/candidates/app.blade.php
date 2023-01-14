@@ -153,6 +153,14 @@
                                             </li>
                                         @endcan  
                                         
+                                        @if ($item->cv_file!=null)
+                                            <div class="dropdown-divider"></div>  
+                                            <a class="dropdown-item" href="{{ '/cv/'.$item->cv_file }}" target="_blank">
+                                                <i class="fa fa-file-pdf"></i> Curriculum Vitae
+                                            </a>    
+                                        @endif
+                                        
+                                        
                                         {{--
 
                                        
