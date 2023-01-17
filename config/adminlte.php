@@ -367,7 +367,7 @@ return [
                         'icon' => 'fas fa-fw fa-lock',
                         'can' =>  'roles.index' ,
                     ],
-
+                /*
                 ['header' => 'profile'],
 
                     [
@@ -380,6 +380,7 @@ return [
                         'url'  => 'admin/settings',
                         'icon' => 'fas fa-fw fa-lock',
                     ],
+                */
             ],
         ],        
         
@@ -392,14 +393,14 @@ return [
                 [
                     'text' => 'staff',
                     'url'  => 'hr/staff',
-                    'icon' => 'fas fa-user-plus',
+                    'icon' => 'fas fa-id-card-alt',
                     'can' =>  'staff.index' ,
                 ],
 
                 [
                     'text' => 'authorized job vacancy',
                     'route'  => 'authorized.job.vacancies',
-                    'icon' => 'fas fa-user-plus',
+                    'icon' => 'fas fa-check-double',
                     'can' =>  'authorized.job.vacancies.index' ,
                 ],
         
@@ -426,7 +427,7 @@ return [
                 [
                     'text' => 'candidates',
                     'route'  => 'recruitment.candidates',
-                    'icon' => 'fas fa-clipboard-list',
+                    'icon' => 'far fa-id-card',
                     'can' =>  'recruitment.candidates.index' ,
                 ],
                 [

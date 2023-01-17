@@ -319,7 +319,15 @@ Route::prefix('recruitment')->group(function () {
 
         Route::get('delete/cv/{id}',[App\Http\Controllers\Recruitment\CandidatesController::class, 'delete_cv'])
         ->middleware(['permission:recruitment.requisitions.update'])
-        ->name('recruitment.candidates.cv.delete'); 
+        ->name('recruitment.candidates.cv.delete');
+
+        Route::get('set/archive/{id}',[App\Http\Controllers\Recruitment\CandidatesController::class, 'set_archive'])
+        ->middleware(['permission:recruitment.requisitions.update'])
+        ->name('recruitment.candidates.set.archive'); 
+
+        Route::get('set/active/{id}',[App\Http\Controllers\Recruitment\CandidatesController::class, 'set_active'])
+        ->middleware(['permission:recruitment.requisitions.update'])
+        ->name('recruitment.candidates.set.active'); 
 
     });
    

@@ -40,9 +40,14 @@
                 @csrf           
                 
                 <div class="col-12 col-lg-3">
+                    <label for="">Buscar por</label>
+                    <input type="text" class="form-control" name="keyWords" value="{{ $keyWords }}" placeholder="(Nombre, Correo, Email)">
+                </div>
+
+                <div class="col-12 col-lg-3">
                     <label for="status_id">Estatus</label>
                     <select name="status_id" id="status_id" class="form-control">
-                        <option value=""></option>
+                        <option value="0"></option>
                         @foreach ($status as $item)
                             <option {{ ($item->id == $status_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
@@ -50,21 +55,11 @@
                 </div>
 
                 <div class="col-12 col-lg-3">
-                    <label for="status_id">Estatus</label>
-                    <select name="status_id" id="status_id" class="form-control">
-                        <option value=""></option>
-                        @foreach ($status as $item)
-                            <option {{ ($item->id == $status_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-12 col-lg-3">
-                    <label for="status_id">Estatus</label>
-                    <select name="status_id" id="status_id" class="form-control">
-                        <option value=""></option>
-                        @foreach ($status as $item)
-                            <option {{ ($item->id == $status_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
+                    <label for="status_id">Fuente</label>
+                    <select name="source_id" id="source_id" class="form-control">
+                        <option value="0"></option>
+                        @foreach ($sources as $item)
+                            <option {{ ($item->id == $source_id) ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -85,6 +80,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            
             <div class="col-12">
                 {{ $data->links('pagination::bootstrap-4') }}
             </div>
@@ -131,6 +127,25 @@
                                                     <i class="fas fa-network-wired"></i> Seguimiento
                                                 </a>
                                             </li>
+
+                                            @if ( $item->status_id==1)
+                                                <div class="dropdown-divider"></div> 
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('recruitment.candidates.set.archive',['id' => $item->id]) }}">
+                                                        <i class="fas fa-door-closed"></i> Archivar
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @if ( $item->status_id==10)
+                                                <div class="dropdown-divider"></div> 
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('recruitment.candidates.set.active',['id' => $item->id]) }}">
+                                                        <i class="fas fa-door-open"></i> Activar
+                                                    </a>
+                                                </li>
+                                            @endif
+
                                         @endcan  
 
                                         @can('recruitment.candidates.update')
@@ -151,6 +166,7 @@
                                                     <i class="fas fa-calendar-plus"></i> Agendar Entrevista
                                                 </a>
                                             </li>
+                                            
                                         @endcan  
                                         
                                         @if ($item->cv_file!=null)

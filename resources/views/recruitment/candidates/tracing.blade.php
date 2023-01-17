@@ -28,6 +28,12 @@
             </blockquote>
         </div>
 
+        <div class="col-12">
+            <a href="{{ route('recruitment.candidates') }}" class="btn btn-default">
+                Cancelar
+            </a>
+        </div>
+        
         <div class="card col-12 col-lg-3 m-2 card-tabs">
             <div class="card-header">
                 <h3 class="card-title">Encargado de Area</h3>
@@ -36,9 +42,8 @@
                     <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
                 </div>            
             </div>
-
-            <div class="card-body p-0">
-
+            
+            <div class="card-body p-0">                
             
                 <form action="{{ route('recruitment.candidates.update.accepted') }}" method="POST">
                     @csrf
@@ -57,12 +62,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 p-2 d-flex justify-content-between">
-                        
-                        <a href="{{ route('recruitment.candidates') }}" class="btn btn-default">
-                            Cancelar
-                        </a>
-
+                    <div class="col-sm-12 p-2 d-flex justify-content-between">                                                
                         <button class="btn btn-primary">
                             Guardar
                         </button>
@@ -115,11 +115,6 @@
                     </div>
                         
                     <div class="col-sm-12 p-2 d-flex justify-content-between">
-                        
-                        <a href="{{ route('recruitment.candidates') }}" class="btn btn-default">
-                            Cancelar
-                        </a>
-
                         <button class="btn btn-primary">
                             Guardar
                         </button>

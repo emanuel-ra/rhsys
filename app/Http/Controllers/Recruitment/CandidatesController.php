@@ -40,30 +40,31 @@ class CandidatesController extends Controller
         $query = Candidate::query();
 
         $query = $query->where('status_id','!=',2);    
-
-        if(isset($request->branch_id)){
-            $query = $query->Where('branch_id', $request->branch_id);
-        }
-
-        if(isset($request->department_id)){
-            $query = $query->Where('department_id', $request->department_id);
-        }
-
-        if(isset($request->jop_position_id)){
-            $query = $query->Where('jop_position_id', $request->jop_position_id);
-        }
-
-        if(isset($request->status_id)){
+        
+        if($request->status_id>0){
             $query = $query->Where('status_id', $request->status_id);
+        }
+
+        if($request->source_id>0){
+            $query = $query->Where('sources_id', $request->source_id);
+        }
+
+        if($request->keyWords!==''){
+            $query = $query
+                ->whereRaw('concat(name," ",mobile_phone," ",email) like ?','%'.$request->keyWords.'%');
+                //->orWhere('mobile_phone','like','%'.$request->keyWords.'%')
+                //->orWhere('email','like','%'.$request->keyWords.'%');
         }
 
         // $branches = Branch::select('id','name')->where('enable',1)->get();
         // $departments = Department::select('id','name')->where('enable',1)->get();
         // $jop_positions = JopPosition::select('id','name')->where('enable',1)->get();
-        $status = Status::select('id','name')->whereIn('id',array(1,8,9,10,11))->where('enable',1)->get();
+        $status = Status::select('id','name')->whereIn('id',array(1,10))->where('enable',1)->get();
+        $sources = CandidateSource::select('id','name')->where('enable',1)->get();
 
         $query->with('CandidateSource');
         $query->with('Requisitions');
+        
         // $query->with('Company');
         // $query->with('Branch');
         // $query->with('Supervisor');
@@ -72,19 +73,16 @@ class CandidatesController extends Controller
         $query->orderByDesc('id');
         
         $data = $query->paginate(50); 
-        //return $data;
-        //$data = Requisitions::paginate(10);
+        
         return view('recruitment.candidates.app',[
             'data' => $data ,
-            // 'branches' => $branches ,
-            // 'departments' => $departments ,
-            // 'jop_positions' => $jop_positions ,
-            'status' => $status ,
 
-            'branch_id' => $request->branch_id ,
-            'department_id' => $request->department_id ,
-            'jop_position_id' => $request->jop_position_id ,
+            'status' => $status ,
+            'sources' => $sources ,
+            
             'status_id' => $request->status_id ,
+            'source_id' => $request->source_id ,
+            'keyWords' => $request->keyWords ,
         ]);
     }
     public function create(){      
@@ -217,6 +215,34 @@ class CandidatesController extends Controller
         $Candidate->save();
 
         return redirect()->back()->withSuccess('Información guardada correctamente'); 
+    }
+    public function set_archive($id)
+    {
+        if(!$id){
+            return redirect()->back()->withErrors(['Error' => 'Parámetros incorrectos']);
+        }
+
+        $Candidate = Candidate::find($id);
+        $Candidate->status_id = 10;
+        if($Candidate->save()){
+            return redirect()->back()->withSuccess('Candidato archivado');
+        }else{
+            return redirect()->back()->withErrors(['Error' => 'Error al archivar archivo']);
+        }
+
+    }
+    public function set_active($id){
+        if(!$id){
+            return redirect()->back()->withErrors(['Error' => 'Parámetros incorrectos']);
+        }
+
+        $Candidate = Candidate::find($id);
+        $Candidate->status_id = 1;
+        if($Candidate->save()){
+            return redirect()->back()->withSuccess('Candidato Activado');
+        }else{
+            return redirect()->back()->withErrors(['Error' => 'Error al activar archivo']);
+        }
     }
     public function delete_cv($id){
       if(!$id){
