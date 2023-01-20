@@ -57,5 +57,8 @@ class Staff extends Model
     public function StaffRotation(){
         return $this->hasOne(StaffRotation::class, 'staff_id', 'id')->select('id','name');
     }
+    public function Vacations(){
+        return $this->hasMany(Vacation::class, 'staff_id', 'id')->with('Status')->orderBy('created_at','desc');;
+    }
 
 }

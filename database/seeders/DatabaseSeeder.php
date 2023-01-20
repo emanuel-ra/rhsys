@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             RequisitionsSeeder::class ,
             CandidatesSeeder::class ,
             InterviewsSeeder::class ,
+            VacationTableSeeder::class ,
         ]);
     }
 }

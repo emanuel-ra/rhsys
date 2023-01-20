@@ -37,7 +37,9 @@
                     <table>
                         <tr>
                             <td style="border-bottom: 1px dashed #000;border-right:1px dashed #000;">CÓDIGO</td>
-                            <td style="border-bottom: 1px dashed #000;text-align:center">F-RH-{{$data->id}}</td>
+                            <td style="border-bottom: 1px dashed #000;text-align:center">
+                                {{ env('HR_DOCUMENT_PERSONAL_DATA') }}
+                            </td>
                         </tr>
                         <tr>
                             <td style="border-bottom: 1px dashed #000;border-right:1px dashed #000;">VERSION</td>

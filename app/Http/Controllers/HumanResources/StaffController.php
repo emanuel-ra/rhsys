@@ -17,14 +17,14 @@ use App\Models\StaffLogs;
 use App\Models\StaffRotation;
 use App\Models\Status;
 use App\Models\TypeOfContract;
-use Carbon\Carbon;
 use PDF;
 
 class StaffController extends Controller
 {
-   /**
-     * Create a new controller instance.
-     *
+    /**
+     * * Create a new controller instance.
+     * @desc This Controller is responsible to the staff of the company
+     * @author Tomas Emanuel Ramirez Abarca
      * @return void
      */
     public function __construct()
@@ -38,8 +38,13 @@ class StaffController extends Controller
     }   
     
     /**
-     * Show the application dashboard.
-     *
+     * * Show the application staff.
+     * @desc Show the main template, it's a list of the staff     
+     * @param string searchKeyword this parameter is filter the list by name,email,mobile pone, curp, rfc, city, zip code, suburb, genre, code
+     * @param int branch_id filter by branch
+     * @param int department_id filter by department 
+     * @param int jop_position_id filter by jop position 
+     * @param int status_id filter by status of the staff
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
@@ -114,6 +119,11 @@ class StaffController extends Controller
             
         ]);
     }  
+    /**
+     * * Show the application staff view
+     * @desc show all the information for the staff
+     * @param int id is the staff id 
+     */
     public function view($id){
        
         $data = Staff::with('User')
@@ -135,6 +145,10 @@ class StaffController extends Controller
             'data'=>$data
         ]);
     }
+    /**
+     * * Show Form Create
+     * @desc this form create new staff data
+     */
     public function register(){
 
         $Supervisor = Staff::select('id','name')->where('status_id',4)->where('supervisor',1)->get();
@@ -156,7 +170,41 @@ class StaffController extends Controller
             'MaritalStatus' => $MaritalStatus ,
             'TypeOfContract' => $TypeOfContract ,             
         ]);
+    }       
+    
+     /**
+     * * FORM EDIT RECORD
+     * @desc this function edit a record
+     */
+    public function edit($id){
+
+        $Staff = Staff::find($id);       
+        $Supervisor = Staff::select('id','name')->where('status_id',4)->where('id','!=',$id)->where('supervisor',1)->get();
+        $Company = Company::select('id','name')->where('enable',1)->get();      
+        $Department = Department::select('id','name')->where('enable',1)->get();
+        $JopPosition = JopPosition::select('id','name')->where('enable',1)->get();
+        $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
+        $Country = Country::select('id','name')->where('enable',1)->get();
+        $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
+        $TypeOfContract = TypeOfContract::select('id','name')->where('enable',1)->get();
+        //return $Staff;
+        return view('human-resources.staff.edit',[
+            'Staff' => $Staff ,
+            'Supervisor' => $Supervisor ,
+            'Company' => $Company ,
+            'Department' => $Department ,
+            'JopPosition' => $JopPosition ,
+            'Scholarship' => $Scholarship ,
+            'Country' => $Country ,     
+            'MaritalStatus' => $MaritalStatus ,
+            'TypeOfContract' => $TypeOfContract ,
+            'id' => $id ,
+        ]);
     }   
+     /**
+     * * CREATE STAFF
+     * @desc this function create a record
+     */
     public function store(Request $request)
     {                       
       
@@ -299,32 +347,12 @@ class StaffController extends Controller
         $StaffLogs->save();
 
         return redirect()->route('hr.staff');
-    }
-    public function edit($id){
-
-        $Staff = Staff::find($id);       
-        $Supervisor = Staff::select('id','name')->where('status_id',4)->where('id','!=',$id)->where('supervisor',1)->get();
-        $Company = Company::select('id','name')->where('enable',1)->get();      
-        $Department = Department::select('id','name')->where('enable',1)->get();
-        $JopPosition = JopPosition::select('id','name')->where('enable',1)->get();
-        $Scholarship = Scholarship::select('id','name')->where('enable',1)->get();
-        $Country = Country::select('id','name')->where('enable',1)->get();
-        $MaritalStatus = MaritalStatus::select('id','name')->where('enable',1)->get();
-        $TypeOfContract = TypeOfContract::select('id','name')->where('enable',1)->get();
-        //return $Staff;
-        return view('human-resources.staff.edit',[
-            'Staff' => $Staff ,
-            'Supervisor' => $Supervisor ,
-            'Company' => $Company ,
-            'Department' => $Department ,
-            'JopPosition' => $JopPosition ,
-            'Scholarship' => $Scholarship ,
-            'Country' => $Country ,     
-            'MaritalStatus' => $MaritalStatus ,
-            'TypeOfContract' => $TypeOfContract ,
-            'id' => $id ,
-        ]);
-    }
+    } 
+    
+      /**
+     * * EDIT STAFF DATA
+     * @desc this function create a record
+     */
     public function update($id,Request $request)
     {                
         $this->validate($request, [               
@@ -463,6 +491,10 @@ class StaffController extends Controller
         return redirect()->route('hr.staff.view',['id'=>$id]);
 
     }
+      /**
+     * * UNSUBSCRIBE FORM 
+     * 
+     */
     public function unsubscribe_from($id){
         $data = Staff::find($id);
 
@@ -475,6 +507,10 @@ class StaffController extends Controller
             'ReasonsToLeaveWork'=>$ReasonsToLeaveWork ,
         ]);       
     }
+      /**
+     * * SUBSCRIBE FORM 
+     * 
+     */
     public function unsubscribe(Request $request){
         $this->validate($request, [               
             'id' => 'required|integer',         
@@ -509,6 +545,9 @@ class StaffController extends Controller
 
         return redirect()->route('hr.staff.view',['id'=>$request->id]);
     }
+     /**
+     * * PDF SPECIFIC CONTRACT * 
+     */
     public function pdf_specific_contract($id){
         
         $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
@@ -518,6 +557,9 @@ class StaffController extends Controller
         $pdf = Pdf::loadView('pdf.human-resources.staff.specific-contract', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
     }
+     /**
+     * * PDF INDETERMINATE CONTRACT * 
+     */
     public function pdf_indeterminate_contract($id){
         
         $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
@@ -527,6 +569,9 @@ class StaffController extends Controller
         $pdf = Pdf::loadView('pdf.human-resources.staff.indeterminate-contract', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
     }
+     /**
+     * * PDF INDETERMINATE PERIOD CONTRACT * 
+     */
     public function pdf_indeterminate_period_contract($id){
         
         $data = Staff::with('Country')->with('MaritalStatus')->with('State')->with('Position')->find($id);    
@@ -536,11 +581,15 @@ class StaffController extends Controller
         $pdf = Pdf::loadView('pdf.human-resources.staff.indeterminate-period-contract', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
     }
+     /**
+     * * PDF PERSONAL DATA * 
+     */
     public function pdf_personal_data($id){
         $data = Staff::with('Country')->with('MaritalStatus')->with('Position')->find($id);
         //return  $data;
         $Company = Company::find($data->company_id);
         $pdf = Pdf::loadView('pdf.human-resources.staff.personal-data', ['data'=>$data,'Company'=>$Company]);
         return $pdf->stream();
-    }
+    }  
+    
 }

@@ -18,6 +18,7 @@ class CreateVacationsTable extends Migration
             $table->unsignedInteger('staff_id')->default(0);
             $table->unsignedInteger('status_id')->default(0);
             $table->unsignedInteger('user_id')->default(0);
+            $table->Integer('number_of_requested_days');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->date('come_back_date')->nullable();

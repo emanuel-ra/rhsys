@@ -21,6 +21,14 @@ Auth::routes([
     'register' => false
 ]);
 
+
+/*
+   * * SYSTEM ROUTES
+    *   COMPANY
+    *   BRANCHES
+    *   JOP POSITIONS
+    *   DEPARTMENTS
+*/
 Route::prefix('system')->group(function () {    
 
     Route::prefix('companies')->group(function () {    
@@ -168,6 +176,11 @@ Route::prefix('system')->group(function () {
     });    
 });
 
+/*
+   * * HUMAN RESOURCES ROUTES
+    *   STAFF
+    *   VACANCIES 
+*/
 Route::prefix('hr')->group(function () {    
     
     Route::prefix('staff')->group(function (){
@@ -183,7 +196,7 @@ Route::prefix('hr')->group(function () {
         Route::post('/store', [App\Http\Controllers\HumanResources\StaffController::class, 'store'])
         ->middleware(['permission:staff.create'])
         ->name('hr.staff.store');
-
+        
         Route::get('/edit/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'edit'])
         ->middleware(['permission:staff.update'])
         ->name('hr.staff.edit');
@@ -205,6 +218,30 @@ Route::prefix('hr')->group(function () {
         ->middleware(['permission:staff.unsubscribe'])
         ->name('hr.staff.post.unsubscribe');  
 
+        Route::prefix('vacations')->group(function (){
+            Route::get('/request/{id}', [App\Http\Controllers\HumanResources\VacationsController::class, 'form'])
+            ->middleware(['permission:staff.vacations.request'])
+            ->name('hr.staff.vacations.request');
+
+            Route::post('/request/store', [App\Http\Controllers\HumanResources\VacationsController::class, 'store'])
+            ->middleware(['permission:staff.vacations.request'])
+            ->name('hr.staff.vacations.request.store');
+
+            Route::get('/set/accepted/{id}', [App\Http\Controllers\HumanResources\VacationsController::class, 'accepted'])
+            ->middleware(['permission:staff.vacations.request'])
+            ->name('hr.staff.vacations.set.accepted');
+
+            Route::get('/set/denied/{id}', [App\Http\Controllers\HumanResources\VacationsController::class, 'denied'])
+            ->middleware(['permission:staff.vacations.request'])
+            ->name('hr.staff.vacations.set.denied');
+
+            Route::get('/set/cancel/{id}', [App\Http\Controllers\HumanResources\VacationsController::class, 'cancel'])
+            ->middleware(['permission:staff.vacations.request'])
+            ->name('hr.staff.vacations.set.cancel');
+
+            
+        });
+
         Route::prefix('PDF')->group(function (){
 
             Route::get('/specific/contract/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_specific_contract'])
@@ -222,7 +259,11 @@ Route::prefix('hr')->group(function () {
 
             Route::get('/personal-data/{id}', [App\Http\Controllers\HumanResources\StaffController::class, 'pdf_personal_data'])
             //->middleware(['permission:staff.unsubscribe'])
-            ->name('hr.staff.pdf.personal.data');  
+            ->name('hr.staff.pdf.personal.data');
+            
+            Route::get('/vacation/{id}', [App\Http\Controllers\HumanResources\VacationsController::class, 'make_pdf'])
+            //->middleware(['permission:staff.unsubscribe'])
+            ->name('hr.staff.pdf.vacation');
         });
              
     });  
@@ -249,7 +290,12 @@ Route::prefix('hr')->group(function () {
 
 });
 
-
+/*
+   * * RECRUITMENT ROUTES
+    *   REQUISITIONS
+    *   CANDIDATES
+    *   INTERVIEWS
+*/
 Route::prefix('recruitment')->group(function () {    
 
     // REQUISITIONS

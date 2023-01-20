@@ -422,7 +422,7 @@ return [
                     'text' => 'requisitions',
                     'route'  => 'recruitment.requisitions',
                     'icon' => 'fas fa-clipboard-list',
-                    'can' =>  'interview.appointment.index' ,
+                    'can' =>  'recruitment.requisitions.index' ,
                 ],
                 [
                     'text' => 'candidates',
@@ -434,7 +434,7 @@ return [
                     'text' => 'interview_appointment',
                     'route'  => 'recruitment.interview.appointment',
                     'icon' => 'fas fa-calendar-times',
-                    //'can' =>  'interview.appointment.index' ,
+                    'can' =>  'recruitment.interview.appointment.index' ,
                 ],
             ]
         ],

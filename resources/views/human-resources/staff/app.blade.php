@@ -172,7 +172,7 @@
                                             </li>
 
                                         @endcan  
-
+                                      
                                         @can('staff.pdf.personal.data')
                                             <li>                                                
                                                 <a class="dropdown-item" target="_blank" href="{{ route('hr.staff.pdf.personal.data',['id' => $item->id]) }}">
@@ -182,12 +182,14 @@
                                         @endcan  
 
                                         @can('users.update')
-                                            <div class="dropdown-divider"></div>   
-                                            <li>                                                
-                                                <a class="dropdown-item" href="{{ route('hr.staff.edit',['id' => $item->id]) }}">
-                                                    <i class="fas fa-user-edit"></i> Editar
-                                                </a>
-                                            </li>
+                                            @if ($item->status_id == 4)
+                                                <div class="dropdown-divider"></div>   
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('hr.staff.edit',['id' => $item->id]) }}">
+                                                        <i class="fas fa-user-edit"></i> Editar
+                                                    </a>
+                                                </li>
+                                            @endif
                                         @endcan   
                                         
                                         @can('users.update')
@@ -197,6 +199,18 @@
                                             </a>
                                         @endcan
                                              
+                                        @can('staff.vacations.request')
+                                            @if ($item->status_id == 4)
+                                                <div class="dropdown-divider"></div>    
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('hr.staff.vacations.request',['id' => $item->id]) }}">
+                                                        <i class="fas fa-umbrella-beach"></i> Solicitud de Vacaciones
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endcan
+
+                                        
                                         @can('staff.unsubscribe')     
                                             <div class="dropdown-divider"></div>                                   
                                             @if ($item->status_id == 4)
