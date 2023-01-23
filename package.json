@@ -22,6 +22,8 @@
     },
     "dependencies": {
         "bootstrap-timepicker": "^0.5.2",
-        "icheck-bootstrap": "^3.0.1"
+        "icheck-bootstrap": "^3.0.1",
+        "moment": "^2.29.4",
+        "tempusdominus-bootstrap-4": "^5.39.2"
     }
 }
