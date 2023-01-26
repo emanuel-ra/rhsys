@@ -28,7 +28,7 @@
             
             <div class="card-body p-0">                
             
-                <form action="{{ route('format.attendance.download') }}" method="POST">
+                <form action="{{ route('format.attendance.download') }}" method="POST" target="_blank">
                     @csrf                   
                     <div class="row">
 
@@ -45,7 +45,7 @@
 
                         <div class="form-group col-12 col-lg-6">
                             <label for="">Titulo</label>
-                            <input type="text" class="form-control" name="title" placeholder="Ejemplo: Control de Asistencia Quincena 01">
+                            <input type="text" class="form-control" name="title" placeholder="Ejemplo: Control de Asistencia Quincena 01" value="Control de Asistencia Quincena " required>
                         </div>
 
                         <div class="col-sm-12 col-lg-2">
@@ -54,7 +54,7 @@
                                 <div class="input-group-append" data-target="#start_date" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div> 
-                                <input type="text" class="form-control datetimepicker-input" data-target="#start_date" data-toggle="datetimepicker" name="start_date" value="" autocomplete="off"/>
+                                <input type="text" class="form-control datetimepicker-input" data-target="#start_date" data-toggle="datetimepicker" name="start_date" value="" autocomplete="off" required/>
                             </div>
                         </div>
 
