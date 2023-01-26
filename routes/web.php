@@ -403,6 +403,27 @@ Route::prefix('recruitment')->group(function () {
     }); 
 });
 
+/*
+   * * REPORTS ROUTES
+    *   CENSUS
+    *   INTERVIEWS    
+*/
+Route::prefix('format')->group(function () { 
+    Route::get('/attendance', [App\Http\Controllers\Formats\AttendanceController::class, 'index'])
+    //->middleware(['permission:reports.census.index'])
+    ->name('format.attendance');
+
+    Route::prefix('download')->group(function () {
+        Route::post('attendance/', [App\Http\Controllers\Formats\AttendanceController::class, 'download'])        
+        ->name('format.attendance.download'); 
+    });
+});
+
+/*
+   * * REPORTS ROUTES
+    *   CENSUS
+    *   INTERVIEWS    
+*/
 Route::prefix('reports')->group(function () { 
     Route::get('/census', [App\Http\Controllers\Reports\CensusController::class, 'index'])
     ->middleware(['permission:reports.census.index'])

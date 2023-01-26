@@ -450,7 +450,7 @@ return [
                     'can' =>  'reports.census.index' ,
                 ],
                 [
-                    'text' => 'Entrevistas',
+                    'text' => 'interviews',
                     'route'  => 'reports.interviews',
                     'icon' => 'fas fa-calendar-check',
                     'can' =>  'reports.interview.index' ,
@@ -458,6 +458,19 @@ return [
             ]
         ], 
         
+        [
+            'text'    => 'formats',
+            'icon'    => 'fas fa-clipboard-list',
+            'submenu' =>[
+                [
+                    'text' => 'attendance',
+                    'route'  => 'format.attendance',
+                    'icon' => 'fas fa-fw fa-user',
+                    //'can' =>  'reports.census.index' ,
+                ]
+            ]
+        ], 
+
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',

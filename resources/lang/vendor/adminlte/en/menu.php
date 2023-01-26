@@ -18,8 +18,9 @@ return [
     'information'                   => 'Information',
 
     // [    A   ]
+        'attendance'      => 'Attendance',
     // [    B   ]
-        'branches'      => 'Branches',
+        'branches'      => 'Branches',        
     // [    C   ]
         'companies'     => 'Company',
         'census'        => 'Census',    
@@ -29,12 +30,14 @@ return [
         'dashboard'     => 'Dashboard',
     // [    E   ]
     // [    F   ]
+        'formats'         => 'Formats',
     // [    G   ]
         'general_information'  => 'General Information',
     // [    H   ]
         'human_resources'      => 'HUMAN RESOURCES',
     // [    I   ]
         'interview_appointment'=> 'Interview Appointment' ,
+        'interviews' => 'Interviews' ,
     // [    J   ]
         'jop_position'  => 'Jop Position' ,
         'authorized job vacancy'   => 'job vacancy',    
