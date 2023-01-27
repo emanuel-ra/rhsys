@@ -30,7 +30,7 @@ class AttendanceController extends Controller
     
     /**
      * * Show the application staff.
-     * @desc Show the main template, it's a list of the staff     
+     * @desc Show the main template, is a form      
      * @param string searchKeyword this parameter is filter the list by name,email,mobile pone, curp, rfc, city, zip code, suburb, genre, code
      * @param int branch_id filter by branch
      * @param int department_id filter by department 
@@ -45,6 +45,10 @@ class AttendanceController extends Controller
             'companies'=>$companies ,            
         ]);
     }
+    /**
+     * * Show a PDF Document
+     * @desc it's a format that show the staff by company, it's used for attendance control, the person need to sign a write the arrive time, lunch time or leave time  
+     */
     public function download(Request $request){        
 
         $this->validate($request,[            
@@ -70,10 +74,6 @@ class AttendanceController extends Controller
             'company'=>$company,
             'rows' => 0 ,
         ]);
-        //->setPaper('a4', 'landscape')
-            //legal
         return $pdf->stream();
-
-        //return view('pdf.formats.attendance',['period'=>$period ,]);
     }
 }
