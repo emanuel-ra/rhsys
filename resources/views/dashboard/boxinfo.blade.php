@@ -1,17 +1,36 @@
 <div class="row">
-
-    <div class="col-12 col-md-2">
-        <x-dg-info-box bg="success" title="Personal Activo" text="{{ $enable_staff }}" icon="fas fa-user-check" :full="true" :grad="true"/>
+  
+    <div class="info-box col-12 col-md-2 m-1">
+        <span class="info-box-icon bg-success"><i class="fas fa-user-check"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Personal Activo</span>
+            <span class="info-box-number">{{ $enable_staff }}</span>            
+        </div>
     </div>
 
-    <div class="col-12 col-md-2">
-        <x-dg-info-box bg="danger" title="Personal dado de baja" text="{{ $disabled_staff }}" icon="fas fa-user-times" :full="true" :grad="true"/>
+    <div class="info-box col-12 col-md-2 m-1">
+        <span class="info-box-icon bg-danger"><i class="fas fa-user-check"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Personal dado de baja</span>
+            <span class="info-box-number">{{ $disabled_staff }}</span>            
+        </div>
     </div>
 
-    <div class="col-12 col-md-2">
-        <x-dg-info-box bg="primary" title="Empresas" text="{{ $companies_count }}" icon="fas fa-building" :full="true" :grad="true"/>
+    <div class="info-box col-12 col-md-2 m-1">
+        <span class="info-box-icon bg-primary"><i class="fas fa-building"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Empresas</span>
+            <span class="info-box-number">{{ $companies_count }}</span>            
+        </div>
     </div>
-    <div class="col-12 col-md-2">
-        <x-dg-info-box bg="info" title="Sucursales" text="{{ $branches_count }}" icon="fas fa-store" :full="true" :grad="true"/>
+
+    <div class="info-box col-12 col-md-2 m-1">
+        <span class="info-box-icon bg-info"><i class="fas fa-store"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Sucursales</span>
+            <span class="info-box-number">{{ $branches_count }}</span>            
+        </div>
     </div>
+    
+</div>
   
