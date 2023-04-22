@@ -22,12 +22,14 @@ class DepartmentSeeder extends Seeder
         Department::create(['name'=>'CALL CENTER']);
         Department::create(['name'=>'DISEÑO']);
         Department::create(['name'=>'SOPORTE TÉCNICO']);
-        Department::create(['name'=>'LIMPIEZA']);
+        Department::create(['name'=>'LIMPIEZA / INTENDENCIA']);
         Department::create(['name'=>'MANTENIMIENTO']);
         Department::create(['name'=>'CONTABILIDAD']);
         Department::create(['name'=>'ALMACÉN']);
         Department::create(['name'=>'DISPLAY']);
         Department::create(['name'=>'TESORERÍA']);
-        Department::create(['name'=>'CAJAS']);        
+        Department::create(['name'=>'CAJAS']);   
+        Department::create(['name'=>'ADMINISTRACIÓN']);
+        Department::create(['name'=>'OTROS']);    
     }
 }

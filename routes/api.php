@@ -22,7 +22,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // AUTHENTICATION FOR API
 Route::post('/auth', [App\Http\Controllers\AuthApi\AuthController::class, 'auth'] );
 
+// * PROTECTED ROUTES
 Route::middleware(['auth:sanctum'])->group(function() {
+
+    Route::prefix('companies')->group(function(){
+        Route::get('/with/rfc', [App\Http\Controllers\Api\System\CompaniesController::class, 'getListWithRfc'] );    
+    });
+
+    Route::prefix('staff')->group(function(){
+        // * REGISTER STAFF
+        Route::post('/register', [App\Http\Controllers\Api\HumanResources\StaffController::class, 'store'] );    
+    });
+
+    // * LOGOUT
     Route::get('/logout', [App\Http\Controllers\AuthApi\AuthController::class, 'logout'] );
 });
 

@@ -331,7 +331,7 @@ class StaffController extends Controller
         $Staff->born_place = $request->born_place;
 
         if($request->hired_date!='')
-            $Staff->born_date = $request->hired_date;      
+            $Staff->hired_date = $request->hired_date;      
         if($request->born_date!='')
             $Staff->born_date = $request->born_date;        
         if($request->expiration_date!='')
