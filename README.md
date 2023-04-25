@@ -1,64 +1,76 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# RHSYS 💻
+Sistema para llevar el registro del personal, requisiciones, agendar entrevistas, candidatos y seguimiento de entrevista.
 
-## About Laravel
+# Indice 
+1. [Screenshots](#Screenshots)  
+2. [Modulos](#Modulos)  
+3. [Instalación](#Instalación)  
+4. [Stack](#Stack)
+5. [Author](#Author)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Screenshots  
+![Dashboard Screenshot](./screenshots/rhsys-dashboard.png)  
+ 
+# Modulos
+1. Dashboard
+2. Sistema
+    1. Generales
+        1. Empresas
+        2. Sucursales 
+        3. Puestos
+        4. Departamentos
+    2. Accesos
+        1. Usuarios
+        2. Roles
+3. Recursos Humanos
+    1. Personal
+    2. Vacantes Autoizadas
+4. Reclutamiento
+    1. Requisiciones
+    2. Candidatos
+    3. Entrevistas
+5. Reportes
+    1. Censo
+    2.Entrevistas
+6. Formatos
+    1. Asistencias
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalación  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Clone the project  
 
-## Learning Laravel
+~~~bash  
+  git clone git@github.com:emanuel-ra/rhsys.git
+~~~
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Go to the project directory  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+~~~bash  
+  cd rhsys
+~~~
 
-## Laravel Sponsors
+Install dependencies  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+~~~bash  
+npm install
+composer install
+~~~
 
-### Premium Partners
+Start the server  
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+~~~bash  
+php artisan serve
+~~~  
 
-## Contributing
+## Stack
+- PHP 7
+- [Laravel 8](https://laravel.com/docs/8.x) - PHP Framework
+- [AdminLTE](https://adminlte.io/docs/3.0/implementations.html) - Template
+- [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) - CSS Framework
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Author 
+- Github - [emanuel-ra](https://github.com/emanuel-ra/)
+- Frontend Mentor - [@emanuel-ra](https://www.frontendmentor.io/profile/emanuel-ra)
+- Linkedin - [@emanuelramirezabarca](https://www.linkedin.com/in/emanuelramirezabarca/) 
+ 

@@ -37,7 +37,3 @@ Route::middleware(['auth:sanctum'])->group(function() {
     // * LOGOUT
     Route::get('/logout', [App\Http\Controllers\AuthApi\AuthController::class, 'logout'] );
 });
-
-Route::post('/test', function(){
-    return 'hello';
-});
