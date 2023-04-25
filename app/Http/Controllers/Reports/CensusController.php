@@ -54,9 +54,7 @@ class CensusController extends Controller
             }
             $data[] = array('puesto'=>$row->name, 'authorized' => $authorized);
         }
-        
-        //$data = AuthorizedPost::with('getCount')->get();
-        return $data;        
-        //return view('reports.census.app',['data'=>$data]);
+               
+        return view('reports.census.app',['data'=>$data]);
     }
 }
