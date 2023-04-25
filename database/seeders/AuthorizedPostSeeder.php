@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\JopPosition;
 use App\Models\AuthorizedPost;
-use App\Models\branch;
+use App\Models\Branch;
 
 class AuthorizedPostSeeder extends Seeder
 {
