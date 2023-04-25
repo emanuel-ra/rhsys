@@ -21,6 +21,7 @@ class ReasonsToLeaveWorkSeeder extends Seeder
         ReasonsToLeaveWork::create(['name'=>'Puesto temporal']);
         ReasonsToLeaveWork::create(['name'=>'Oferta de empleo']);
         ReasonsToLeaveWork::create(['name'=>'Abandono laboral']);
+        ReasonsToLeaveWork::create(['name'=>'Separación voluntaria']);
         //ReasonsToLeaveWork::create(['name'=>'Otros']);        
     }
 }
