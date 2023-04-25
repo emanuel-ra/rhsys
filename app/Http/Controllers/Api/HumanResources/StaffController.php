@@ -65,6 +65,11 @@ class StaffController extends Controller
             
             'status' => 'required|in:A,B',
             'maritial' => 'nullable:in:C,S',
+
+
+            'reason_unsubscribe_id' => 'nullable|integer',  
+            'reason_unsubscribe_text' => 'nullable',  
+            'unsubscribe_date' => 'nullable'
         ]);  
         // 'unique:staff,rfc,'.$request->code.',code' 
         // 'unique:staff,curp,'.$request->code.',code' , 
@@ -99,6 +104,7 @@ class StaffController extends Controller
 
         
         
+        $status_id = ($request->status == 'A') ? 4:5;
 
         $Staff->name = $request->name;
         $Staff->code = $request->code;
@@ -127,7 +133,7 @@ class StaffController extends Controller
         $Staff->supervisor = 0;        
         $Staff->supervisor_id = 0;        
         $Staff->hired_date = $request->hired_date;
-        $Staff->status_id = ($request->status == 'A') ? 4:5;
+        $Staff->status_id = $status_id;
         $Staff->working_hours = json_encode($working_hours);
         $Staff->daily_salary = $request->daily_salary;
         $Staff->user_id = $request->user()->id;        
@@ -150,6 +156,13 @@ class StaffController extends Controller
             $Staff->born_date = $request->born_date;        
         if($request->expiration_date!='')
             $Staff->expiration_date = $request->expiration_date;
+
+        
+        if($status_id==5){
+            $Staff->reason_unsubscribe_id = $request->reason_unsubscribe_id;
+            $Staff->reason_unsubscribe_text =  $request->reason_unsubscribe_text;
+            $Staff->unsubscribe_date =  $request->unsubscribe_date;
+        }
                     
         $Staff->save();
 
@@ -159,7 +172,19 @@ class StaffController extends Controller
         $StaffLogs->description = ($action=='updated') ? 'Actualizado':'Alta';
         $StaffLogs->data = json_encode($Staff);
         $StaffLogs->save();
-    
+        
+        if($status_id==5){
+            $StaffRotation = new StaffRotation;     
+            $StaffRotation->staff_id = $Staff->id;
+            $StaffRotation->supervisor_id = $Staff->supervisor_id;
+            $StaffRotation->company_id = $Staff->company_id;
+            $StaffRotation->branch_id = $Staff->branch_id;
+            $StaffRotation->department_id = $Staff->department_id;
+            $StaffRotation->jop_position_id = $Staff->jop_position_id;
+            $StaffRotation->scholarship_id = $Staff->scholarship_id;
+            $StaffRotation->save();
+        }
+        
         if($Staff->save()){
             return Response()->json([
                 'message' => 'Your data is '.$action.' successfully' ,
