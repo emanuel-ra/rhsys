@@ -40,19 +40,21 @@
                                 </tr>
                         </thead>
                         <tbody>
-                                @foreach ($data as $key)
-                                    <tr>
-                                        <td>{{ $key["puesto"] }}</td>                               
-                                        @foreach ($key["authorized"] as $item)
-                                            @php
-                                                $v = $item["authorized"]-$item["staff_quantity"];
-                                            @endphp
-                                            <td class="text-center">{{ $item["authorized"] }}</td>
-                                            <td class="text-center">{{ $item["staff_quantity"] }}</td>
-                                            <td class="text-center">{{ $v }}</td>
-                                        @endforeach      
-                                    </tr>
-                                @endforeach
+                                @if (count($data)>0) 
+                                    @foreach ($data as $key)
+                                        <tr>
+                                            <td>{{ $key["puesto"] }}</td>                               
+                                            @foreach ($key["authorized"] as $item)
+                                                @php
+                                                    $v = $item["authorized"]-$item["staff_quantity"];
+                                                @endphp
+                                                <td class="text-center">{{ $item["authorized"] }}</td>
+                                                <td class="text-center">{{ $item["staff_quantity"] }}</td>
+                                                <td class="text-center">{{ $v }}</td>
+                                            @endforeach      
+                                        </tr>
+                                    @endforeach
+                                @endif
                         </tbody>
                     </table>
                 </div>

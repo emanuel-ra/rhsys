@@ -37,7 +37,7 @@ class CensusController extends Controller
         $Branch = Branch::select('id','name')->where('enable',1)->get();
         $JopPosition = JopPosition::select('id','name')->where('enable',1)->get();
         $data = [];
-        
+       
         foreach($JopPosition as $row)
         {
             $authorized = [];
@@ -56,7 +56,7 @@ class CensusController extends Controller
         }
         
         //$data = AuthorizedPost::with('getCount')->get();
-        //return $data;
-        return view('reports.census.app',['data'=>$data]);
+        return $data;        
+        //return view('reports.census.app',['data'=>$data]);
     }
 }

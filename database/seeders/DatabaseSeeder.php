@@ -35,9 +35,10 @@ class DatabaseSeeder extends Seeder
             TypeOfContractSeeder::class ,
             VacationTableSeeder::class ,
 
+            AuthorizedPostSeeder::class , // Default one for all branches and jop positions
             // testing 
             //StaffSeeder::class ,
-            //AuthorizedPostSeeder::class ,
+            
             //RequisitionsSeeder::class ,
             //CandidatesSeeder::class ,
             //InterviewsSeeder::class ,

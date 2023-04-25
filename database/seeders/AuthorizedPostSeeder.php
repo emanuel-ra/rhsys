@@ -26,7 +26,7 @@ class AuthorizedPostSeeder extends Seeder
                     'company_id'=> $key->company_id ,
                     'branch_id'=>$key->id ,
                     'jop_position_id'=>$key2->id ,
-                    'quantity'=>rand(1,10) ,
+                    'quantity'=> 1 ,
                 ]);
             }
         }
