@@ -18,11 +18,14 @@ return [
     'information'                   => 'Information',
 
     // [    A   ]
+        'attendances'      => 'Attendances',
         'attendance'      => 'Attendance',
     // [    B   ]
-        'branches'      => 'Branches',        
+        'branches'      => 'Branches',
+        'branch'      => 'Branch',
     // [    C   ]
-        'companies'     => 'Company',
+        'companies'     => 'Companies',
+        'company'     => 'Company',
         'census'        => 'Census',    
         'candidates'    => 'Candidates',            
     // [    D   ]

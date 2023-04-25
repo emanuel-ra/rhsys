@@ -50,7 +50,7 @@
                                                 @endphp
                                                 <td class="text-center">{{ $item["authorized"] }}</td>
                                                 <td class="text-center">{{ $item["staff_quantity"] }}</td>
-                                                <td class="text-center">{{ $v }}</td>
+                                                <td class="text-center text-bold {{ ($v<0) ? "text-danger":"" }} {{ ($v>0) ? "text-warning":"" }} {{ ($v==0) ? "text-success":"" }}">{{ $v }}</td>
                                             @endforeach      
                                         </tr>
                                     @endforeach
