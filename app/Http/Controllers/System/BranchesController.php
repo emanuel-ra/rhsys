@@ -42,7 +42,7 @@ class BranchesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [               
-            'name' => 'required|max:255|unique:companies',         
+            'name' => 'required|max:255|unique:branches',         
             'company_id' => 'required',
         ]); 
      
