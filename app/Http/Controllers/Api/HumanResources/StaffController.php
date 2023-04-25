@@ -176,12 +176,12 @@ class StaffController extends Controller
         if($status_id==5){
 
             $StaffLogs = new StaffLogs;
-            $StaffLogs->staff_id = $request->id;
+            $StaffLogs->staff_id = $Staff->id;
             $StaffLogs->user_id =  $request->user()->id;
             $StaffLogs->description =  'Baja';
             $StaffLogs->data = json_encode($Staff);
             $StaffLogs->save();
-            
+
             $StaffRotation = new StaffRotation;     
             $StaffRotation->staff_id = $Staff->id;
             $StaffRotation->supervisor_id = $Staff->supervisor_id;
