@@ -52,8 +52,12 @@ class StaffController extends Controller
      
         $query = Staff::query();
 
-        $query = $query->where('status_id','!=',2);        
-        
+        if(isset($request->status_id)){
+            $query = $query->Where('status_id',"=", $request->status_id);
+        }else{
+            $query = $query->where('status_id','!=',2); 
+        }
+
         if(isset($request->searchKeyword)){
             $query = $query->Where('name', 'LIKE', "%".$request->searchKeyword."%")
                 ->orWhere('email', 'LIKE', "%".$request->searchKeyword."%")
@@ -79,11 +83,6 @@ class StaffController extends Controller
             $query = $query->Where('jop_position_id', $request->jop_position_id);
         }
 
-        if(isset($request->status_id)){
-            $query = $query->Where('status_id', $request->status_id);
-        }
-
-
         $query->with('User');
         $query->with('Position');
         $query->with('Department');
@@ -97,6 +96,10 @@ class StaffController extends Controller
         
         $query->orderByDesc('id');
         
+        $sql = $query->toSql();
+        $bindings = $query->getBindings();
+        //return $sql;
+
         $data = $query->paginate(50)->withQueryString();; 
 
 
