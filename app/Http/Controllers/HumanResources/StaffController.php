@@ -59,16 +59,19 @@ class StaffController extends Controller
         }
 
         if(isset($request->searchKeyword)){
-            $query = $query->Where('name', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('email', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('mobile_phone', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('curp', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('rfc', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('city', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('zip_code', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('suburb', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('genre', 'LIKE', "%".$request->searchKeyword."%")
-                ->orWhere('code', 'LIKE', "%".$request->searchKeyword."%");
+            $Keyword = $request->searchKeyword;
+            $query = $query->where(function($q) use ($Keyword) {
+                $q->Where('name', 'LIKE', "%".$Keyword."%")
+                ->orWhere('email', 'LIKE', "%".$Keyword."%")
+                ->orWhere('mobile_phone', 'LIKE', "%".$Keyword."%")
+                ->orWhere('curp', 'LIKE', "%".$Keyword."%")
+                ->orWhere('rfc', 'LIKE', "%".$Keyword."%")
+                ->orWhere('city', 'LIKE', "%".$Keyword."%")
+                ->orWhere('zip_code', 'LIKE', "%".$Keyword."%")
+                ->orWhere('suburb', 'LIKE', "%".$Keyword."%")
+                ->orWhere('genre', 'LIKE', "%".$Keyword."%")
+                ->orWhere('code', 'LIKE', "%".$Keyword."%");
+            });
         }
 
         if(isset($request->branch_id)){
@@ -96,8 +99,8 @@ class StaffController extends Controller
         
         $query->orderByDesc('id');
         
-        $sql = $query->toSql();
-        $bindings = $query->getBindings();
+        //$sql = $query->toSql();
+        //$bindings = $query->getBindings();
         //return $sql;
 
         $data = $query->paginate(50)->withQueryString();; 
