@@ -333,6 +333,10 @@ Route::prefix('recruitment')->group(function () {
         Route::match(['get', 'post'], '/', [App\Http\Controllers\Recruitment\CandidatesController::class, 'index'])
         ->middleware(['permission:recruitment.requisitions.index'])
         ->name('recruitment.candidates');
+
+        Route::match(['get', 'post'], '/charts', [App\Http\Controllers\Recruitment\CandidatesController::class, 'getCharts'])
+        //->middleware(['permission:recruitment.candidates.tracing'])
+        ->name('recruitment.candidates.charts');
         
         Route::get('/form/create', [App\Http\Controllers\Recruitment\CandidatesController::class, 'create'])
         ->middleware(['permission:recruitment.requisitions.create'])
@@ -345,7 +349,7 @@ Route::prefix('recruitment')->group(function () {
         Route::get('/form/tracing/{id}', [App\Http\Controllers\Recruitment\CandidatesController::class, 'tracing'])
         ->middleware(['permission:recruitment.candidates.tracing'])
         ->name('recruitment.candidates.form.tracing');
-        
+               
         //POST
         Route::post('/store', [App\Http\Controllers\Recruitment\CandidatesController::class, 'store'])
         ->middleware(['permission:recruitment.requisitions.create'])

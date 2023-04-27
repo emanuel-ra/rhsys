@@ -18,6 +18,12 @@
     <div class="row">
 
         <div class="col-12">
+            <a href="{{ route('recruitment.candidates') }}" class="btn btn-lg btn-default text-bold">
+                Salir
+            </a>
+        </div>
+
+        <div class="col-12 p-0">
             <blockquote>
                 <b>Nombre</b>: {{ $Candidate->name }} <br>
                 <b>Teléfono</b>: {{ $Candidate->mobile_phone }} <br>
@@ -28,26 +34,19 @@
             </blockquote>
         </div>
 
-        <div class="col-12">
-            <a href="{{ route('recruitment.candidates') }}" class="btn btn-default">
-                Cancelar
-            </a>
-        </div>
-        
         <div class="card col-12 col-lg-3 m-2 card-tabs">
             <div class="card-header">
                 <h3 class="card-title">Encargado de Area</h3>
                 <div class="card-tools">
                     <!-- Maximize Button -->
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                    {{-- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button> --}}
                 </div>            
             </div>
             
             <div class="card-body p-0">                
             
                 <form action="{{ route('recruitment.candidates.update.accepted') }}" method="POST">
-                    @csrf
-
+                    @csrf 
                     <input type="hidden" name="id" value="{{ $Candidate->id }}">
                     <div class="row p-2">
                         <div class="col-12">
@@ -60,18 +59,23 @@
                                 <label for="is_accepted2">Rechazo</label>
                             </div>
                         </div>
+
+                        <div class="col-12 form-group">
+                            <label for="accepted_commentaries">Observaciones/Comentarios</label>
+                            <textarea name="accepted_commentaries" id="accepted_commentaries" class="form-control" {{ ($Candidate->is_accepted==0) ? '':'disabled' }}>{{$Candidate->accepted_commentaries}}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 p-2 d-flex justify-content-between">     
+                        @if ($Candidate->is_accepted==0)
+                            <button class="btn btn-primary">
+                                Guardar
+                            </button>    
+                        @endif   
                     </div>
 
-                    <div class="col-sm-12 p-2 d-flex justify-content-between">                                                
-                        <button class="btn btn-primary">
-                            Guardar
-                        </button>
-                    </div>
-        
                 </form>
-
-                
             </div>    
+
         </div>
 
         <div class="card col-12 col-lg-3 m-2 card-tabs">
@@ -79,7 +83,7 @@
                 <h3 class="card-title">Contratado</h3>
                 <div class="card-tools">
                     <!-- Maximize Button -->
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                    {{-- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button> --}}
                 </div>            
             </div>
 
@@ -107,17 +111,24 @@
                                     <div class="input-group-append" data-target="#dateHired" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div> 
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateHired" data-toggle="datetimepicker" name="date_hired" value="{{ $Candidate->hired_date }}"/>
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateHired" data-toggle="datetimepicker" name="date_hired" value="{{ $Candidate->hired_date }}" {{ ($Candidate->is_hired==0) ? '':'disabled' }}/>
                                 </div>
+                            </div>
+
+                            <div class="col-12 form-group">
+                                <label for="hired_commentaries">Observaciones/Comentarios</label>
+                                <textarea name="hired_commentaries" id="hired_commentaries" class="form-control" {{ ($Candidate->is_hired==0) ? '':'disabled' }}>{{$Candidate->hired_commentaries}}</textarea>
                             </div>
 
                         </div>
                     </div>
                         
                     <div class="col-sm-12 p-2 d-flex justify-content-between">
-                        <button class="btn btn-primary">
-                            Guardar
-                        </button>
+                        @if ($Candidate->is_accepted>0 && $Candidate->is_hired==0)
+                            <button class="btn btn-primary">
+                                Guardar
+                            </button>
+                        @endif   
                     </div>
         
                 </form>

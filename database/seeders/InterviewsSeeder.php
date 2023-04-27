@@ -27,7 +27,7 @@ class InterviewsSeeder extends Seeder
                 "commentaries" => $this->faker->text(50) , 
                 "observations" => $this->faker->text(50) , 
                 "candidate_id" => $key->id , 
-                //"status_id" => $status_id , 
+                "status_id" => 7 , 
                 "branch_id" => $key->requisitions->branch_id , 
                 "type_interview_id" => TypeInterview::all()->random()->id , 
                 "user_id" => User::all()->random()->id ,

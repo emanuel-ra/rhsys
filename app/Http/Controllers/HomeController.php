@@ -8,6 +8,8 @@ use App\Models\Staff;
 use App\Models\StaffRotation;
 use App\Models\Company;
 use App\Models\Branch;
+use App\Models\Interview;
+use App\Models\Candidate;
 
 class HomeController extends Controller
 {
@@ -33,7 +35,10 @@ class HomeController extends Controller
 
         $companies_count = Company::where('enable',1)->count();
         $branches_count = Branch::where('enable',1)->count();
-      
+
+        $interviews_count = Interview::where('status_id',7)->count();
+        $candidates_count = Candidate::where('status_id',1)->where('is_hired',0)->count();
+
         $char_bar_enable = Staff::selectRaw('year(hired_date) year, monthname(hired_date) month, count(*) data')
                 ->whereYear('hired_date',date('Y'))
                 ->where('status_id',4)
@@ -88,6 +93,8 @@ class HomeController extends Controller
                 'disabled_staff' => $disabled_staff , // NUMBER OF DISABLED STAFF
                 'companies_count' => $companies_count , // NUMBER OF ENABLE STAFF
                 'branches_count' => $branches_count , // NUMBER OF DISABLED STAFF
+                'interviews_count' => $interviews_count , // NUMBER OF DISABLED STAFF
+                'candidates_count' => $candidates_count , 
                 
                 // DATA TO BUILD CHARTS
                 'char_bar_enable' => $char_bar_enable , // STAFF REGISTERED

@@ -31,6 +31,22 @@
             <span class="info-box-number">{{ $branches_count }}</span>            
         </div>
     </div>
+
+
+    <div class="info-box col-12 col-md-2 m-1">
+        <span class="info-box-icon bg-warning"><i class="fas fa-comments"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Entevistas Pendientes</span>
+            <span class="info-box-number">{{ $interviews_count }}</span>            
+        </div>
+    </div>
+
+    <div class="info-box col-12 col-md-2 m-1">
+        <span class="info-box-icon bg-warning"><i class="fas fa-user-clock"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">Candidatos</span>
+            <span class="info-box-number">{{ $candidates_count }}</span>            
+        </div>
+    </div>
     
 </div>
-  

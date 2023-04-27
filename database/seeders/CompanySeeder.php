@@ -70,5 +70,24 @@ class CompanySeeder extends Seeder
             'enable' => 1 ,
         ]);
 
+
+        $company = Company::create([
+            'name' => "VIVIMXHOME",
+            'business_name' => "VIVIMXHOME SA DE CV",
+            'address' =>'Av. Chapultepec, Número 616, Colonia Moderna, ente calle Mariano Otero y calle España, Guadalajara Jalisco, México',
+            'zip_code' => '44190',
+            'legal_representative' => $faker->name('male')      ,
+            'public_deed' => $faker->text($maxNbChars = 200)  ,
+            'rfc' => 'VIV210730JA8' ,
+            'enable' => 1 ,
+        ]);
+
+        Branch::create([
+            'name' => "VIVIMXHOME",
+            'address' => "",
+            'zip_code' =>'44190',
+            'company_id' =>  $company->id ,
+            'enable' => 1 ,
+        ]);
     }
 }

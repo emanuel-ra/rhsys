@@ -36,12 +36,13 @@ class DatabaseSeeder extends Seeder
             VacationTableSeeder::class ,
 
             AuthorizedPostSeeder::class , // Default one for all branches and jop positions
-            // testing 
-            //StaffSeeder::class ,
             
+            // testing 
+            //StaffSeeder::class ,            
             //RequisitionsSeeder::class ,
             //CandidatesSeeder::class ,
             //InterviewsSeeder::class ,
+
         ]);
     }
 }

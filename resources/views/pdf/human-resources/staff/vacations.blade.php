@@ -27,18 +27,18 @@
                         SOLICITUD DE VACACIONES
                     </th>
                     <th style="width: 200px;">
-                        <table style="width: 200px;">
+                        <table style="width: 200px;" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td>Código</td>
-                                <td>{{ env('HR_DOCUMENT_REQUEST_VACATIONS_CODE') }}</td>
+                                <td style="border-right:#000000 solid 0.5px; border-bottom:#000000 solid 0.5px;text-align:right;padding-right:3px;">Código</td>
+                                <td style="border-bottom:#000000 solid 0.5px;text-align:center;">{{ env('HR_DOCUMENT_REQUEST_VACATIONS_CODE') }}</td>
                             </tr>
                             <tr>
-                                <td>Version</td>
-                                <td>{{ env('HR_DOCUMENT_REQUEST_VACATIONS_VERSION') }}</td>
+                                <td style="border-right:#000000 solid 0.5px; border-bottom:#000000 solid 0.5px;text-align:right;padding-right:3px;">Version</td>
+                                <td  style="border-bottom:#000000 solid 0.5px;text-align:center;">{{ env('HR_DOCUMENT_REQUEST_VACATIONS_VERSION') }}</td>
                             </tr>
                             <tr>
-                                <td>Emisión</td>
-                                <td>{{ \Carbon\Carbon::now()->format('Y-m-d'); }}</td>
+                                <td style="border-right:#000000 solid 0.5px; border-bottom:#000000 solid 0.5px;text-align:right;padding-right:3px;">Emisión</td>
+                                <td  style="border-bottom:#000000 solid 0.5px;text-align:center;">{{ \Carbon\Carbon::now()->format('Y-m-d'); }}</td>
                             </tr>
                         </table>
                     </th>
@@ -58,7 +58,7 @@
                 <td style="border-bottom: 1px solid #000000;text-align:center;">{{ $data->staff->code }}</td>
             </tr>                
             <tr>
-                <td colspan="2"><b>Empresa</b> {{ $data->staff->company->name }}</td>
+                <td colspan="2"><b>EMPRESA: </b> {{ $data->staff->company->name }}</td>
             </tr>
             <tr>
                 <td style="width: 500px;text-align:left;"><b>PUESTO DEL TRABAJADOR</b></td>
@@ -96,7 +96,12 @@
                                     @endphp
                                     <tr class="{{ $corresponds }}">
                                         <td>
-                                            {{ ucfirst(__('vacations-table.'.$key->label)) }}
+                                            @if ($key->from==$key->to)
+                                                {{ $key->from }} {{ __('words.years') }}    
+                                            @else
+                                                {{ $key->from }} - {{ $key->to }} {{ __('words.years') }}    
+                                            @endif
+                                            
                                         </td>
                                         <td style="text-align:right;">
                                             {{ $key->days }} {{ __('words.days') }}
@@ -201,16 +206,8 @@
                 <td colspan="3" style="height: 15px;"></td>
             </tr>
             <tr>
-                <td style="border-bottom: 1px solid #000000;width: 250px;">&nbsp;</td>
-                <td style="width: 190px;"></td>
-                <td style="border-bottom: 1px solid #000000;width: 250px;">&nbsp;</td>
-            </tr>
-            <tr>
-                <td> <b>NOMBRE Y FIRMA</b> </td>
-                <td></td>
-                <td> <b>NOMBRE Y FIRMA</b> </td>
-            </tr>
-
+                <td colspan="3" style="height:15px;"></td>
+            </tr>                        
             <tr>
                 <td style="width: 250px;">&nbsp;</td>
                 <td style="width: 190px;border-bottom: 1px solid #000000;"></td>

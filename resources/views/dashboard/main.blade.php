@@ -18,6 +18,8 @@
         @include('dashboard.boxinfo', [
             'enable_staff' => $enable_staff ,
             'disabled_staff' => $disabled_staff ,
+            'interviews_count' => $interviews_count , 
+            'candidates_count' => $candidates_count , 
         ])
 
         <div class="row">

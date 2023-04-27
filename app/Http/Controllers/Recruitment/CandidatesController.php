@@ -85,6 +85,60 @@ class CandidatesController extends Controller
             'keyWords' => $request->keyWords ,
         ]);
     }
+    public function getCharts(Request $request){
+
+        $start_date  = new \Carbon\Carbon('first day of this month');
+        $ended_date  = new \Carbon\Carbon('last day of this month');
+        
+        //T23:50:41.637546Z"
+        if(isset($request->start_date)){
+            $start_date  = \Carbon\Carbon::parse($request->start_date);
+           
+        }
+        if(isset($request->ended_date)){
+            $ended_date = \Carbon\Carbon::parse("$request->ended_date 23:59:59");
+        }
+        
+        $pie_candidates_hired = Candidate::selectRaw('is_hired, count(*) data')
+        ->where('status_id',1)
+        ->whereBetween('created_at', [$start_date, $ended_date])
+        ->groupBy('is_hired')
+        ->orderBy('is_hired', 'asc')
+        ->get();
+
+        $pie_candidates_accepted = Candidate::selectRaw('is_accepted, count(*) data')
+        ->where('status_id',1)
+        ->whereBetween('created_at', [$start_date, $ended_date])
+        ->groupBy('is_accepted')
+        ->orderBy('is_accepted', 'asc')
+        ->get();
+
+        $pie_candidates_sources = Candidate::selectRaw('candidate_sources.name label, count(candidates.id) data')
+                ->join('candidate_sources', 'candidates.sources_id' ,'candidate_sources.id')
+                ->where('candidates.status_id',1)
+                ->whereBetween('candidates.created_at', [$start_date, $ended_date])
+                ->groupBy('candidates.sources_id')
+                ->get();
+            
+        $bar_candidates_users = Candidate::selectRaw('users.name label, count(candidates.user_id) data')
+            ->join('users', 'candidates.user_id' ,'users.id')
+            ->where('candidates.status_id',1)
+            ->whereBetween('candidates.created_at', [$start_date, $ended_date])
+            ->groupBy('candidates.user_id')
+            ->get();
+                
+        //return $bar_candidates_users;
+
+        return view('recruitment.candidates.charts',[
+            'pie_candidates_accepted'=>$pie_candidates_accepted ,
+            'pie_candidates_hired'=>$pie_candidates_hired ,
+            'pie_candidates_sources'=>$pie_candidates_sources ,
+            'bar_candidates_users'=>$bar_candidates_users ,
+
+            'start_date' => $start_date ,
+            'ended_date' => $ended_date ,
+        ]);
+    }
     public function create(){      
         $CandidateSource = CandidateSource::select('id','name')->where('enable',1)->get();
         $Requisitions = Requisitions::select('id','jop_position_id','branch_id')->where('status_id',1)->with('Position')->with('Branch')->get();
@@ -187,11 +241,14 @@ class CandidatesController extends Controller
         $this->validate($request, [               
                 'id' => 'required',
                 'is_accepted' => 'required|in:1,2',
+                'accepted_commentaries' => 'nullable|max:500'
             ]
         );   
         
         $Candidate = Candidate::find($request->id);
         $Candidate->is_accepted = $request->is_accepted;        
+        $Candidate->accepted_date = \Carbon\Carbon::now();
+        $Candidate->accepted_commentaries = trim($request->accepted_commentaries); 
         $Candidate->save();
 
         return redirect()->back()->withSuccess('Información guardada correctamente');
@@ -199,12 +256,16 @@ class CandidatesController extends Controller
 
     public function update_hired(Request $request)
     {
+        $today =  \Carbon\Carbon::now()->toDateString();
+        
         $this->validate($request, [               
                 'id' => 'required',
                 'is_hired' => 'required|in:1,2',
-                'date_hired' => 'required_if:is_hired,1'
+                'date_hired' => 'nullable|required_if:is_hired,1|date_format:Y-m-d|after_or_equal:'.$today ,
+                'hired_commentaries' => 'nullable|max:500'
             ],[
-                'date_hired.required_if' => 'La fecha de contratación es obligatoria si el candidato sera contratado'
+                'date_hired.required_if' => 'La fecha de contratación es obligatoria si el candidato sera contratado' ,
+                'date_hired.after_or_equal' => 'La fecha de contratación no debe de ser menor a la fecha actual'
             ]
         ); 
         
@@ -212,6 +273,7 @@ class CandidatesController extends Controller
         $Candidate = Candidate::find($request->id);
         $Candidate->is_hired = $request->is_hired;        
         $Candidate->hired_date = $request->date_hired;        
+        $Candidate->hired_commentaries = trim($request->hired_commentaries);                
         $Candidate->save();
 
         return redirect()->back()->withSuccess('Información guardada correctamente'); 

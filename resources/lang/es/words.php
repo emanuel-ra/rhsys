@@ -17,6 +17,7 @@ return [
     'come back (hr)' => 'deberá presentarse' ,
     'requested at' => 'Solicitado',
     'years of work' => 'años de trabajo' ,
+    'years' => 'años' ,
     'days of vacations' => 'días de vacaciones' ,
     'date of elaboration' => 'fecha de elaboración' ,
     'requested days' => 'días solicitados' ,

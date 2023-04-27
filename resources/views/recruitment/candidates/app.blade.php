@@ -18,11 +18,17 @@
         </button>    
 
         @can('users.create')
-            <a href="{{ route('recruitment.candidates.form.create') }}" class="btn btn-primary">
+            <a href="{{ route('recruitment.candidates.form.create') }}" class="btn btn-primary mr-2">
                 <i class="fa fa-plus"></i>          
                 Nueva Candidato
             </a>
-        @endcan            
+        @endcan    
+        
+        <a href="{{ route('recruitment.candidates.charts') }}" class="btn btn-info">
+            <i class="fas fa-chart-bar"></i>  
+            Graficas
+        </a>
+
     </div>
 
     <div class="card col-12">
@@ -93,7 +99,9 @@
                         <th>Email</th>                        
                         <th>Vacante</th>                        
                         <th>Fuente</th>                        
-                        <th>Estatus</th>                        
+                        <th>Estatus</th>
+                        <th>Aceptación</th>
+                        <th>Contratación</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -114,6 +122,28 @@
                             <td>{{ $item->candidatesource->name }}</td>
                             <td>{{ $item->status->name }}</td>
                             <td>
+                                @if ($item->is_accepted==0)
+                                    <span class="text-warning">Pendiente</span>                                    
+                                @endif
+                                @if ($item->is_accepted==1)
+                                    <span class="text-success">Aceptado</span>
+                                @endif
+                                @if ($item->is_accepted==2)
+                                    <span class="text-danger">Rechazado</span>                       
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->is_hired==0)
+                                    <span class="text-warning">Pendiente</span>                                    
+                                @endif
+                                @if ($item->is_hired==1)
+                                    <span class="text-success">Contratado</span>
+                                @endif
+                                @if ($item->is_hired==2)
+                                    <span class="text-danger">No Contratado</span>                       
+                                @endif 
+                            </td>
+                            <td>
                                 <div class="dropdown dropleft show">
                                     <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-cogs"></i>
@@ -122,64 +152,65 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         
                                         @can('recruitment.candidates.tracing')
+
                                             <li>                                                
                                                 <a class="dropdown-item" href="{{ route('recruitment.candidates.form.tracing',['id' => $item->id]) }}">
                                                     <i class="fas fa-network-wired"></i> Seguimiento
                                                 </a>
                                             </li>
+                                            <div class="dropdown-divider"></div> 
+                                            
 
-                                            @if ( $item->status_id==1)
-                                                <div class="dropdown-divider"></div> 
+                                            @if ( $item->status_id==1 && $item->is_hired==0 && $item->is_accepted==0)
                                                 <li>                                                
                                                     <a class="dropdown-item" href="{{ route('recruitment.candidates.set.archive',['id' => $item->id]) }}">
                                                         <i class="fas fa-door-closed"></i> Archivar
                                                     </a>
                                                 </li>
+                                                <div class="dropdown-divider"></div> 
                                             @endif
 
-                                            @if ( $item->status_id==10)
-                                                <div class="dropdown-divider"></div> 
+                                            @if ( $item->status_id==10)                                                
                                                 <li>                                                
                                                     <a class="dropdown-item" href="{{ route('recruitment.candidates.set.active',['id' => $item->id]) }}">
                                                         <i class="fas fa-door-open"></i> Activar
                                                     </a>
                                                 </li>
+                                                <div class="dropdown-divider"></div>  
                                             @endif
 
                                         @endcan  
 
                                         @can('recruitment.candidates.update')
-                                            <div class="dropdown-divider"></div>  
-
-                                            <li>                                                
-                                                <a class="dropdown-item" href="{{ route('recruitment.candidates.form.edit',['id' => $item->id]) }}">
-                                                    <i class="fas fa-user-edit"></i> Editar
-                                                </a>
-                                            </li>
+                                            @if ( $item->is_hired==0 || $item->is_accepted==0)
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('recruitment.candidates.form.edit',['id' => $item->id]) }}">
+                                                        <i class="fas fa-user-edit"></i> Editar
+                                                    </a>
+                                                </li>
+                                                <div class="dropdown-divider"></div>  
+                                            @endif
                                         @endcan   
 
                                         @can('recruitment.candidates.update')
-                                            <div class="dropdown-divider"></div>  
-
-                                            <li>                                                
-                                                <a class="dropdown-item" href="{{ route('recruitment.interview.form.create',['id' => $item->id]) }}">
-                                                    <i class="fas fa-calendar-plus"></i> Agendar Entrevista
-                                                </a>
-                                            </li>
-                                            
+                                            @if ( $item->is_hired==0 || $item->is_accepted==0)
+                                                <li>                                                
+                                                    <a class="dropdown-item" href="{{ route('recruitment.interview.form.create',['id' => $item->id]) }}">
+                                                        <i class="fas fa-calendar-plus"></i> Agendar Entrevista
+                                                    </a>
+                                                </li>
+                                                <div class="dropdown-divider"></div>  
+                                            @endif
                                         @endcan  
                                         
                                         @if ($item->cv_file!=null)
-                                            <div class="dropdown-divider"></div>  
+                                           
                                             <a class="dropdown-item" href="{{ '/cv/'.$item->cv_file }}" target="_blank">
                                                 <i class="fa fa-file-pdf"></i> Curriculum Vitae
                                             </a>    
-                                        @endif
+                                        @endif                                       
                                         
-                                        
-                                        {{--
-
-                                       
+                                        {{--                                       
                                         @can('users.update')
                                             <div class="dropdown-divider"></div>       
                                             <a class="dropdown-item" href="{{route('hr.staff.view',['id'=> $item->id])}}">

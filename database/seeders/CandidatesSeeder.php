@@ -15,6 +15,6 @@ class CandidatesSeeder extends Seeder
      */
     public function run()
     {
-        Candidate::factory(15)->create();
+        Candidate::factory(50)->create();
     }
 }
