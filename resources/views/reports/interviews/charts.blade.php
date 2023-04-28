@@ -229,29 +229,15 @@
         {{-- LINE CHARTS --}}
         <script>
 
-            const ctx_line_char_type_complete = document.getElementById("line_char_type_complete").getContext('2d');
+            const ctx_line_char_complete_by_dates = document.getElementById("line_char_complete_by_dates").getContext('2d');
             let data_interviews_by_year=  {!! json_encode($interviews_by_year) !!}          
             
-            const labels = ["lunes","martes","miercoles"];
+            const months = [...data_interviews_by_year[0].data];
 
-            const draw_line_char_type_complete = new Chart(ctx_line_char_type_complete, {
+            const draw_line_char_complete_by_dates = new Chart(ctx_line_char_complete_by_dates, {
                 type: 'line',
                 data: {
-                    labels: labels ,
-                    datasets: [
-                        {
-                            label: 'Dataset 1',
-                            data: [1,20,5],
-                            borderColor: 'rgb(183, 28, 28)',
-                            backgroundColor: 'rgba(183, 28, 28,0)',
-                        },
-                        {
-                            label: 'Dataset 2',
-                            data: [2,5,10],
-                            borderColor: 'rgb(13, 71, 161)' ,
-                            backgroundColor: 'rgba(13, 71, 161,0)',
-                        }
-                    ]
+                    labels: months.map( v => { return `${v.month} ${v.year}`; }) ,                    
                 } , 
                 options: {
                     responsive: true,
@@ -267,6 +253,19 @@
                 }
             });
 
+
+            data_interviews_by_year.map( (v,i) => {
+                draw_line_char_complete_by_dates.data.datasets.push({
+                    label: v.label,
+                    data: v.data.map( d => { return d.data }) ,
+                    borderColor: bg_colors[i] ,
+                    backgroundColor: 'rgba(183, 28, 28,0)',
+                });
+            });
+            
+            draw_line_char_complete_by_dates.update();
+
+            console.log(draw_line_char_complete_by_dates.data)
         </script>
 
     @endsection

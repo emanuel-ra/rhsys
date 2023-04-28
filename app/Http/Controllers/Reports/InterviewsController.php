@@ -172,6 +172,9 @@ class InterviewsController extends Controller
                     ->get();
 
                     $dataByMonths[] = (object)['year'=>date('Y'),'month'=>$nameMonth,'data'=>(int) @$result[0]->data];
+
+                    //$qty = ((int)@$result[0]->data) ? (int) $result[0]->data:rand(0, 25); // ONLY FOR TEST 
+                    //$dataByMonths[] = (object)['year'=>date('Y'),'month'=>$nameMonth,'data'=> $qty];
             }  
             
             $interviews_by_year[] = array(

@@ -1,4 +1,4 @@
-<div class="col-12 col-lg-6">
+<div class="col-12">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title"></h3>
@@ -10,7 +10,7 @@
             <!-- /.card-tools -->
         </div>
         <div class="card-body">
-            <canvas id="line_char_type_complete" width="100%" height="100%"></canvas>
+            <canvas id="line_char_complete_by_dates" width="100%" height="100%"></canvas>
         </div>
     </div>
 </div>
