@@ -90,7 +90,6 @@ class CandidatesController extends Controller
         $start_date  = new \Carbon\Carbon('first day of this month');
         $ended_date  = new \Carbon\Carbon('last day of this month');
         
-        //T23:50:41.637546Z"
         if(isset($request->start_date)){
             $start_date  = \Carbon\Carbon::parse($request->start_date);
            

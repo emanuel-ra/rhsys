@@ -16,18 +16,31 @@
     @section('content')
         <div class="row">
 
+            <div class="col-12 p-2">              
+
+                <button class="btn btn-primary float-right" onclick="document.getElementById('formFilters').submit();">
+                    <i class="fa fa-search"></i> Buscar
+                </button>
+
+                <a class="btn btn-info float-right mr-2" href="{{route('reports.interviews.charts')}}" >
+                    <i class="fa fa-chart-bar"></i> Graficas
+                </a>
+
+            </div>
+
             <div class="card col-12">
                 <div class="card-header">
-                    <h3 class="card-title">Filtros</h3>
+                    <h3 class="card-title"></h3>
                     <div class="card-tools">
                         <!-- Maximize Button -->
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         {{-- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button> --}}
                     </div>
-                </div>
+                </div>               
+                
                 <div class="card-body">
                     
-                    <form action="{{ route('reports.interviews') }}" method="POST">
+                    <form action="{{ route('reports.interviews') }}" method="POST" id="formFilters">
                         @csrf
                         <div class="col-12 mt-2">
                             <div class="row">
@@ -82,12 +95,6 @@
                                     </select>
                                 </div>
 
-                                <div class="col-12 p-2">
-                                    <button class="btn btn-primary float-right">
-                                        <i class="fa fa-search"></i> Buscar
-                                    </button>
-                                </div>
-                                
                             </div>
                            
                         </div>
@@ -126,7 +133,7 @@
                                     <th>Sucursal</th>
                                     <th>Fuente</th>
                                     <th>¿Asistio?</th>
-                                    <th>Enc. Área <br> Aceptadi/Rechazado</th>                               
+                                    <th>Enc. Área <br> Aceptado/Rechazado</th>                               
                                     <th>Contratado</th>
                                     <th>Fecha de Contratación</th>
                                     <th>Comentarios</th>

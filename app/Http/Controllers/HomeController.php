@@ -17,7 +17,7 @@ class HomeController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */
+     */    
     public function __construct()
     {
         $this->middleware('auth');
@@ -46,7 +46,6 @@ class HomeController extends Controller
                 ->orderBy('year', 'desc')
                 ->orderBy('month', 'asc')
                 ->get();
-        
 
         $char_bar_disabled = Staff::selectRaw('year(hired_date) year, monthname(hired_date) month, count(*) data')
                 ->whereYear('hired_date',date('Y'))

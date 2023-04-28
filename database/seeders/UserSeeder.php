@@ -22,13 +22,13 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$CbHqO.a9HsT3c6fQk.2J/ODorUbvSHUzEAWTTeCTfwfpS9lC1MsPG' , //admin23*
             'remember_token' => Str::random(10) ,
         ])->assignRole('admin');
-
+        
         /*
         User::create([
             'name' => "Juan RH",
             'email' => "gerencia.rh@massivehome.com.mx",
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', W// password
             'remember_token' => Str::random(10),
         ])->assignRole('manager');
 
