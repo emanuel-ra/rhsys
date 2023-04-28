@@ -14,6 +14,13 @@
     @section('content')
         <div class="row">
             <div class="card col-12">
+                <div class="card-body">
+                    <a href="{{ route('reports.census.charts') }}" class="btn btn-info float-right">
+                        <i class="fa fa-chart-bar"></i> Graficas
+                    </a>
+                </div>
+            </div>
+            <div class="card col-12">
                 <div class="card-header">
                     <h4>Censo</h4>
                     <div class="card-tools">

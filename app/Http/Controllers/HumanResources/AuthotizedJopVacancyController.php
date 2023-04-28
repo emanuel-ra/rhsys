@@ -14,7 +14,7 @@ class AuthotizedJopVacancyController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['permission: authorized.job.vacancies.index|authorized.job.vacancies.create|authorized.job.vacancies.update|authorized.job.vacancies.view']);
+        $this->middleware(['permission:authorized.job.vacancies.index|authorized.job.vacancies.create|authorized.job.vacancies.update|authorized.job.vacancies.view']);
     }   
     public function index(Request $request){
         $branches = Branch::where('enable',1)->paginate(20);

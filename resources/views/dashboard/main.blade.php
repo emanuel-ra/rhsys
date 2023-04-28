@@ -250,7 +250,7 @@
 
                 // CHARST
                 var ChartRotationJopPosition = new Chart(ctx_char_rotation_by_jop_position, {                   
-                    type: 'bar',
+                    //type: 'bar',
                     type: 'horizontalBar',
                     data: {
                         labels: char_rotation_by_jop_position.map((i)=>{ return `${i.name}` }),

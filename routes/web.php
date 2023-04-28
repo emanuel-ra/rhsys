@@ -430,10 +430,16 @@ Route::prefix('format')->group(function () {
 */
 Route::prefix('reports')->group(function () { 
 
+    // CENSUS 
     Route::get('/census', [App\Http\Controllers\Reports\CensusController::class, 'index'])
     ->middleware(['permission:reports.census.index'])
     ->name('reports.census');
+
+    Route::match(['get', 'post'],'/census/charts', [App\Http\Controllers\Reports\CensusController::class, 'getCharts'])
+    ->middleware(['permission:reports.census.index'])
+    ->name('reports.census.charts');
     
+    // INTERVIEWS
     Route::match(['get', 'post'],'/interviews', [App\Http\Controllers\Reports\InterviewsController::class, 'index'])
     ->middleware(['permission:reports.interview.index'])
     ->name('reports.interviews');
