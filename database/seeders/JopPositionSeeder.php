@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\JopPosition;
+use App\Models\Department;
 //use App\Models\AuthorizedPost;
 
 class JopPositionSeeder extends Seeder
@@ -16,7 +17,6 @@ class JopPositionSeeder extends Seeder
     public function run()
     {
         $lorem = '';
-
         $record = JopPosition::create(['department_id'=>9,'name'=>'AFANADOR','activities' => $lorem ]);        
         $record = JopPosition::create(['department_id'=>2,'name'=>'AUXILIAR SISTEMAS','activities' => $lorem ]);        
         $record = JopPosition::create(['department_id'=>11,'name'=>'AUXILIAR DE CONTABILIDAD','activities' => $lorem ]);        
@@ -57,5 +57,6 @@ class JopPositionSeeder extends Seeder
         $record = JopPosition::create(['department_id'=>5,'name'=>'ATENCION CLIENTES','activities' => $lorem ]);
         $record = JopPosition::create(['department_id'=>16,'name'=>'AUDITOR PROCESOS','activities' => $lorem ]);
         $record = JopPosition::create(['department_id'=>17,'name'=>'OTROS','activities' => $lorem ]);
+       
     }
 }

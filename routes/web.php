@@ -60,7 +60,7 @@ Route::prefix('system')->group(function () {
 
         
     });
-
+    
     Route::prefix('branches')->group(function () {    
         
         Route::match(['get', 'post'],'/', [App\Http\Controllers\System\BranchesController::class, 'index'])
@@ -174,6 +174,17 @@ Route::prefix('system')->group(function () {
         ->name('system.roles.update');
 
     });    
+
+    Route::prefix('profile')->group(function () {     
+        Route::get('/', [App\Http\Controllers\System\ProfileController::class, 'form_change_password'])
+        //->middleware(['permission:roles.index'])
+        ->name('system.profile.change.password');
+
+        Route::post('/', [App\Http\Controllers\System\ProfileController::class, 'action_update_password'])
+        //->middleware(['permission:roles.index'])
+        ->name('system.profile.change.password.update');
+
+    });
 });
 
 /*

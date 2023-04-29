@@ -78,8 +78,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'authorized.job.vacancies.index'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'authorized.job.vacancies.config'])->syncRoles([$role_admin,$role_manage_rh]);        
         //Permission::create(['name' => 'authorized.job.vacancies.view'])->syncRoles([$role_admin,$role_manage_rh]);        
-
-       
+                
         //-------------------- RECRUITMENT ------------------------------//
         // REQUISITIONS 
         Permission::create(['name' => 'recruitment.requisitions.index'])->syncRoles([$role_admin,$role_manage_rh,$role_recruiter]);
@@ -104,8 +103,7 @@ class RoleSeeder extends Seeder
         // REPORT         
         Permission::create(['name' => 'reports.census.index'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'reports.interview.index'])->syncRoles([$role_admin,$role_manage_rh]);
-
-
+        
         // VACATIONS
         Permission::create(['name' => 'vacations.index'])->syncRoles([$role_admin,$role_manage_rh]);
         Permission::create(['name' => 'staff.vacations.request'])->syncRoles([$role_admin,$role_manage_rh]);

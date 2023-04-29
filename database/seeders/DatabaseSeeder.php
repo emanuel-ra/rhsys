@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             TypeInterviewSeeder::class ,
             TypeOfContractSeeder::class ,
             VacationTableSeeder::class ,
-
+            
             AuthorizedPostSeeder::class , // Default one for all branches and jop positions
             
             // testing 

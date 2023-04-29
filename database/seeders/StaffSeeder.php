@@ -19,9 +19,7 @@ class StaffSeeder extends Seeder
         //\App\Models\Staff::StaffFactory(50)->create();
         //factory(\App\Models\Staff::class)->count(12)->create();
         //factory(\App\Models\Staff::class)->count(12)->create();
-
-        /*  */
-
+        
         $supervisors = Staff::factory(20)->isSupervisor()->enableStatus()->has(
             StaffLogs::factory()
             ->count(1)
@@ -50,8 +48,9 @@ class StaffSeeder extends Seeder
                         "data" => json_encode($staff),
                     ];
                 })
-            )        
+            )
             ->create();        
-        }        
+        }
+
     }   
 }

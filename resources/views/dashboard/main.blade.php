@@ -255,7 +255,7 @@
                     data: {
                         labels: char_rotation_by_jop_position.map((i)=>{ return `${i.name}` }),
                         datasets: [{
-                            label: '',
+                            label: 'Bajas',
                             data: char_rotation_by_jop_position.map((i)=>{ return i.data }) ,
                             backgroundColor: char_rotation_by_jop_position.map((val,index)=>{ return (index%2==0) ? 'rgba(67, 160, 71, 0.2)':'rgba(21, 101, 192, 0.2)'}) ,
                             borderColor: char_rotation_by_jop_position.map((val,index)=>{ return (index%2==0) ? 'rgba(67, 160, 71, 1)':'rgba(21, 101, 192, 1)'}) ,

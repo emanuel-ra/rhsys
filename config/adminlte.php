@@ -364,23 +364,22 @@ return [
                     [
                         'text' => 'roles',
                         'route'  => 'system.roles',
-                        'icon' => 'fas fa-fw fa-lock',
+                        'icon' => 'fas fa-user-tag',
                         'can' =>  'roles.index' ,
                     ],
-                /*
-                ['header' => 'profile'],
-
+                /* */
+                ['header' => 'profile'],                    
+                    // [
+                    //     'text' => 'profile',
+                    //     'url'  => 'admin/settings',
+                    //     'icon' => 'fas fa-fw fa-user',
+                    // ],
                     [
-                        'text' => 'profile',
-                        'url'  => 'admin/settings',
-                        'icon' => 'fas fa-fw fa-user',
+                        'text' => 'change_password' ,
+                        'route'  => 'system.profile.change.password' ,
+                        'icon' => 'fas fa-fw fa-lock' ,
                     ],
-                    [
-                        'text' => 'change_password',
-                        'url'  => 'admin/settings',
-                        'icon' => 'fas fa-fw fa-lock',
-                    ],
-                */
+               
             ],
         ],        
         
