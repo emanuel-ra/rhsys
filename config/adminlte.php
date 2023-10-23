@@ -656,17 +656,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/moment/moment.min.js',
+                    'location' => 'node_modules/moment/moment.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',
+                    'location' => 'node_modules/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
+                    'location' => 'node_modules/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
                 ],
 
             ],
