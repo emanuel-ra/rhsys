@@ -288,7 +288,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-    
+
     'menu' => [
         // Navbar items:
         /*
@@ -296,7 +296,7 @@ return [
             'type'         => 'navbar-search',
             'text'         => 'search',
             'topnav_right' => true,
-            'method'       => 'post',         
+            'method'       => 'post',
             'input_name' => 'searchKeyword'
         ],
         */
@@ -331,7 +331,7 @@ return [
                         'route'  => 'system.companies',
                         'icon' => 'fas fa-fw fa-industry',
                         'can' =>  'companies.index' ,
-                    ],               
+                    ],
                     [
                         'text' => 'branches',
                         'route'  => 'system.branches',
@@ -368,7 +368,7 @@ return [
                         'can' =>  'roles.index' ,
                     ],
                 /* */
-                ['header' => 'profile'],                    
+                ['header' => 'profile'],
                     // [
                     //     'text' => 'profile',
                     //     'url'  => 'admin/settings',
@@ -379,16 +379,16 @@ return [
                         'route'  => 'system.profile.change.password' ,
                         'icon' => 'fas fa-fw fa-lock' ,
                     ],
-               
+
             ],
-        ],        
-        
-       
+        ],
+
+
         [
             'text'    => 'human_resources',
             'icon'    => 'fas fa-users',
             'submenu' =>[
-                      
+
                 [
                     'text' => 'staff',
                     'url'  => 'hr/staff',
@@ -402,7 +402,7 @@ return [
                     'icon' => 'fas fa-check-double',
                     'can' =>  'authorized.job.vacancies.index' ,
                 ],
-        
+
                 // [
                 //     'text' => 'census',
                 //     'url'  => 'recruitment/census',
@@ -437,7 +437,7 @@ return [
                 ],
             ]
         ],
-        
+
         [
             'text'    => 'reports',
             'icon'    => 'fas fa-clipboard-list',
@@ -455,8 +455,8 @@ return [
                     'can' =>  'reports.interview.index' ,
                 ]
             ]
-        ], 
-        
+        ],
+
         [
             'text'    => 'formats',
             'icon'    => 'fas fa-clipboard-list',
@@ -468,7 +468,7 @@ return [
                     //'can' =>  'reports.census.index' ,
                 ]
             ]
-        ], 
+        ],
 
         // [
         //     'text'        => 'pages',
@@ -649,7 +649,7 @@ return [
                 ],
             ],
         ],
-       
+
         'TempusDominusBs4' => [
             'active' => false,
             'files' => [
@@ -668,7 +668,7 @@ return [
                     'asset' => true,
                     'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
                 ],
-                
+
             ],
         ],
 
@@ -740,7 +740,7 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.min.js',
-                ],          
+                ],
                 [
                     'type' => 'css',
                     'asset' => false,
@@ -756,7 +756,7 @@ return [
                     'asset' => false,
                     'location' => '//cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/js/plugins/buffer.min.js',
                 ],
-               
+
                 [
                     'type' => 'js',
                     'asset' => false,
