@@ -6,6 +6,8 @@ return [
     'companies.create' => 'Crear empresa' ,
     'companies.update' => 'Actualizar empresa' ,
     'companies.delete' => 'Eliminar empresa' ,
+    'permissions.companies.upload.logo' => 'Logotipo empresa' ,
+
 
     'branches.index' => 'Sucursales' ,
     'branches.create' => 'Crear sucursal' ,
