@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             // system
-            RoleSeeder::class,        
+            RoleSeeder::class,
             UserSeeder::class,
             CompanySeeder::class ,
             JopPositionSeeder::class ,
@@ -27,18 +27,18 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class ,
             StateSeeder::class ,
             StatusSeeder::class ,
-            MariatialStatusSeeder::class ,   
-            ReasonsToLeaveWorkSeeder::class ,            
-            StaffRotationSeeder::class ,            
+            MariatialStatusSeeder::class ,
+            ReasonsToLeaveWorkSeeder::class ,
+            StaffRotationSeeder::class ,
             CandidateSourceSeeder::class ,
             TypeInterviewSeeder::class ,
             TypeOfContractSeeder::class ,
             VacationTableSeeder::class ,
-            
+
             AuthorizedPostSeeder::class , // Default one for all branches and jop positions
-            
-            // testing 
-            //StaffSeeder::class ,            
+
+            // testing
+            //StaffSeeder::class ,
             //RequisitionsSeeder::class ,
             //CandidatesSeeder::class ,
             //InterviewsSeeder::class ,
