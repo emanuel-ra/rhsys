@@ -1,6 +1,6 @@
 <?php
 
-return [   
+return [
     'dashboard' => 'Dashboard' ,
     'companies.index' => 'Empresas' ,
     'companies.create' => 'Crear empresa' ,
@@ -17,17 +17,17 @@ return [
     'jop.position.update' => 'Actualizar puesto' ,
     'jop.position.enable' => 'Habilitar puesto' ,
     'jop.position.disabled' => 'Des-habilitar puesto' ,
-    
+
     'departments.index' => 'Departamentos' ,
     'departments.create' => 'Crear departamento' ,
     'departments.update' => 'Actualizar departamento' ,
     'departments.enable' => 'Habilitar departamento' ,
     'departments.disabled' => 'Des-habilitar departamento' ,
-    
+
     'users.index' => 'Usuarios' ,
     'users.create' => 'Crear usuario' ,
     'users.update' => 'Actualizar usuario' ,
-    'users.delete' => 'Eliminar Actualizar' ,
+    'users.delete' => 'Eliminar usuario' ,
 
     'roles.index' => 'Roles' ,
     'roles.create' => 'Crear Rol' ,
@@ -49,7 +49,7 @@ return [
     'interview.appointment.index' => 'Citas entrevista' ,
     'interview.appointment.create' => 'Crear cita' ,
     'interview.appointment.update' => 'Actualizar cita' ,
-    
+
     'staff.view' => 'Kardex del Empleado' ,
     'staff.pdf.contract' => 'Contrato del Empleado' ,
     'staff.pdf.personal.data' => 'Datos del Empleado' ,
