@@ -656,17 +656,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'node_modules/moment/moment.min.js',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'node_modules/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'node_modules/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css',
                 ],
 
             ],
