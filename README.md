@@ -57,6 +57,19 @@ npm install
 composer install
 ~~~
 
+Run Migrations
+
+~~~bash  
+php artisan migrate:fresh --seed
+~~~
+
+
+publish views
+
+~~~bash  
+php artisan adminlte:install --only=main_views
+~~~
+
 Start the server  
 
 ~~~bash  
