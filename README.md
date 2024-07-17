@@ -63,6 +63,11 @@ Run Migrations
 php artisan migrate:fresh --seed
 ~~~
 
+install plugings
+
+~~~bash  
+php artisan adminlte:plugins install
+~~~
 
 publish views
 
@@ -85,5 +90,8 @@ php artisan serve
 ## Author 
 - Github - [emanuel-ra](https://github.com/emanuel-ra/)
 - Frontend Mentor - [@emanuel-ra](https://www.frontendmentor.io/profile/emanuel-ra)
-- Linkedin - [@emanuelramirezabarca](https://www.linkedin.com/in/emanuelramirezabarca/) 
+- Linkedin - [@emanuelramirezabarca](https://www.linkedin.com/in/emanuelramirezabarca/)
+
+  ## Useful Links
+  [AdminLTE](https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Plugins-Configuration)
  
