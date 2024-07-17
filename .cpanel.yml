@@ -1,5 +1,5 @@
 ---
   deployment:
     tasks:
-      - export DEPLOYPATH=/home/massivehomeon/public_html/rh/
+      - export DEPLOYPATH=/home/vivimxhome/public_html/
       - /bin/cp -r * $DEPLOYPATH
